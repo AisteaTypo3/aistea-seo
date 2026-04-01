@@ -1,7 +1,7 @@
 <?php
 $EM_CONF[$_EXTKEY] = [
-    'title'           => 'AIstea SEO',
-    'description'     => 'SEO analysis and reporting extension - crawls websites and generates reports similar to Screaming Frog SEO Spider',
+    'title'           => 'Aistea SEO Crawler',
+    'description'     => 'SEO crawler and reporting extension for TYPO3 - audits external websites and generates actionable reports',
     'category'        => 'module',
     'constraints' => [
         'depends' => [

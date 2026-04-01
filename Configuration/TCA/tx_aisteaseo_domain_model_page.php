@@ -15,7 +15,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'report, url, status_code, page_title, meta_description, h1_text, page_score, issues',
+            'showitem' => 'report, url, status_code, page_type, content_type, redirect_target, redirect_final_url, redirect_hops, page_title, meta_description, h1_text, page_score, issues',
         ],
     ],
     'columns' => [
@@ -31,6 +31,26 @@ return [
         ],
         'status_code' => [
             'label' => 'HTTP Status',
+            'config' => ['type' => 'number', 'readOnly' => true],
+        ],
+        'page_type' => [
+            'label' => 'Page Type',
+            'config' => ['type' => 'input', 'size' => 20, 'readOnly' => true],
+        ],
+        'content_type' => [
+            'label' => 'Content Type',
+            'config' => ['type' => 'input', 'size' => 40, 'readOnly' => true],
+        ],
+        'redirect_target' => [
+            'label' => 'Redirect Target',
+            'config' => ['type' => 'input', 'size' => 80, 'readOnly' => true],
+        ],
+        'redirect_final_url' => [
+            'label' => 'Redirect Final URL',
+            'config' => ['type' => 'input', 'size' => 80, 'readOnly' => true],
+        ],
+        'redirect_hops' => [
+            'label' => 'Redirect Hops',
             'config' => ['type' => 'number', 'readOnly' => true],
         ],
         'page_title' => [

@@ -4,6 +4,8 @@
 
 <f:flashMessages />
 
+<div class="px-3 py-3 px-xl-4">
+
 <!-- Report meta + action buttons -->
 <div class="d-flex align-items-start justify-content-between mb-4 gap-3">
     <div>
@@ -162,6 +164,41 @@
     </div>
 </f:if>
 
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-body py-3">
+                <div class="text-uppercase small text-muted mb-1">HTML Pages</div>
+                <div class="display-6 fw-bold lh-1">{pageTypeSummary.html}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-body py-3">
+                <div class="text-uppercase small text-muted mb-1">Redirects</div>
+                <div class="display-6 fw-bold lh-1">{pageTypeSummary.redirect}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+            <div class="card-body py-3">
+                <div class="text-uppercase small text-muted mb-1">Resources</div>
+                <div class="display-6 fw-bold lh-1">{pageTypeSummary.resource}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="card h-100 border-danger">
+            <div class="card-body py-3">
+                <div class="text-uppercase small text-muted mb-1">Pages With Errors</div>
+                <div class="display-6 fw-bold text-danger lh-1">{pageTypeSummary.withErrors}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Issues summary -->
 <f:if condition="{issuesSummary -> f:count()} > 0">
     <div class="card mb-4">
@@ -178,7 +215,7 @@
             </thead>
             <tbody>
                 <f:for each="{issuesSummary}" as="issue">
-                    <tr>
+                    <tr class="seo-issue-summary-row" data-issue-type="{issue.type -> f:format.htmlspecialchars()}" style="cursor:pointer">
                         <td class="small">{issue.message -> f:format.htmlspecialchars()}</td>
                         <td>
                             <f:if condition="{issue.severity} == 'error'">
@@ -201,6 +238,54 @@
 
 <!-- Pages table -->
 <f:if condition="{pages -> f:count()} > 0">
+    <div class="card mb-3" style="position:sticky;top:12px;z-index:20">
+        <div class="card-body py-3">
+            <div class="row g-2 align-items-end">
+                <div class="col-lg-3 col-md-6">
+                    <label class="form-label mb-1" for="seo-filter-search">Search URL or title</label>
+                    <input id="seo-filter-search" type="search" class="form-control form-control-sm" placeholder="Filter pages..." />
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <label class="form-label mb-1" for="seo-filter-type">Page type</label>
+                    <select id="seo-filter-type" class="form-select form-select-sm">
+                        <option value="">All types</option>
+                        <option value="html">HTML</option>
+                        <option value="redirect">Redirect</option>
+                        <option value="resource">Resource</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <label class="form-label mb-1" for="seo-filter-severity">Min issue level</label>
+                    <select id="seo-filter-severity" class="form-select form-select-sm">
+                        <option value="">Any</option>
+                        <option value="error">Has errors</option>
+                        <option value="warning">Has warnings</option>
+                        <option value="notice">Has notices</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <label class="form-label mb-1" for="seo-filter-issue-type">Issue type</label>
+                    <input id="seo-filter-issue-type" type="search" class="form-control form-control-sm" placeholder="e.g. missing_title" />
+                </div>
+                <div class="col-lg-3 col-md-8">
+                    <label class="form-label mb-1 d-block">Export</label>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="{exportCsvUrl}" class="btn btn-default btn-sm text-nowrap">
+                            <core:icon identifier="actions-download" size="small" /> Pages CSV
+                        </a>
+                        <a href="{exportIssuesCsvUrl}" class="btn btn-default btn-sm text-nowrap">
+                            <core:icon identifier="actions-document-duplicates-select" size="small" /> Issues CSV
+                        </a>
+                        <a href="{exportJsonUrl}" class="btn btn-default btn-sm text-nowrap">
+                            <core:icon identifier="actions-code" size="small" /> JSON
+                        </a>
+                        <button type="button" id="seo-filter-reset" class="btn btn-default btn-sm">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
             <h3 class="card-title h6 mb-0">Crawled pages</h3>
@@ -210,21 +295,39 @@
             <table class="table table-sm table-hover mb-0" id="seo-pages-table">
                 <thead>
                     <tr>
-                        <th>URL</th>
-                        <th class="text-center" style="width:56px">HTTP</th>
-                        <th class="text-center" style="width:66px">Score</th>
-                        <th class="text-center" style="width:46px" title="Errors">Err</th>
-                        <th class="text-center" style="width:46px" title="Warnings">Warn</th>
-                        <th style="width:190px">Title</th>
-                        <th class="text-center" style="width:40px" title="H1 count">H1</th>
-                        <th class="text-center" style="width:54px" title="Word count">Words</th>
-                        <th class="text-center" style="width:62px" title="Load time in ms">ms</th>
+                        <th><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="url">URL</button></th>
+                        <th style="width:92px"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="type">Type</button></th>
+                        <th class="text-center" style="width:56px"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="http">HTTP</button></th>
+                        <th class="text-center" style="width:66px"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="score">Score</button></th>
+                        <th class="text-center" style="width:46px" title="Errors"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="errors">Err</button></th>
+                        <th class="text-center" style="width:46px" title="Warnings"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="warnings">Warn</button></th>
+                        <th style="width:190px"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="title">Title</button></th>
+                        <th class="text-center" style="width:40px" title="H1 count"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="h1">H1</button></th>
+                        <th class="text-center" style="width:54px" title="Word count"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="words">Words</button></th>
+                        <th class="text-center" style="width:62px" title="Load time in ms"><button type="button" class="btn btn-link btn-sm text-decoration-none p-0 seo-sort" data-sort-key="load">ms</button></th>
                         <th style="width:28px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <f:for each="{pages}" as="page" iteration="iter">
-                        <tr>
+                        <tr class="seo-page-row"
+                            data-detail-id="page-detail-{iter.index}"
+                            data-page-type="{page.pageType -> f:format.htmlspecialchars()}"
+                            data-error-count="{page.errorCount}"
+                            data-warning-count="{page.warningCount}"
+                            data-notice-count="{page.noticeCount}"
+                            data-search="{page.url -> f:format.htmlspecialchars()} {page.pageTitle -> f:format.htmlspecialchars()}"
+                            data-issues-json="{page.issues -> f:format.htmlspecialchars()}"
+                            data-sort-url="{page.url -> f:format.htmlspecialchars()}"
+                            data-sort-type="{page.pageType -> f:format.htmlspecialchars()}"
+                            data-sort-http="{page.statusCode}"
+                            data-sort-score="{page.pageScore}"
+                            data-sort-errors="{page.errorCount}"
+                            data-sort-warnings="{page.warningCount}"
+                            data-sort-title="{page.pageTitle -> f:format.htmlspecialchars()}"
+                            data-sort-h1="{page.h1Count}"
+                            data-sort-words="{page.wordCount}"
+                            data-sort-load="{page.loadTime}">
                             <td class="small" style="max-width:220px">
                                 <a href="{page.url -> f:format.htmlspecialchars()}"
                                    target="_blank"
@@ -233,6 +336,9 @@
                                    style="max-width:220px">
                                     {page.url -> f:format.htmlspecialchars()}
                                 </a>
+                            </td>
+                            <td class="small">
+                                <span class="badge badge-{page.pageTypeBadgeClass}">{page.pageTypeLabel}</span>
                             </td>
                             <td class="text-center">
                                 <span class="badge badge-{page.statusCodeClass}">{page.statusCode}</span>
@@ -251,23 +357,38 @@
                                 </f:if>
                             </td>
                             <td class="small" style="max-width:190px">
-                                <span class="d-block text-truncate" style="max-width:190px"
-                                      title="{page.pageTitle -> f:format.htmlspecialchars()}">
-                                    {page.pageTitle -> f:format.htmlspecialchars()}
-                                </span>
-                            </td>
-                            <td class="text-center small">
-                                <f:if condition="{page.h1Count} == 1">
-                                    <f:then><span class="text-success">1</span></f:then>
-                                    <f:else>
-                                        <f:if condition="{page.h1Count} == 0">
-                                            <f:then><span class="text-danger fw-bold">0</span></f:then>
-                                            <f:else><span class="text-warning fw-bold">{page.h1Count}</span></f:else>
-                                        </f:if>
-                                    </f:else>
+                                <f:if condition="{page.pageType} == 'html'">
+                                    <f:then>
+                                        <span class="d-block text-truncate" style="max-width:190px"
+                                              title="{page.pageTitle -> f:format.htmlspecialchars()}">
+                                            {page.pageTitle -> f:format.htmlspecialchars()}
+                                        </span>
+                                    </f:then>
+                                    <f:else><span class="text-muted">-</span></f:else>
                                 </f:if>
                             </td>
-                            <td class="text-center small">{page.wordCount}</td>
+                            <td class="text-center small">
+                                <f:if condition="{page.pageType} == 'html'">
+                                    <f:then>
+                                        <f:if condition="{page.h1Count} == 1">
+                                            <f:then><span class="text-success">1</span></f:then>
+                                            <f:else>
+                                                <f:if condition="{page.h1Count} == 0">
+                                                    <f:then><span class="text-danger fw-bold">0</span></f:then>
+                                                    <f:else><span class="text-warning fw-bold">{page.h1Count}</span></f:else>
+                                                </f:if>
+                                            </f:else>
+                                        </f:if>
+                                    </f:then>
+                                    <f:else><span class="text-muted">-</span></f:else>
+                                </f:if>
+                            </td>
+                            <td class="text-center small">
+                                <f:if condition="{page.pageType} == 'html'">
+                                    <f:then>{page.wordCount}</f:then>
+                                    <f:else><span class="text-muted">-</span></f:else>
+                                </f:if>
+                            </td>
                             <td class="text-center small">{page.loadTime}</td>
                             <td class="text-center">
                                 <f:if condition="{page.issuesArray -> f:count()} > 0">
@@ -285,7 +406,7 @@
                         <!-- Detail row -->
                         <f:if condition="{page.issuesArray -> f:count()} > 0">
                             <tr id="page-detail-{iter.index}" class="collapse table-light">
-                                <td colspan="10" class="py-2 px-3">
+                                <td colspan="11" class="py-2 px-3">
                                     <ul class="list-unstyled mb-2 small">
                                         <f:for each="{page.issuesArray}" as="issue">
                                             <li class="mb-1">
@@ -303,6 +424,36 @@
                                         </f:for>
                                     </ul>
                                     <dl class="row row-cols-auto g-2 small text-muted mb-0">
+                                        <dt class="col mb-0">Type</dt>
+                                        <dd class="col mb-0">
+                                            <span class="badge badge-{page.pageTypeBadgeClass}">{page.pageTypeLabel}</span>
+                                        </dd>
+                                        <f:if condition="{page.contentType} != ''">
+                                            <dt class="col mb-0">Content-Type</dt>
+                                            <dd class="col mb-0">{page.contentType -> f:format.htmlspecialchars()}</dd>
+                                        </f:if>
+                                        <f:if condition="{page.redirectTarget} != ''">
+                                            <dt class="col mb-0">Redirect</dt>
+                                            <dd class="col mb-0">
+                                                <a href="{page.redirectTarget -> f:format.htmlspecialchars()}"
+                                                   target="_blank" rel="noopener noreferrer" class="text-muted">
+                                                    {page.redirectTarget -> f:format.htmlspecialchars()}
+                                                </a>
+                                            </dd>
+                                        </f:if>
+                                        <f:if condition="{page.redirectFinalUrl} != ''">
+                                            <dt class="col mb-0">Final URL</dt>
+                                            <dd class="col mb-0">
+                                                <a href="{page.redirectFinalUrl -> f:format.htmlspecialchars()}"
+                                                   target="_blank" rel="noopener noreferrer" class="text-muted">
+                                                    {page.redirectFinalUrl -> f:format.htmlspecialchars()}
+                                                </a>
+                                            </dd>
+                                        </f:if>
+                                        <f:if condition="{page.redirectHops} > 0">
+                                            <dt class="col mb-0">Redirect hops</dt>
+                                            <dd class="col mb-0">{page.redirectHops}</dd>
+                                        </f:if>
                                         <f:if condition="{page.pageTitle} != ''">
                                             <dt class="col mb-0">Title</dt>
                                             <dd class="col mb-0">
@@ -357,6 +508,173 @@ document.querySelectorAll('.js-confirm').forEach(function (el) {
         }
     });
 });
+
+(function () {
+    const table = document.getElementById('seo-pages-table');
+    if (!table) {
+        return;
+    }
+
+    const storageKey = 'aistea-seo-report-filters-{report.uid}';
+    const searchInput = document.getElementById('seo-filter-search');
+    const typeSelect = document.getElementById('seo-filter-type');
+    const severitySelect = document.getElementById('seo-filter-severity');
+    const issueTypeInput = document.getElementById('seo-filter-issue-type');
+    const resetButton = document.getElementById('seo-filter-reset');
+    const issueSummaryRows = Array.from(document.querySelectorAll('.seo-issue-summary-row'));
+    const rows = Array.from(table.querySelectorAll('tbody tr.seo-page-row'));
+
+    function matchesSeverity(row, severity) {
+        if (!severity) {
+            return true;
+        }
+        return Number(row.dataset[severity + 'Count'] || '0') > 0;
+    }
+
+    function matchesIssueType(row, issueType) {
+        if (!issueType) {
+            return true;
+        }
+
+        try {
+            const issues = JSON.parse(row.dataset.issuesJson || '[]');
+            return issues.some(function (issue) {
+                return String(issue.type || '').toLowerCase().includes(issueType);
+            });
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function saveFilters() {
+        const payload = {
+            search: searchInput.value || '',
+            type: typeSelect.value || '',
+            severity: severitySelect.value || '',
+            issueType: issueTypeInput.value || '',
+        };
+        localStorage.setItem(storageKey, JSON.stringify(payload));
+    }
+
+    function loadFilters() {
+        try {
+            const payload = JSON.parse(localStorage.getItem(storageKey) || '{}');
+            searchInput.value = payload.search || '';
+            typeSelect.value = payload.type || '';
+            severitySelect.value = payload.severity || '';
+            issueTypeInput.value = payload.issueType || '';
+        } catch (error) {
+            localStorage.removeItem(storageKey);
+        }
+    }
+
+    function applyFilters() {
+        const search = (searchInput.value || '').trim().toLowerCase();
+        const type = typeSelect.value;
+        const severity = severitySelect.value;
+        const issueType = (issueTypeInput.value || '').trim().toLowerCase();
+
+        rows.forEach(function (row) {
+            const text = (row.dataset.search || '').toLowerCase();
+            const visible = (search === '' || text.includes(search))
+                && (type === '' || row.dataset.pageType === type)
+                && matchesSeverity(row, severity)
+                && matchesIssueType(row, issueType);
+
+            row.style.display = visible ? '' : 'none';
+
+            const detailRow = document.getElementById(row.dataset.detailId || '');
+            if (detailRow && !visible) {
+                detailRow.classList.remove('show');
+                detailRow.style.display = 'none';
+            } else if (detailRow) {
+                detailRow.style.display = '';
+            }
+        });
+
+        saveFilters();
+    }
+
+    loadFilters();
+    applyFilters();
+
+    searchInput.addEventListener('input', applyFilters);
+    typeSelect.addEventListener('change', applyFilters);
+    severitySelect.addEventListener('change', applyFilters);
+    issueTypeInput.addEventListener('input', applyFilters);
+    resetButton.addEventListener('click', function () {
+        searchInput.value = '';
+        typeSelect.value = '';
+        severitySelect.value = '';
+        issueTypeInput.value = '';
+        applyFilters();
+    });
+
+    issueSummaryRows.forEach(function (row) {
+        row.addEventListener('click', function () {
+            issueTypeInput.value = row.dataset.issueType || '';
+            applyFilters();
+            table.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+})();
+
+(function () {
+    const table = document.getElementById('seo-pages-table');
+    if (!table) {
+        return;
+    }
+
+    const tbody = table.querySelector('tbody');
+    const sortButtons = Array.from(table.querySelectorAll('.seo-sort'));
+    let currentKey = '';
+    let currentDirection = 'asc';
+
+    sortButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const key = button.dataset.sortKey || '';
+            if (!key) {
+                return;
+            }
+
+            currentDirection = currentKey === key && currentDirection === 'asc' ? 'desc' : 'asc';
+            currentKey = key;
+
+            const rows = Array.from(tbody.querySelectorAll('tr.seo-page-row'));
+            rows.sort(function (a, b) {
+                const aValue = a.dataset['sort' + key.charAt(0).toUpperCase() + key.slice(1)] || '';
+                const bValue = b.dataset['sort' + key.charAt(0).toUpperCase() + key.slice(1)] || '';
+                const aNumber = Number(aValue);
+                const bNumber = Number(bValue);
+                const bothNumeric = !Number.isNaN(aNumber) && !Number.isNaN(bNumber) && aValue !== '' && bValue !== '';
+
+                let comparison = 0;
+                if (bothNumeric) {
+                    comparison = aNumber - bNumber;
+                } else {
+                    comparison = aValue.localeCompare(bValue, undefined, { sensitivity: 'base' });
+                }
+
+                return currentDirection === 'asc' ? comparison : -comparison;
+            });
+
+            rows.forEach(function (row) {
+                tbody.appendChild(row);
+                const detailId = row.dataset.detailId || '';
+                const detailRow = detailId ? document.getElementById(detailId) : null;
+                if (detailRow) {
+                    tbody.appendChild(detailRow);
+                }
+            });
+
+            sortButtons.forEach(function (item) {
+                item.classList.remove('text-primary');
+            });
+            button.classList.add('text-primary');
+        });
+    });
+})();
 </script>
 
+</div>
 </html>

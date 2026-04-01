@@ -1,7 +1,7 @@
 {
     "name": "aistea/aistea-seo",
     "type": "typo3-cms-extension",
-    "description": "SEO analysis and reporting extension for TYPO3 - crawls websites and generates reports like Screaming Frog SEO Spider",
+    "description": "Aistea SEO Crawler for TYPO3 - crawls external websites and generates SEO audit reports",
     "homepage": "https://aistea.me",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS", "SEO", "SEO Spider", "audit", "reports"],

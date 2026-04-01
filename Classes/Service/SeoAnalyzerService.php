@@ -94,6 +94,11 @@ class SeoAnalyzerService
                 $seoPage->setReport($report->getUid());
                 $seoPage->setUrl($url);
                 $seoPage->setStatusCode($pageData['statusCode']);
+                $seoPage->setPageType($pageData['pageType']);
+                $seoPage->setContentType($pageData['contentType']);
+                $seoPage->setRedirectTarget($pageData['redirectTarget']);
+                $seoPage->setRedirectFinalUrl($pageData['redirectFinalUrl']);
+                $seoPage->setRedirectHops($pageData['redirectHops']);
                 $seoPage->setPageTitle($pageData['title']);
                 $seoPage->setTitleLength(mb_strlen($pageData['title']));
                 $seoPage->setMetaDescription($pageData['metaDescription']);
@@ -125,6 +130,19 @@ class SeoAnalyzerService
                         && $this->isSameDomain($normalized, $baseUrl)
                     ) {
                         $queue[] = $normalized;
+                    }
+                }
+
+                if (($pageData['redirectQueueTarget'] ?? '') !== '') {
+                    $normalizedRedirectTarget = $this->normalizeUrl($pageData['redirectQueueTarget'], $baseUrl);
+                    if (
+                        $normalizedRedirectTarget !== null
+                        && !$this->shouldSkipCrawlUrl($normalizedRedirectTarget)
+                        && !in_array($normalizedRedirectTarget, $visited, true)
+                        && !in_array($normalizedRedirectTarget, $queue, true)
+                        && $this->isSameDomain($normalizedRedirectTarget, $baseUrl)
+                    ) {
+                        $queue[] = $normalizedRedirectTarget;
                     }
                 }
 
@@ -174,6 +192,10 @@ class SeoAnalyzerService
         $metaDescriptionMap = [];
 
         foreach ($pages as $page) {
+            if ($page->getPageType() !== 'html') {
+                continue;
+            }
+
             $title = trim($page->getPageTitle());
             if ($title !== '') {
                 $titleMap[mb_strtolower($title)][] = $page;
@@ -275,26 +297,57 @@ class SeoAnalyzerService
         $issues = [];
 
         try {
-            $response = $this->requestFactory->request($url, 'GET', [
-                'headers' => [
-                    'User-Agent' => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                ],
-                'timeout' => 15,
-                'allow_redirects' => ['max' => 5],
-                'verify' => true,
-                'http_errors' => false,
-            ]);
-
+            $redirectInfo = $this->fetchResponseWithRedirects($url);
+            $response = $redirectInfo['response'];
             $loadTime = (int) ((microtime(true) - $startTime) * 1000);
             $statusCode = $response->getStatusCode();
             $html = (string) $response->getBody();
             $contentType = strtolower(trim(explode(';', $response->getHeaderLine('Content-Type'))[0]));
+            $redirectTarget = $redirectInfo['redirectTarget'];
+            $redirectFinalUrl = $redirectInfo['redirectFinalUrl'];
+            $redirectHops = $redirectInfo['redirectHops'];
         } catch (\Throwable $e) {
             $loadTime = (int) ((microtime(true) - $startTime) * 1000);
             return $this->emptyPageResult($loadTime, [
                 ['type' => 'fetch_error', 'severity' => 'error', 'message' => 'Failed to fetch page: ' . $e->getMessage()],
             ]);
+        }
+
+        if ($redirectHops > 0) {
+            $redirectIssues = [[
+                'type' => 'redirect',
+                'severity' => 'notice',
+                'message' => $redirectHops === 1
+                    ? 'URL responded with a redirect'
+                    : sprintf('URL redirected %d times before reaching the final target', $redirectHops),
+            ]];
+
+            return [
+                'statusCode' => $redirectInfo['initialStatusCode'],
+                'pageType' => 'redirect',
+                'contentType' => $contentType,
+                'redirectTarget' => $redirectTarget,
+                'redirectFinalUrl' => $redirectFinalUrl,
+                'redirectHops' => $redirectHops,
+                'redirectQueueTarget' => $redirectFinalUrl !== '' ? $redirectFinalUrl : $redirectTarget,
+                'title' => '',
+                'metaDescription' => '',
+                'h1Count' => 0,
+                'h1Text' => '',
+                'h2Count' => 0,
+                'canonical' => '',
+                'robotsNoindex' => false,
+                'robotsNofollow' => false,
+                'imagesTotal' => 0,
+                'imagesMissingAlt' => 0,
+                'linksInternal' => 0,
+                'linksExternal' => 0,
+                'wordCount' => 0,
+                'loadTime' => $loadTime,
+                'score' => 100,
+                'issues' => $redirectIssues,
+                'internalLinks' => [],
+            ];
         }
 
         if ($statusCode >= 400) {
@@ -304,6 +357,12 @@ class SeoAnalyzerService
         if (!$this->isHtmlContentType($contentType, $url)) {
             return [
                 'statusCode' => $statusCode,
+                'pageType' => 'resource',
+                'contentType' => $contentType,
+                'redirectTarget' => '',
+                'redirectFinalUrl' => '',
+                'redirectHops' => 0,
+                'redirectQueueTarget' => '',
                 'title' => '',
                 'metaDescription' => '',
                 'h1Count' => 0,
@@ -484,6 +543,12 @@ class SeoAnalyzerService
 
         return [
             'statusCode' => $statusCode,
+            'pageType' => 'html',
+            'contentType' => $contentType,
+            'redirectTarget' => '',
+            'redirectFinalUrl' => '',
+            'redirectHops' => 0,
+            'redirectQueueTarget' => '',
             'title' => $title,
             'metaDescription' => $metaDescription,
             'h1Count' => $h1Count,
@@ -508,6 +573,12 @@ class SeoAnalyzerService
     {
         return [
             'statusCode' => 0,
+            'pageType' => 'resource',
+            'contentType' => '',
+            'redirectTarget' => '',
+            'redirectFinalUrl' => '',
+            'redirectHops' => 0,
+            'redirectQueueTarget' => '',
             'title' => '',
             'metaDescription' => '',
             'h1Count' => 0,
@@ -526,6 +597,66 @@ class SeoAnalyzerService
             'issues' => $issues,
             'internalLinks' => [],
         ];
+    }
+
+    /**
+     * @return array{response: \Psr\Http\Message\ResponseInterface, redirectTarget: string, redirectFinalUrl: string, redirectHops: int, initialStatusCode: int}
+     */
+    private function fetchResponseWithRedirects(string $url): array
+    {
+        $currentUrl = $url;
+        $firstRedirectTarget = '';
+        $initialStatusCode = 0;
+        $redirectHops = 0;
+
+        for ($hop = 0; $hop < 5; $hop++) {
+            $response = $this->requestFactory->request($currentUrl, 'GET', [
+                'headers' => [
+                    'User-Agent' => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                ],
+                'timeout' => 15,
+                'allow_redirects' => false,
+                'verify' => true,
+                'http_errors' => false,
+            ]);
+
+            $statusCode = $response->getStatusCode();
+            if ($initialStatusCode === 0) {
+                $initialStatusCode = $statusCode;
+            }
+
+            if ($statusCode < 300 || $statusCode >= 400) {
+                return [
+                    'response' => $response,
+                    'redirectTarget' => $firstRedirectTarget,
+                    'redirectFinalUrl' => $redirectHops > 0 ? $currentUrl : '',
+                    'redirectHops' => $redirectHops,
+                    'initialStatusCode' => $initialStatusCode,
+                ];
+            }
+
+            $location = trim($response->getHeaderLine('Location'));
+            if ($location === '') {
+                return [
+                    'response' => $response,
+                    'redirectTarget' => $firstRedirectTarget,
+                    'redirectFinalUrl' => '',
+                    'redirectHops' => $redirectHops,
+                    'initialStatusCode' => $initialStatusCode,
+                ];
+            }
+
+            $resolvedLocation = $this->resolveRelativeUrl($location, $currentUrl);
+            if ($firstRedirectTarget === '') {
+                $firstRedirectTarget = $resolvedLocation;
+            }
+
+            $currentUrl = $resolvedLocation;
+            $redirectHops++;
+        }
+
+        throw new \RuntimeException('Too many redirects while fetching URL.');
     }
 
     private function normalizeUrl(string $url, string $baseUrl): ?string

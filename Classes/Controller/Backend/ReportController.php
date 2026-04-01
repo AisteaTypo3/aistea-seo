@@ -133,22 +133,8 @@ class ReportController extends ActionController
             $noticeCount += $page->getNoticeCount();
         }
 
-        $issuesSummary = [];
-        foreach ($pages as $page) {
-            foreach ($page->getIssuesArray() as $issue) {
-                $type = $issue['type'] ?? 'unknown';
-                if (!isset($issuesSummary[$type])) {
-                    $issuesSummary[$type] = [
-                        'type' => $type,
-                        'severity' => $issue['severity'],
-                        'message' => $issue['message'],
-                        'count' => 0,
-                    ];
-                }
-                $issuesSummary[$type]['count']++;
-            }
-        }
-        usort($issuesSummary, static fn($a, $b) => $b['count'] <=> $a['count']);
+        $issuesSummary = $this->buildIssuesSummary($pages);
+        $pageTypeSummary = $this->buildPageTypeSummary($pages);
 
         $moduleTemplate->assignMultiple([
             'report' => $report,
@@ -157,9 +143,188 @@ class ReportController extends ActionController
             'warningCount' => $warningCount,
             'noticeCount' => $noticeCount,
             'issuesSummary' => $issuesSummary,
+            'pageTypeSummary' => $pageTypeSummary,
+            'exportCsvUrl' => $this->uriBuilder->uriFor('exportCsv', ['report' => $report]),
+            'exportIssuesCsvUrl' => $this->uriBuilder->uriFor('exportIssuesCsv', ['report' => $report]),
+            'exportJsonUrl' => $this->uriBuilder->uriFor('exportJson', ['report' => $report]),
         ]);
 
         return $moduleTemplate->renderResponse('Backend/Report/Show');
+    }
+
+    public function exportCsvAction(SeoReport $report): ResponseInterface
+    {
+        $pages = $this->pageRepository->findByReportUid($report->getUid());
+        $rows = [[
+            'URL',
+            'Page Type',
+            'HTTP Status',
+            'Content Type',
+            'Redirect Target',
+            'Redirect Final URL',
+            'Redirect Hops',
+            'Score',
+            'Errors',
+            'Warnings',
+            'Notices',
+            'Title',
+            'Title Length',
+            'Meta Description',
+            'Meta Description Length',
+            'H1 Count',
+            'H1 Text',
+            'H2 Count',
+            'Canonical URL',
+            'Robots Noindex',
+            'Robots Nofollow',
+            'Images Total',
+            'Images Missing Alt',
+            'Internal Links',
+            'External Links',
+            'Word Count',
+            'Load Time (ms)',
+            'Issue Types',
+            'Issue Messages',
+        ]];
+
+        foreach ($pages as $page) {
+            $rows[] = [
+                $page->getUrl(),
+                $page->getPageTypeLabel(),
+                (string) $page->getStatusCode(),
+                $page->getContentType(),
+                $page->getRedirectTarget(),
+                $page->getRedirectFinalUrl(),
+                (string) $page->getRedirectHops(),
+                (string) $page->getPageScore(),
+                (string) $page->getErrorCount(),
+                (string) $page->getWarningCount(),
+                (string) $page->getNoticeCount(),
+                $page->getPageTitle(),
+                (string) $page->getTitleLength(),
+                $page->getMetaDescription(),
+                (string) $page->getMetaDescriptionLength(),
+                (string) $page->getH1Count(),
+                $page->getH1Text(),
+                (string) $page->getH2Count(),
+                $page->getCanonicalUrl(),
+                $page->getRobotsNoindex() ? 'yes' : 'no',
+                $page->getRobotsNofollow() ? 'yes' : 'no',
+                (string) $page->getImagesTotal(),
+                (string) $page->getImagesMissingAlt(),
+                (string) $page->getLinksInternal(),
+                (string) $page->getLinksExternal(),
+                (string) $page->getWordCount(),
+                (string) $page->getLoadTime(),
+                $this->buildIssueTypesString($page->getIssuesArray()),
+                $this->buildIssueMessagesString($page->getIssuesArray()),
+            ];
+        }
+
+        $handle = fopen('php://temp', 'w+');
+        foreach ($rows as $row) {
+            fputcsv($handle, $row);
+        }
+        rewind($handle);
+        $csv = stream_get_contents($handle) ?: '';
+        fclose($handle);
+
+        $filename = sprintf(
+            'seo-report-%d-%s.csv',
+            $report->getUid(),
+            preg_replace('/[^a-z0-9]+/i', '-', strtolower($report->getTitle())) ?: 'report'
+        );
+
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/csv; charset=utf-8')
+            ->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->withBody($this->streamFactory->createStream($csv));
+
+        return $response;
+    }
+
+    public function exportIssuesCsvAction(SeoReport $report): ResponseInterface
+    {
+        $issuesSummary = $this->buildIssuesSummary($this->pageRepository->findByReportUid($report->getUid()));
+        $rows = [[
+            'Issue Type',
+            'Severity',
+            'Message',
+            'Affected Pages',
+        ]];
+
+        foreach ($issuesSummary as $issue) {
+            $rows[] = [
+                $issue['type'],
+                $issue['severity'],
+                $issue['message'],
+                (string) $issue['count'],
+            ];
+        }
+
+        return $this->createCsvResponse(
+            $rows,
+            sprintf(
+                'seo-issues-%d-%s.csv',
+                $report->getUid(),
+                preg_replace('/[^a-z0-9]+/i', '-', strtolower($report->getTitle())) ?: 'report'
+            )
+        );
+    }
+
+    public function exportJsonAction(SeoReport $report): ResponseInterface
+    {
+        $pages = $this->pageRepository->findByReportUid($report->getUid());
+        $payload = [
+            'report' => [
+                'uid' => $report->getUid(),
+                'title' => $report->getTitle(),
+                'baseUrl' => $report->getBaseUrl(),
+                'status' => $report->getStatusLabel(),
+                'overallScore' => $report->getOverallScore(),
+                'pagesCrawled' => $report->getPagesCrawled(),
+                'maxPages' => $report->getMaxPages(),
+            ],
+            'issuesSummary' => $this->buildIssuesSummary($pages),
+            'pages' => array_map(static function ($page): array {
+                return [
+                    'url' => $page->getUrl(),
+                    'pageType' => $page->getPageType(),
+                    'pageTypeLabel' => $page->getPageTypeLabel(),
+                    'statusCode' => $page->getStatusCode(),
+                    'contentType' => $page->getContentType(),
+                    'redirectTarget' => $page->getRedirectTarget(),
+                    'redirectFinalUrl' => $page->getRedirectFinalUrl(),
+                    'redirectHops' => $page->getRedirectHops(),
+                    'score' => $page->getPageScore(),
+                    'errorCount' => $page->getErrorCount(),
+                    'warningCount' => $page->getWarningCount(),
+                    'noticeCount' => $page->getNoticeCount(),
+                    'title' => $page->getPageTitle(),
+                    'titleLength' => $page->getTitleLength(),
+                    'metaDescription' => $page->getMetaDescription(),
+                    'metaDescriptionLength' => $page->getMetaDescriptionLength(),
+                    'h1Count' => $page->getH1Count(),
+                    'h1Text' => $page->getH1Text(),
+                    'h2Count' => $page->getH2Count(),
+                    'wordCount' => $page->getWordCount(),
+                    'loadTime' => $page->getLoadTime(),
+                    'issues' => $page->getIssuesArray(),
+                ];
+            }, $pages),
+        ];
+
+        $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $filename = sprintf(
+            'seo-report-%d-%s.json',
+            $report->getUid(),
+            preg_replace('/[^a-z0-9]+/i', '-', strtolower($report->getTitle())) ?: 'report'
+        );
+
+        return $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'application/json; charset=utf-8')
+            ->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->withBody($this->streamFactory->createStream($json ?: '{}'));
     }
 
     public function analyzeAction(SeoReport $report): ResponseInterface
@@ -226,5 +391,105 @@ class ReportController extends ActionController
     private function isPostRequest(): bool
     {
         return strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET')) === 'POST';
+    }
+
+    /**
+     * @param list<\Aistea\AisteaSeo\Domain\Model\SeoPage> $pages
+     * @return list<array{type: string, severity: string, message: string, count: int}>
+     */
+    private function buildIssuesSummary(array $pages): array
+    {
+        $issuesSummary = [];
+        foreach ($pages as $page) {
+            foreach ($page->getIssuesArray() as $issue) {
+                $type = $issue['type'] ?? 'unknown';
+                if (!isset($issuesSummary[$type])) {
+                    $issuesSummary[$type] = [
+                        'type' => $type,
+                        'severity' => (string) ($issue['severity'] ?? 'notice'),
+                        'message' => (string) ($issue['message'] ?? $type),
+                        'count' => 0,
+                    ];
+                }
+                $issuesSummary[$type]['count']++;
+            }
+        }
+
+        usort($issuesSummary, static fn($a, $b) => $b['count'] <=> $a['count']);
+        return $issuesSummary;
+    }
+
+    /**
+     * @param list<list<string>> $rows
+     */
+    private function createCsvResponse(array $rows, string $filename): ResponseInterface
+    {
+        $handle = fopen('php://temp', 'w+');
+        fwrite($handle, "\xEF\xBB\xBF");
+        foreach ($rows as $row) {
+            fputcsv($handle, $row);
+        }
+        rewind($handle);
+        $csv = stream_get_contents($handle) ?: '';
+        fclose($handle);
+
+        return $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/csv; charset=utf-8')
+            ->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"')
+            ->withBody($this->streamFactory->createStream($csv));
+    }
+
+    /**
+     * @param list<\Aistea\AisteaSeo\Domain\Model\SeoPage> $pages
+     * @return array<string,int>
+     */
+    private function buildPageTypeSummary(array $pages): array
+    {
+        $summary = [
+            'html' => 0,
+            'redirect' => 0,
+            'resource' => 0,
+            'withErrors' => 0,
+        ];
+
+        foreach ($pages as $page) {
+            $pageType = $page->getPageType();
+            if (isset($summary[$pageType])) {
+                $summary[$pageType]++;
+            }
+            if ($page->getErrorCount() > 0) {
+                $summary['withErrors']++;
+            }
+        }
+
+        return $summary;
+    }
+
+    /**
+     * @param list<array{type?: string}> $issues
+     */
+    private function buildIssueTypesString(array $issues): string
+    {
+        $types = array_map(
+            static fn(array $issue): string => (string) ($issue['type'] ?? ''),
+            $issues
+        );
+        $types = array_values(array_filter(array_unique($types), static fn(string $type): bool => $type !== ''));
+
+        return implode(' | ', $types);
+    }
+
+    /**
+     * @param list<array{message?: string}> $issues
+     */
+    private function buildIssueMessagesString(array $issues): string
+    {
+        $messages = array_map(
+            static fn(array $issue): string => trim((string) ($issue['message'] ?? '')),
+            $issues
+        );
+        $messages = array_values(array_filter($messages, static fn(string $message): bool => $message !== ''));
+
+        return implode(' | ', $messages);
     }
 }

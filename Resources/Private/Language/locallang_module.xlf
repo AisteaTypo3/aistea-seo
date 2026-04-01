@@ -4,13 +4,13 @@
         <header/>
         <body>
             <trans-unit id="module.title">
-                <source>SEO Reports</source>
+                <source>Aistea SEO Crawler</source>
             </trans-unit>
             <trans-unit id="module.description">
-                <source>Analyse websites and generate SEO reports – crawls pages like Screaming Frog SEO Spider.</source>
+                <source>Crawl external websites and generate SEO audit reports.</source>
             </trans-unit>
             <trans-unit id="module.shortDescription">
-                <source>Website SEO auditing and reporting</source>
+                <source>External website SEO crawler</source>
             </trans-unit>
         </body>
     </file>

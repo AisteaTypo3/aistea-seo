@@ -21,6 +21,11 @@ return [
         'tableName' => 'tx_aisteaseo_domain_model_page',
         'properties' => [
             'statusCode' => ['fieldName' => 'status_code'],
+            'pageType' => ['fieldName' => 'page_type'],
+            'contentType' => ['fieldName' => 'content_type'],
+            'redirectTarget' => ['fieldName' => 'redirect_target'],
+            'redirectFinalUrl' => ['fieldName' => 'redirect_final_url'],
+            'redirectHops' => ['fieldName' => 'redirect_hops'],
             'pageTitle' => ['fieldName' => 'page_title'],
             'titleLength' => ['fieldName' => 'title_length'],
             'metaDescription' => ['fieldName' => 'meta_description'],

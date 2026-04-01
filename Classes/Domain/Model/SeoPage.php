@@ -10,6 +10,11 @@ class SeoPage extends AbstractEntity
     protected int $report = 0;
     protected string $url = '';
     protected int $statusCode = 0;
+    protected string $pageType = '';
+    protected string $contentType = '';
+    protected string $redirectTarget = '';
+    protected string $redirectFinalUrl = '';
+    protected int $redirectHops = 0;
     protected string $pageTitle = '';
     protected int $titleLength = 0;
     protected string $metaDescription = '';
@@ -57,6 +62,56 @@ class SeoPage extends AbstractEntity
     public function setStatusCode(int $statusCode): void
     {
         $this->statusCode = $statusCode;
+    }
+
+    public function getPageType(): string
+    {
+        return $this->pageType;
+    }
+
+    public function setPageType(string $pageType): void
+    {
+        $this->pageType = $pageType;
+    }
+
+    public function getContentType(): string
+    {
+        return $this->contentType;
+    }
+
+    public function setContentType(string $contentType): void
+    {
+        $this->contentType = $contentType;
+    }
+
+    public function getRedirectTarget(): string
+    {
+        return $this->redirectTarget;
+    }
+
+    public function setRedirectTarget(string $redirectTarget): void
+    {
+        $this->redirectTarget = $redirectTarget;
+    }
+
+    public function getRedirectFinalUrl(): string
+    {
+        return $this->redirectFinalUrl;
+    }
+
+    public function setRedirectFinalUrl(string $redirectFinalUrl): void
+    {
+        $this->redirectFinalUrl = $redirectFinalUrl;
+    }
+
+    public function getRedirectHops(): int
+    {
+        return $this->redirectHops;
+    }
+
+    public function setRedirectHops(int $redirectHops): void
+    {
+        $this->redirectHops = $redirectHops;
     }
 
     public function getPageTitle(): string
@@ -285,5 +340,25 @@ class SeoPage extends AbstractEntity
             return 'info';
         }
         return 'success';
+    }
+
+    public function getPageTypeLabel(): string
+    {
+        return match ($this->pageType) {
+            'html' => 'HTML',
+            'redirect' => 'Redirect',
+            'resource' => 'Resource',
+            default => $this->pageType !== '' ? ucfirst($this->pageType) : 'Unknown',
+        };
+    }
+
+    public function getPageTypeBadgeClass(): string
+    {
+        return match ($this->pageType) {
+            'html' => 'success',
+            'redirect' => 'info',
+            'resource' => 'secondary',
+            default => 'secondary',
+        };
     }
 }

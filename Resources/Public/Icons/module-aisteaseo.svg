@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-    <!-- Magnifying glass -->
-    <circle cx="6.2" cy="6.2" r="4" fill="none" stroke="#fff" stroke-width="1.4"/>
-    <!-- Bar chart inside lens (SEO data visual) -->
-    <rect x="3.8" y="6.8" width="1.1" height="1.8" rx="0.2" fill="#fff"/>
-    <rect x="5.4" y="5.6" width="1.1" height="3" rx="0.2" fill="#fff"/>
-    <rect x="7" y="4.4" width="1.1" height="4.2" rx="0.2" fill="#fff"/>
-    <!-- Handle -->
-    <line x1="9.3" y1="9.3" x2="14" y2="14" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+    <circle cx="6.6" cy="6.6" r="3.1" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M8.8 8.8L12 12" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+    <circle cx="5.3" cy="6.7" r=".6" fill="#FFFFFF"/>
+    <circle cx="6.95" cy="5.15" r=".6" fill="#FFFFFF"/>
+    <circle cx="8.1" cy="7.45" r=".6" fill="#FFFFFF"/>
+    <path d="M5.3 6.7L6.95 5.15L8.1 7.45" stroke="#FFFFFF" stroke-width=".75" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
