@@ -1,0 +1,71 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:flashMessages />
+
+<div class="row">
+    <div class="col-md-8 col-lg-6">
+
+        <f:form action="create" objectName="report" object="{report}">
+
+            <div class="mb-3">
+                <label class="form-label" for="report-title">
+                    Report title <span class="text-danger">*</span>
+                </label>
+                <f:form.textfield
+                    property="title"
+                    id="report-title"
+                    class="form-control"
+                    placeholder="e.g. aistea.me – April 2026"
+                    required="required" />
+                <div class="form-text">A descriptive name to identify this report later.</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="report-base-url">
+                    Website URL <span class="text-danger">*</span>
+                </label>
+                <f:form.textfield
+                    property="baseUrl"
+                    id="report-base-url"
+                    class="form-control"
+                    placeholder="https://example.com"
+                    required="required"
+                    additionalAttributes="{type: 'url'}" />
+                <div class="form-text">Start URL for the crawler. Only pages on the same domain will be followed.</div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label" for="report-max-pages">Max pages to crawl</label>
+                <f:form.textfield
+                    property="maxPages"
+                    id="report-max-pages"
+                    class="form-control"
+                    value="50"
+                    additionalAttributes="{type: 'number', min: '1', max: '200'}" />
+                <div class="form-text">1–200 pages. Start low for large sites.</div>
+            </div>
+
+            <div class="callout callout-warning mb-4">
+                <div class="callout-body">
+                    <h4 class="callout-title">Queue note</h4>
+                    <p class="mb-0">
+                        New analyses are queued for background processing.
+                        Run <code>bin/typo3 aistea-seo:process-queue</code> manually or through TYPO3 Scheduler / cron
+                        to execute queued crawls.
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <f:form.submit value="Create &amp; save" class="btn btn-primary" />
+                <f:link.action action="index" class="btn btn-default">Cancel</f:link.action>
+            </div>
+
+        </f:form>
+
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,362 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:flashMessages />
+
+<!-- Report meta + action buttons -->
+<div class="d-flex align-items-start justify-content-between mb-4 gap-3">
+    <div>
+        <p class="mb-1">
+            <a href="{report.baseUrl -> f:format.htmlspecialchars()}" target="_blank" rel="noopener noreferrer"
+               class="text-muted small">
+                {report.baseUrl -> f:format.htmlspecialchars()}
+            </a>
+        </p>
+        <p class="mb-0 small text-muted">
+            <span class="badge badge-{report.statusBadgeClass} me-2">{report.statusLabel}</span>
+            Created: <f:format.date format="d.m.Y H:i">{report.crdate}</f:format.date>
+            &nbsp;&middot;&nbsp; Max pages: {report.maxPages}
+            <f:if condition="{report.startedAt} > 0">
+                &nbsp;&middot;&nbsp; Started: <f:format.date format="d.m.Y H:i">{report.startedAt}</f:format.date>
+            </f:if>
+            <f:if condition="{report.finishedAt} > 0">
+                &nbsp;&middot;&nbsp; Finished: <f:format.date format="d.m.Y H:i">{report.finishedAt}</f:format.date>
+            </f:if>
+        </p>
+    </div>
+    <div class="d-flex gap-2 flex-shrink-0">
+        <f:form action="analyze" arguments="{report: report}" method="post" class="d-inline">
+            <button type="submit"
+               class="btn btn-warning btn-sm text-nowrap js-confirm"
+               data-confirm="Queue SEO analysis? Existing results will be replaced when the worker processes this report.">
+                <core:icon identifier="actions-refresh" size="small" /> Queue Analysis
+            </button>
+        </f:form>
+        <f:form action="delete" arguments="{report: report}" method="post" class="d-inline">
+            <button type="submit"
+               class="btn btn-danger btn-sm js-confirm"
+               data-confirm="Delete this report and all its data? This cannot be undone.">
+                <core:icon identifier="actions-delete" size="small" /> Delete
+            </button>
+        </f:form>
+    </div>
+</div>
+
+<!-- Status: failed -->
+<f:if condition="{report.status} == 3">
+    <div class="callout callout-danger mb-4">
+        <div class="callout-body">
+            <h4 class="callout-title">Analysis failed</h4>
+            <p class="mb-0"><code>{report.errorMessage -> f:format.htmlspecialchars()}</code></p>
+        </div>
+    </div>
+</f:if>
+
+<!-- Status: not yet run -->
+<f:if condition="{report.status} == 0">
+    <div class="callout callout-info mb-4">
+        <div class="callout-body">
+            <h4 class="callout-title">No analysis run yet</h4>
+            <p class="mb-0">Click <strong>Queue Analysis</strong> to enqueue a background crawl.</p>
+        </div>
+    </div>
+</f:if>
+
+<!-- Status: queued -->
+<f:if condition="{report.status} == 4">
+    <div class="callout callout-warning mb-4">
+        <div class="callout-body">
+            <h4 class="callout-title">Analysis queued</h4>
+            <p class="mb-2">
+                This report is waiting for the background worker. Run
+                <code>bin/typo3 aistea-seo:process-queue</code> or schedule that command.
+            </p>
+            <f:if condition="{report.queuedAt} > 0">
+                <p class="mb-0 small text-muted">
+                    Queued: <f:format.date format="d.m.Y H:i">{report.queuedAt}</f:format.date>
+                </p>
+            </f:if>
+        </div>
+    </div>
+</f:if>
+
+<!-- Status: running -->
+<f:if condition="{report.status} == 1">
+    <div class="card mb-4 border-info">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center gap-3 mb-2">
+                <div>
+                    <h4 class="h6 mb-1">Analysis in progress</h4>
+                    <p class="mb-0 small text-muted">{report.progressPages} / {report.maxPages} pages processed</p>
+                </div>
+                <span class="badge badge-info">{report.progressPercent}%</span>
+            </div>
+            <div class="progress mb-2" style="height:8px">
+                <div class="progress-bar bg-info"
+                     style="width:{report.progressPercent}%"
+                     role="progressbar"
+                     aria-valuenow="{report.progressPercent}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
+            <f:if condition="{report.lastCrawledUrl} != ''">
+                <p class="mb-0 small text-muted text-break">
+                    Last crawled URL: {report.lastCrawledUrl -> f:format.htmlspecialchars()}
+                </p>
+            </f:if>
+        </div>
+    </div>
+</f:if>
+
+<!-- Score + stats cards -->
+<f:if condition="{report.status} == 2">
+    <div class="row g-3 mb-4">
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card text-center h-100">
+                <div class="card-body py-3">
+                    <div class="display-5 fw-bold text-{report.scoreBadgeClass} lh-1 mb-1">
+                        {report.overallScore}
+                    </div>
+                    <div class="small text-muted">Overall score / 100</div>
+                    <div class="progress mt-2" style="height:6px">
+                        <div class="progress-bar bg-{report.scoreBadgeClass}"
+                             style="width:{report.overallScore}%"
+                             role="progressbar"
+                             aria-valuenow="{report.overallScore}"
+                             aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card text-center h-100 border-danger">
+                <div class="card-body py-3">
+                    <div class="display-5 fw-bold text-danger lh-1 mb-1">{errorCount}</div>
+                    <div class="small text-muted">Errors</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card text-center h-100 border-warning">
+                <div class="card-body py-3">
+                    <div class="display-5 fw-bold text-warning lh-1 mb-1">{warningCount}</div>
+                    <div class="small text-muted">Warnings</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card text-center h-100">
+                <div class="card-body py-3">
+                    <div class="display-5 fw-bold lh-1 mb-1">{report.pagesCrawled}</div>
+                    <div class="small text-muted">Pages crawled</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</f:if>
+
+<!-- Issues summary -->
+<f:if condition="{issuesSummary -> f:count()} > 0">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title h6 mb-0">Issues summary</h3>
+        </div>
+        <table class="table table-sm table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th style="width:90px">Severity</th>
+                    <th class="text-center" style="width:90px">Pages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <f:for each="{issuesSummary}" as="issue">
+                    <tr>
+                        <td class="small">{issue.message -> f:format.htmlspecialchars()}</td>
+                        <td>
+                            <f:if condition="{issue.severity} == 'error'">
+                                <f:then><span class="badge badge-danger">Error</span></f:then>
+                                <f:else>
+                                    <f:if condition="{issue.severity} == 'warning'">
+                                        <f:then><span class="badge badge-warning">Warning</span></f:then>
+                                        <f:else><span class="badge badge-info">Notice</span></f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+                        </td>
+                        <td class="text-center small fw-bold">{issue.count}</td>
+                    </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </div>
+</f:if>
+
+<!-- Pages table -->
+<f:if condition="{pages -> f:count()} > 0">
+    <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="card-title h6 mb-0">Crawled pages</h3>
+            <span class="badge badge-secondary">{pages -> f:count()}</span>
+        </div>
+        <div class="table-fit">
+            <table class="table table-sm table-hover mb-0" id="seo-pages-table">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th class="text-center" style="width:56px">HTTP</th>
+                        <th class="text-center" style="width:66px">Score</th>
+                        <th class="text-center" style="width:46px" title="Errors">Err</th>
+                        <th class="text-center" style="width:46px" title="Warnings">Warn</th>
+                        <th style="width:190px">Title</th>
+                        <th class="text-center" style="width:40px" title="H1 count">H1</th>
+                        <th class="text-center" style="width:54px" title="Word count">Words</th>
+                        <th class="text-center" style="width:62px" title="Load time in ms">ms</th>
+                        <th style="width:28px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <f:for each="{pages}" as="page" iteration="iter">
+                        <tr>
+                            <td class="small" style="max-width:220px">
+                                <a href="{page.url -> f:format.htmlspecialchars()}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="text-break d-block"
+                                   style="max-width:220px">
+                                    {page.url -> f:format.htmlspecialchars()}
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-{page.statusCodeClass}">{page.statusCode}</span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-{page.scoreBadgeClass}">{page.pageScore}</span>
+                            </td>
+                            <td class="text-center small fw-bold text-danger">
+                                <f:if condition="{page.errorCount} > 0">
+                                    {page.errorCount}
+                                </f:if>
+                            </td>
+                            <td class="text-center small fw-bold text-warning">
+                                <f:if condition="{page.warningCount} > 0">
+                                    {page.warningCount}
+                                </f:if>
+                            </td>
+                            <td class="small" style="max-width:190px">
+                                <span class="d-block text-truncate" style="max-width:190px"
+                                      title="{page.pageTitle -> f:format.htmlspecialchars()}">
+                                    {page.pageTitle -> f:format.htmlspecialchars()}
+                                </span>
+                            </td>
+                            <td class="text-center small">
+                                <f:if condition="{page.h1Count} == 1">
+                                    <f:then><span class="text-success">1</span></f:then>
+                                    <f:else>
+                                        <f:if condition="{page.h1Count} == 0">
+                                            <f:then><span class="text-danger fw-bold">0</span></f:then>
+                                            <f:else><span class="text-warning fw-bold">{page.h1Count}</span></f:else>
+                                        </f:if>
+                                    </f:else>
+                                </f:if>
+                            </td>
+                            <td class="text-center small">{page.wordCount}</td>
+                            <td class="text-center small">{page.loadTime}</td>
+                            <td class="text-center">
+                                <f:if condition="{page.issuesArray -> f:count()} > 0">
+                                    <button class="btn btn-icon btn-sm btn-default"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#page-detail-{iter.index}"
+                                            aria-expanded="false"
+                                            aria-controls="page-detail-{iter.index}">
+                                        <core:icon identifier="actions-chevron-down" size="small" />
+                                    </button>
+                                </f:if>
+                            </td>
+                        </tr>
+                        <!-- Detail row -->
+                        <f:if condition="{page.issuesArray -> f:count()} > 0">
+                            <tr id="page-detail-{iter.index}" class="collapse table-light">
+                                <td colspan="10" class="py-2 px-3">
+                                    <ul class="list-unstyled mb-2 small">
+                                        <f:for each="{page.issuesArray}" as="issue">
+                                            <li class="mb-1">
+                                                <f:if condition="{issue.severity} == 'error'">
+                                                    <f:then><span class="badge badge-danger me-1">Error</span></f:then>
+                                                    <f:else>
+                                                        <f:if condition="{issue.severity} == 'warning'">
+                                                            <f:then><span class="badge badge-warning me-1">Warning</span></f:then>
+                                                            <f:else><span class="badge badge-info me-1">Notice</span></f:else>
+                                                        </f:if>
+                                                    </f:else>
+                                                </f:if>
+                                                {issue.message -> f:format.htmlspecialchars()}
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                    <dl class="row row-cols-auto g-2 small text-muted mb-0">
+                                        <f:if condition="{page.pageTitle} != ''">
+                                            <dt class="col mb-0">Title</dt>
+                                            <dd class="col mb-0">
+                                                {page.pageTitle -> f:format.htmlspecialchars()}
+                                                <span class="badge badge-secondary ms-1">{page.titleLength} chars</span>
+                                            </dd>
+                                        </f:if>
+                                        <f:if condition="{page.metaDescriptionLength} > 0">
+                                            <dt class="col mb-0">Meta desc</dt>
+                                            <dd class="col mb-0">
+                                                <span class="badge badge-secondary">{page.metaDescriptionLength} chars</span>
+                                            </dd>
+                                        </f:if>
+                                        <dt class="col mb-0">H2</dt>
+                                        <dd class="col mb-0">{page.h2Count}</dd>
+                                        <dt class="col mb-0">Images</dt>
+                                        <dd class="col mb-0">
+                                            {page.imagesTotal}
+                                            <f:if condition="{page.imagesMissingAlt} > 0">
+                                                <span class="badge badge-warning ms-1">{page.imagesMissingAlt} no alt</span>
+                                            </f:if>
+                                        </dd>
+                                        <dt class="col mb-0">Links</dt>
+                                        <dd class="col mb-0">
+                                            {page.linksInternal} int. / {page.linksExternal} ext.
+                                        </dd>
+                                        <f:if condition="{page.canonicalUrl} != ''">
+                                            <dt class="col mb-0">Canonical</dt>
+                                            <dd class="col mb-0">
+                                                <a href="{page.canonicalUrl -> f:format.htmlspecialchars()}"
+                                                   target="_blank" rel="noopener noreferrer" class="text-muted">
+                                                    {page.canonicalUrl -> f:format.htmlspecialchars()}
+                                                </a>
+                                            </dd>
+                                        </f:if>
+                                    </dl>
+                                </td>
+                            </tr>
+                        </f:if>
+                    </f:for>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</f:if>
+
+<script>
+document.querySelectorAll('.js-confirm').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+        if (!confirm(el.getAttribute('data-confirm'))) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+
+</html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <!-- Background circle -->
+    <circle cx="256" cy="256" r="256" fill="#1a1a2e"/>
+
+    <!-- Magnifying glass circle -->
+    <circle cx="210" cy="210" r="120" fill="none" stroke="#4f9cf9" stroke-width="32"/>
+
+    <!-- Bar chart inside lens -->
+    <rect x="142" y="218" width="34" height="62" rx="6" fill="#4f9cf9" opacity="0.7"/>
+    <rect x="193" y="185" width="34" height="95" rx="6" fill="#4f9cf9" opacity="0.85"/>
+    <rect x="244" y="155" width="34" height="125" rx="6" fill="#4f9cf9"/>
+
+    <!-- Handle -->
+    <line x1="302" y1="302" x2="420" y2="420" stroke="#4f9cf9" stroke-width="44" stroke-linecap="round"/>
+
+    <!-- "SEO" text label at bottom -->
+    <text x="256" y="465" font-family="'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="700"
+          fill="#4f9cf9" text-anchor="middle" letter-spacing="4">SEO</text>
+</svg>

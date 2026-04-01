@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" date="2024-01-01T00:00:00Z" product-name="aistea_seo">
+        <header/>
+        <body>
+            <!-- Report model -->
+            <trans-unit id="tx_aisteaseo_domain_model_report">
+                <source>SEO Report</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.base_url">
+                <source>Website URL</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.pages_crawled">
+                <source>Pages Crawled</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.progress_pages">
+                <source>Progress Pages</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.max_pages">
+                <source>Max Pages to Crawl</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.overall_score">
+                <source>Overall Score</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.queued_at">
+                <source>Queued At</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.started_at">
+                <source>Started At</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.finished_at">
+                <source>Finished At</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.last_crawled_url">
+                <source>Last Crawled URL</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.error_message">
+                <source>Error Message</source>
+            </trans-unit>
+            <!-- Page model -->
+            <trans-unit id="tx_aisteaseo_domain_model_page">
+                <source>SEO Page</source>
+            </trans-unit>
+            <!-- Backend UI -->
+            <trans-unit id="report.list.header">
+                <source>SEO Reports</source>
+            </trans-unit>
+            <trans-unit id="report.new">
+                <source>New Report</source>
+            </trans-unit>
+            <trans-unit id="report.analyze">
+                <source>Run Analysis</source>
+            </trans-unit>
+            <trans-unit id="report.delete">
+                <source>Delete</source>
+            </trans-unit>
+            <trans-unit id="report.view">
+                <source>View</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
