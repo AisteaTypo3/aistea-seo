@@ -10,7 +10,13 @@ CREATE TABLE tx_aisteaseo_domain_model_report (
     queued_at int(11) unsigned NOT NULL DEFAULT 0,
     started_at int(11) unsigned NOT NULL DEFAULT 0,
     finished_at int(11) unsigned NOT NULL DEFAULT 0,
-    last_crawled_url varchar(1000) NOT NULL DEFAULT ''
+    last_crawled_url varchar(1000) NOT NULL DEFAULT '',
+    robots_txt_url varchar(1000) NOT NULL DEFAULT '',
+    robots_txt_status smallint(6) unsigned NOT NULL DEFAULT 0,
+    robots_txt_sitemaps text,
+    sitemap_url varchar(1000) NOT NULL DEFAULT '',
+    sitemap_status smallint(6) unsigned NOT NULL DEFAULT 0,
+    sitemap_url_count int(11) unsigned NOT NULL DEFAULT 0
 );
 
 CREATE TABLE tx_aisteaseo_domain_model_page (

@@ -25,6 +25,12 @@ class SeoReport extends AbstractEntity
     protected int $startedAt = 0;
     protected int $finishedAt = 0;
     protected string $lastCrawledUrl = '';
+    protected string $robotsTxtUrl = '';
+    protected int $robotsTxtStatus = 0;
+    protected string $robotsTxtSitemaps = '';
+    protected string $sitemapUrl = '';
+    protected int $sitemapStatus = 0;
+    protected int $sitemapUrlCount = 0;
 
     public function getTitle(): string
     {
@@ -170,6 +176,75 @@ class SeoReport extends AbstractEntity
         $this->lastCrawledUrl = $lastCrawledUrl;
     }
 
+    public function getRobotsTxtUrl(): string
+    {
+        return $this->robotsTxtUrl;
+    }
+
+    public function setRobotsTxtUrl(string $robotsTxtUrl): void
+    {
+        $this->robotsTxtUrl = $robotsTxtUrl;
+    }
+
+    public function getRobotsTxtStatus(): int
+    {
+        return $this->robotsTxtStatus;
+    }
+
+    public function setRobotsTxtStatus(int $robotsTxtStatus): void
+    {
+        $this->robotsTxtStatus = $robotsTxtStatus;
+    }
+
+    public function getRobotsTxtSitemaps(): string
+    {
+        return $this->robotsTxtSitemaps;
+    }
+
+    public function setRobotsTxtSitemaps(string $robotsTxtSitemaps): void
+    {
+        $this->robotsTxtSitemaps = $robotsTxtSitemaps;
+    }
+
+    public function getRobotsTxtSitemapsArray(): array
+    {
+        if ($this->robotsTxtSitemaps === '') {
+            return [];
+        }
+
+        return json_decode($this->robotsTxtSitemaps, true) ?? [];
+    }
+
+    public function getSitemapUrl(): string
+    {
+        return $this->sitemapUrl;
+    }
+
+    public function setSitemapUrl(string $sitemapUrl): void
+    {
+        $this->sitemapUrl = $sitemapUrl;
+    }
+
+    public function getSitemapStatus(): int
+    {
+        return $this->sitemapStatus;
+    }
+
+    public function setSitemapStatus(int $sitemapStatus): void
+    {
+        $this->sitemapStatus = $sitemapStatus;
+    }
+
+    public function getSitemapUrlCount(): int
+    {
+        return $this->sitemapUrlCount;
+    }
+
+    public function setSitemapUrlCount(int $sitemapUrlCount): void
+    {
+        $this->sitemapUrlCount = $sitemapUrlCount;
+    }
+
     public function getScoreBadgeClass(): string
     {
         if ($this->overallScore >= 80) {
@@ -188,5 +263,35 @@ class SeoReport extends AbstractEntity
         }
 
         return max(0, min(100, (int) round(($this->progressPages / $this->maxPages) * 100)));
+    }
+
+    public function getRobotsTxtStatusBadgeClass(): string
+    {
+        if ($this->robotsTxtStatus === 200) {
+            return 'success';
+        }
+        if ($this->robotsTxtStatus === 0) {
+            return 'secondary';
+        }
+        if ($this->robotsTxtStatus >= 400) {
+            return 'warning';
+        }
+
+        return 'info';
+    }
+
+    public function getSitemapStatusBadgeClass(): string
+    {
+        if ($this->sitemapStatus === 200) {
+            return 'success';
+        }
+        if ($this->sitemapStatus === 0) {
+            return 'secondary';
+        }
+        if ($this->sitemapStatus >= 400) {
+            return 'warning';
+        }
+
+        return 'info';
     }
 }

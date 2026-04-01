@@ -43,6 +43,24 @@
             <trans-unit id="tx_aisteaseo_domain_model_report.error_message">
                 <source>Error Message</source>
             </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.robots_txt_url">
+                <source>robots.txt URL</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.robots_txt_status">
+                <source>robots.txt Status</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.robots_txt_sitemaps">
+                <source>robots.txt Sitemap References</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.sitemap_url">
+                <source>Sitemap URL</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.sitemap_status">
+                <source>Sitemap Status</source>
+            </trans-unit>
+            <trans-unit id="tx_aisteaseo_domain_model_report.sitemap_url_count">
+                <source>Sitemap URL Count</source>
+            </trans-unit>
             <!-- Page model -->
             <trans-unit id="tx_aisteaseo_domain_model_page">
                 <source>SEO Page</source>

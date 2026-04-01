@@ -15,6 +15,12 @@ return [
             'startedAt' => ['fieldName' => 'started_at'],
             'finishedAt' => ['fieldName' => 'finished_at'],
             'lastCrawledUrl' => ['fieldName' => 'last_crawled_url'],
+            'robotsTxtUrl' => ['fieldName' => 'robots_txt_url'],
+            'robotsTxtStatus' => ['fieldName' => 'robots_txt_status'],
+            'robotsTxtSitemaps' => ['fieldName' => 'robots_txt_sitemaps'],
+            'sitemapUrl' => ['fieldName' => 'sitemap_url'],
+            'sitemapStatus' => ['fieldName' => 'sitemap_status'],
+            'sitemapUrlCount' => ['fieldName' => 'sitemap_url_count'],
         ],
     ],
     \Aistea\AisteaSeo\Domain\Model\SeoPage::class => [

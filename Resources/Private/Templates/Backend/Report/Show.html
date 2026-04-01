@@ -199,6 +199,88 @@
     </div>
 </div>
 
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title h6 mb-0">Site checks</h3>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-lg-6">
+                <div class="border rounded p-3 h-100">
+                    <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                        <div class="fw-semibold">robots.txt</div>
+                        <span class="badge badge-{report.robotsTxtStatusBadgeClass}">
+                            <f:if condition="{report.robotsTxtStatus} > 0">
+                                <f:then>HTTP {report.robotsTxtStatus}</f:then>
+                                <f:else>Not checked</f:else>
+                            </f:if>
+                        </span>
+                    </div>
+                    <p class="small text-muted mb-2">
+                        <a href="{report.robotsTxtUrl -> f:format.htmlspecialchars()}" target="_blank" rel="noopener noreferrer">
+                            {report.robotsTxtUrl -> f:format.htmlspecialchars()}
+                        </a>
+                    </p>
+                    <f:if condition="{report.robotsTxtStatus} == 200">
+                        <f:then>
+                            <f:if condition="{report.robotsTxtSitemapsArray -> f:count()} > 0">
+                                <f:then>
+                                    <div class="small text-muted mb-1">Sitemaps referenced in robots.txt</div>
+                                    <ul class="small mb-0 ps-3">
+                                        <f:for each="{report.robotsTxtSitemapsArray}" as="sitemapReference">
+                                            <li class="text-break">
+                                                <a href="{sitemapReference -> f:format.htmlspecialchars()}" target="_blank" rel="noopener noreferrer">
+                                                    {sitemapReference -> f:format.htmlspecialchars()}
+                                                </a>
+                                            </li>
+                                        </f:for>
+                                    </ul>
+                                </f:then>
+                                <f:else>
+                                    <div class="small text-muted mb-0">No sitemap references found in robots.txt.</div>
+                                </f:else>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <div class="small text-muted mb-0">robots.txt was not reachable with HTTP 200.</div>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="border rounded p-3 h-100">
+                    <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                        <div class="fw-semibold">Sitemap</div>
+                        <span class="badge badge-{report.sitemapStatusBadgeClass}">
+                            <f:if condition="{report.sitemapStatus} > 0">
+                                <f:then>HTTP {report.sitemapStatus}</f:then>
+                                <f:else>Not found</f:else>
+                            </f:if>
+                        </span>
+                    </div>
+                    <f:if condition="{report.sitemapUrl} != ''">
+                        <f:then>
+                            <p class="small text-muted mb-2">
+                                <a href="{report.sitemapUrl -> f:format.htmlspecialchars()}" target="_blank" rel="noopener noreferrer">
+                                    {report.sitemapUrl -> f:format.htmlspecialchars()}
+                                </a>
+                            </p>
+                            <div class="small text-muted">
+                                Detected sitemap URLs: <strong>{report.sitemapUrlCount}</strong>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <div class="small text-muted">
+                                No reachable sitemap was discovered from robots.txt or default sitemap locations.
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Issues summary -->
 <f:if condition="{issuesSummary -> f:count()} > 0">
     <div class="card mb-4">

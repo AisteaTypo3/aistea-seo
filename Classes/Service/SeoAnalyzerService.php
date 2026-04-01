@@ -67,11 +67,18 @@ class SeoAnalyzerService
         $report->setOverallScore(0);
         $report->setLastCrawledUrl('');
         $report->setErrorMessage('');
+        $report->setRobotsTxtUrl('');
+        $report->setRobotsTxtStatus(0);
+        $report->setRobotsTxtSitemaps('');
+        $report->setSitemapUrl('');
+        $report->setSitemapStatus(0);
+        $report->setSitemapUrlCount(0);
         $this->seoReportRepository->update($report);
         $this->persistenceManager->persistAll();
 
         try {
             $baseUrl = $this->assertAllowedBaseUrl($report->getBaseUrl());
+            $this->applySiteChecks($report, $baseUrl);
             $maxPages = max(1, min(200, $report->getMaxPages()));
             $visited = [];
             $queue = [$baseUrl];
@@ -191,6 +198,12 @@ class SeoAnalyzerService
         $report->setProgressPages(0);
         $report->setLastCrawledUrl('');
         $report->setErrorMessage('');
+        $report->setRobotsTxtUrl('');
+        $report->setRobotsTxtStatus(0);
+        $report->setRobotsTxtSitemaps('');
+        $report->setSitemapUrl('');
+        $report->setSitemapStatus(0);
+        $report->setSitemapUrlCount(0);
         $this->seoReportRepository->update($report);
         $this->persistenceManager->persistAll();
     }
@@ -667,6 +680,76 @@ class SeoAnalyzerService
         return $message;
     }
 
+    private function applySiteChecks(SeoReport $report, string $baseUrl): void
+    {
+        $siteChecks = $this->analyzeSiteChecks($baseUrl);
+        $report->setRobotsTxtUrl($siteChecks['robotsTxtUrl']);
+        $report->setRobotsTxtStatus($siteChecks['robotsTxtStatus']);
+        $report->setRobotsTxtSitemaps(json_encode($siteChecks['robotsTxtSitemaps'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        $report->setSitemapUrl($siteChecks['sitemapUrl']);
+        $report->setSitemapStatus($siteChecks['sitemapStatus']);
+        $report->setSitemapUrlCount($siteChecks['sitemapUrlCount']);
+        $this->seoReportRepository->update($report);
+        $this->persistenceManager->persistAll();
+    }
+
+    /**
+     * @return array{robotsTxtUrl: string, robotsTxtStatus: int, robotsTxtSitemaps: list<string>, sitemapUrl: string, sitemapStatus: int, sitemapUrlCount: int}
+     */
+    private function analyzeSiteChecks(string $baseUrl): array
+    {
+        $robotsTxtUrl = rtrim($baseUrl, '/') . '/robots.txt';
+        $robotsTxtStatus = 0;
+        $robotsTxtSitemaps = [];
+        $sitemapUrl = '';
+        $sitemapStatus = 0;
+        $sitemapUrlCount = 0;
+
+        try {
+            $robotsResponse = $this->requestFactory->request($robotsTxtUrl, 'GET', $this->getDefaultRequestOptions('text/plain,*/*;q=0.8'));
+            $robotsTxtStatus = $robotsResponse->getStatusCode();
+
+            if ($robotsTxtStatus === 200) {
+                $robotsTxtSitemaps = $this->extractSitemapsFromRobots((string) $robotsResponse->getBody(), $robotsTxtUrl);
+            }
+        } catch (\Throwable) {
+            $robotsTxtStatus = 0;
+        }
+
+        $sitemapCandidates = $robotsTxtSitemaps;
+        foreach ($this->buildDefaultSitemapCandidates($baseUrl) as $candidate) {
+            if (!in_array($candidate, $sitemapCandidates, true)) {
+                $sitemapCandidates[] = $candidate;
+            }
+        }
+
+        foreach ($sitemapCandidates as $candidate) {
+            try {
+                $sitemapResponse = $this->requestFactory->request($candidate, 'GET', $this->getDefaultRequestOptions('application/xml,text/xml,text/plain;q=0.9,*/*;q=0.8'));
+                $sitemapStatus = $sitemapResponse->getStatusCode();
+                if ($sitemapStatus !== 200) {
+                    continue;
+                }
+
+                $sitemapUrl = $candidate;
+                $sitemapBody = (string) $sitemapResponse->getBody();
+                $sitemapUrlCount = $this->countSitemapUrls($sitemapBody);
+                break;
+            } catch (\Throwable) {
+                $sitemapStatus = 0;
+            }
+        }
+
+        return [
+            'robotsTxtUrl' => $robotsTxtUrl,
+            'robotsTxtStatus' => $robotsTxtStatus,
+            'robotsTxtSitemaps' => $robotsTxtSitemaps,
+            'sitemapUrl' => $sitemapUrl,
+            'sitemapStatus' => $sitemapStatus,
+            'sitemapUrlCount' => $sitemapUrlCount,
+        ];
+    }
+
     /**
      * @return array{response: \Psr\Http\Message\ResponseInterface, redirectTarget: string, redirectFinalUrl: string, redirectHops: int, initialStatusCode: int}
      */
@@ -678,16 +761,9 @@ class SeoAnalyzerService
         $redirectHops = 0;
 
         for ($hop = 0; $hop < 5; $hop++) {
-            $response = $this->requestFactory->request($currentUrl, 'GET', [
-                'headers' => [
-                    'User-Agent' => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                ],
-                'timeout' => 15,
-                'allow_redirects' => false,
-                'verify' => true,
-                'http_errors' => false,
-            ]);
+            $response = $this->requestFactory->request($currentUrl, 'GET', $this->getDefaultRequestOptions(
+                'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+            ));
 
             $statusCode = $response->getStatusCode();
             if ($initialStatusCode === 0) {
@@ -725,6 +801,20 @@ class SeoAnalyzerService
         }
 
         throw new \RuntimeException('Too many redirects while fetching URL.');
+    }
+
+    private function getDefaultRequestOptions(string $acceptHeader): array
+    {
+        return [
+            'headers' => [
+                'User-Agent' => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
+                'Accept' => $acceptHeader,
+            ],
+            'timeout' => 15,
+            'allow_redirects' => false,
+            'verify' => true,
+            'http_errors' => false,
+        ];
     }
 
     private function normalizeUrl(string $url, string $baseUrl): ?string
@@ -816,6 +906,64 @@ class SeoAnalyzerService
             'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'avif', 'mp4', 'mp3', 'wav',
             'mov', 'avi', 'wmv', 'txt', 'csv', 'xml', 'json',
         ], true);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractSitemapsFromRobots(string $robotsContent, string $robotsUrl): array
+    {
+        $sitemaps = [];
+        foreach (preg_split('/\R+/', $robotsContent) ?: [] as $line) {
+            if (!preg_match('/^\s*sitemap\s*:\s*(.+)\s*$/i', $line, $matches)) {
+                continue;
+            }
+
+            $candidate = trim($matches[1]);
+            if ($candidate === '') {
+                continue;
+            }
+
+            $resolved = str_starts_with($candidate, 'http://') || str_starts_with($candidate, 'https://')
+                ? $candidate
+                : $this->resolveRelativeUrl($candidate, $robotsUrl);
+            $sitemaps[] = $resolved;
+        }
+
+        return array_values(array_unique($sitemaps));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function buildDefaultSitemapCandidates(string $baseUrl): array
+    {
+        $base = rtrim($baseUrl, '/');
+        return [
+            $base . '/sitemap.xml',
+            $base . '/sitemap_index.xml',
+        ];
+    }
+
+    private function countSitemapUrls(string $xml): int
+    {
+        if (trim($xml) === '') {
+            return 0;
+        }
+
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $loaded = @$dom->loadXML($xml, LIBXML_NOWARNING | LIBXML_NOERROR);
+        libxml_clear_errors();
+
+        if ($loaded !== true) {
+            return 0;
+        }
+
+        $xpath = new \DOMXPath($dom);
+        $urlNodes = $xpath->query('//*[local-name()="url"]');
+
+        return $urlNodes !== false ? $urlNodes->length : 0;
     }
 
     private function isHtmlContentType(string $contentType, string $url): bool

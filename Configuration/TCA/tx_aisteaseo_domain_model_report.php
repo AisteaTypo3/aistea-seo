@@ -14,7 +14,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'title, base_url, max_pages, --div--;Status, status, overall_score, pages_crawled, progress_pages, queued_at, started_at, finished_at, last_crawled_url, error_message',
+            'showitem' => 'title, base_url, max_pages, --div--;Status, status, overall_score, pages_crawled, progress_pages, queued_at, started_at, finished_at, last_crawled_url, error_message, --div--;Site Checks, robots_txt_url, robots_txt_status, robots_txt_sitemaps, sitemap_url, sitemap_status, sitemap_url_count',
         ],
     ],
     'columns' => [
@@ -130,6 +130,60 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 3,
+                'readOnly' => true,
+            ],
+        ],
+        'robots_txt_url' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.robots_txt_url',
+            'config' => [
+                'type' => 'input',
+                'size' => 80,
+                'max' => 1000,
+                'readOnly' => true,
+            ],
+        ],
+        'robots_txt_status' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.robots_txt_status',
+            'config' => [
+                'type' => 'number',
+                'size' => 10,
+                'default' => 0,
+                'readOnly' => true,
+            ],
+        ],
+        'robots_txt_sitemaps' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.robots_txt_sitemaps',
+            'config' => [
+                'type' => 'text',
+                'cols' => 60,
+                'rows' => 4,
+                'readOnly' => true,
+            ],
+        ],
+        'sitemap_url' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.sitemap_url',
+            'config' => [
+                'type' => 'input',
+                'size' => 80,
+                'max' => 1000,
+                'readOnly' => true,
+            ],
+        ],
+        'sitemap_status' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.sitemap_status',
+            'config' => [
+                'type' => 'number',
+                'size' => 10,
+                'default' => 0,
+                'readOnly' => true,
+            ],
+        ],
+        'sitemap_url_count' => [
+            'label' => 'LLL:EXT:aistea_seo/Resources/Private/Language/locallang.xlf:tx_aisteaseo_domain_model_report.sitemap_url_count',
+            'config' => [
+                'type' => 'number',
+                'size' => 10,
+                'default' => 0,
                 'readOnly' => true,
             ],
         ],
