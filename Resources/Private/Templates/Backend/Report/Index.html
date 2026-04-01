@@ -5,12 +5,25 @@
 <f:flashMessages />
 
 <div class="px-3 py-3 px-xl-4">
+    <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mb-3">
+        <div>
+            <h2 class="h4 mb-1">SEO Reports</h2>
+            <p class="text-muted mb-0">Create, queue, and review external website crawls.</p>
+        </div>
+        <f:link.action action="new" class="btn btn-primary">
+            <core:icon identifier="actions-add" size="small" /> New Report
+        </f:link.action>
+    </div>
+
     <f:if condition="{reports -> f:count()} == 0">
         <f:then>
             <div class="callout callout-info">
                 <div class="callout-body">
                     <h4 class="callout-title">No reports yet</h4>
-                    <p class="mb-0">Create your first SEO report using the <strong>New Report</strong> button above.</p>
+                    <p class="mb-3">Create your first SEO report to start crawling an external website.</p>
+                    <f:link.action action="new" class="btn btn-primary">
+                        <core:icon identifier="actions-add" size="small" /> Create First Report
+                    </f:link.action>
                 </div>
             </div>
         </f:then>

@@ -76,7 +76,7 @@ class SeoAnalyzerService
             $visited = [];
             $queue = [$baseUrl];
             $crawled = 0;
-            $totalScore = 0;
+            $internalLinkGraph = [];
 
             while (!empty($queue) && $crawled < $maxPages) {
                 $url = array_shift($queue);
@@ -133,6 +133,17 @@ class SeoAnalyzerService
                     }
                 }
 
+                if ($pageData['pageType'] === 'html' && $pageData['internalLinks'] !== []) {
+                    $internalLinkGraph[$url] = array_values(array_unique(array_map(
+                        fn(string $link): ?string => $this->normalizeUrl($link, $baseUrl),
+                        $pageData['internalLinks']
+                    )));
+                    $internalLinkGraph[$url] = array_values(array_filter(
+                        $internalLinkGraph[$url],
+                        static fn(?string $link): bool => $link !== null
+                    ));
+                }
+
                 if (($pageData['redirectQueueTarget'] ?? '') !== '') {
                     $normalizedRedirectTarget = $this->normalizeUrl($pageData['redirectQueueTarget'], $baseUrl);
                     if (
@@ -147,7 +158,6 @@ class SeoAnalyzerService
                 }
 
                 $crawled++;
-                $totalScore += $pageData['score'];
                 $report->setPagesCrawled($crawled);
                 $report->setProgressPages($crawled);
                 $report->setLastCrawledUrl($url);
@@ -155,7 +165,7 @@ class SeoAnalyzerService
                 $this->persistenceManager->persistAll();
             }
 
-            $this->applyCrossPageIssues($report);
+            $this->applyCrossPageIssues($report, $internalLinkGraph);
             $report->setPagesCrawled($crawled);
             $report->setProgressPages($crawled);
             $report->setStatus(SeoReport::STATUS_COMPLETED);
@@ -185,13 +195,19 @@ class SeoAnalyzerService
         $this->persistenceManager->persistAll();
     }
 
-    private function applyCrossPageIssues(SeoReport $report): void
+    /**
+     * @param array<string, list<string>> $internalLinkGraph
+     */
+    private function applyCrossPageIssues(SeoReport $report, array $internalLinkGraph = []): void
     {
         $pages = $this->seoPageRepository->findByReportUid($report->getUid());
         $titleMap = [];
         $metaDescriptionMap = [];
+        $pagesByUrl = [];
 
         foreach ($pages as $page) {
+            $pagesByUrl[$this->normalizeStoredUrl($page->getUrl())] = $page;
+
             if ($page->getPageType() !== 'html') {
                 continue;
             }
@@ -243,6 +259,40 @@ class SeoAnalyzerService
                 $page->setPageScore($this->calculateScore($issues));
                 $this->seoPageRepository->update($page);
             }
+        }
+
+        foreach ($internalLinkGraph as $sourceUrl => $targetUrls) {
+            $sourcePage = $pagesByUrl[$this->normalizeStoredUrl($sourceUrl)] ?? null;
+            if (!$sourcePage instanceof SeoPage || $sourcePage->getPageType() !== 'html') {
+                continue;
+            }
+
+            $brokenTargets = [];
+            foreach (array_unique($targetUrls) as $targetUrl) {
+                $targetPage = $pagesByUrl[$this->normalizeStoredUrl($targetUrl)] ?? null;
+                if (!$targetPage instanceof SeoPage) {
+                    continue;
+                }
+
+                if ($this->isBrokenTargetPage($targetPage)) {
+                    $brokenTargets[] = $targetPage->getUrl();
+                }
+            }
+
+            if ($brokenTargets === []) {
+                continue;
+            }
+
+            $issues = $sourcePage->getIssuesArray();
+            $issues = $this->appendIssueIfMissing(
+                $issues,
+                'broken_internal_links',
+                'error',
+                $this->buildBrokenInternalLinksMessage($brokenTargets)
+            );
+            $sourcePage->setIssues(json_encode($issues, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            $sourcePage->setPageScore($this->calculateScore($issues));
+            $this->seoPageRepository->update($sourcePage);
         }
 
         $this->persistenceManager->persistAll();
@@ -599,6 +649,24 @@ class SeoAnalyzerService
         ];
     }
 
+    private function buildBrokenInternalLinksMessage(array $brokenTargets): string
+    {
+        $uniqueTargets = array_values(array_unique($brokenTargets));
+        $examples = array_slice($uniqueTargets, 0, 3);
+        $message = count($uniqueTargets) === 1
+            ? 'Page contains 1 broken internal link'
+            : sprintf('Page contains %d broken internal links', count($uniqueTargets));
+
+        if ($examples !== []) {
+            $message .= ': ' . implode(', ', $examples);
+            if (count($uniqueTargets) > count($examples)) {
+                $message .= sprintf(' (+%d more)', count($uniqueTargets) - count($examples));
+            }
+        }
+
+        return $message;
+    }
+
     /**
      * @return array{response: \Psr\Http\Message\ResponseInterface, redirectTarget: string, redirectFinalUrl: string, redirectHops: int, initialStatusCode: int}
      */
@@ -708,6 +776,27 @@ class SeoAnalyzerService
     private function isSameDomain(string $url, string $baseUrl): bool
     {
         return parse_url($url, PHP_URL_HOST) === parse_url($baseUrl, PHP_URL_HOST);
+    }
+
+    private function normalizeStoredUrl(string $url): string
+    {
+        $normalized = $this->normalizeUrl($url, $url);
+        return $normalized ?? $url;
+    }
+
+    private function isBrokenTargetPage(SeoPage $page): bool
+    {
+        if ($page->getStatusCode() >= 400 || $page->getStatusCode() === 0) {
+            return true;
+        }
+
+        foreach ($page->getIssuesArray() as $issue) {
+            if (($issue['type'] ?? '') === 'fetch_error') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function shouldSkipCrawlUrl(string $url): bool
