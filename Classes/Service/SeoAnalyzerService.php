@@ -7,6 +7,7 @@ use Aistea\AisteaSeo\Domain\Model\SeoPage;
 use Aistea\AisteaSeo\Domain\Model\SeoReport;
 use Aistea\AisteaSeo\Domain\Repository\SeoPageRepository;
 use Aistea\AisteaSeo\Domain\Repository\SeoReportRepository;
+use GuzzleHttp\Psr7\Response;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
@@ -706,7 +707,7 @@ class SeoAnalyzerService
         $sitemapUrlCount = 0;
 
         try {
-            $robotsResponse = $this->requestFactory->request($robotsTxtUrl, 'GET', $this->getDefaultRequestOptions('text/plain,*/*;q=0.8'));
+            $robotsResponse = $this->requestUrl($robotsTxtUrl, 'text/plain,*/*;q=0.8');
             $robotsTxtStatus = $robotsResponse->getStatusCode();
 
             if ($robotsTxtStatus === 200) {
@@ -725,7 +726,7 @@ class SeoAnalyzerService
 
         foreach ($sitemapCandidates as $candidate) {
             try {
-                $sitemapResponse = $this->requestFactory->request($candidate, 'GET', $this->getDefaultRequestOptions('application/xml,text/xml,text/plain;q=0.9,*/*;q=0.8'));
+                $sitemapResponse = $this->requestUrl($candidate, 'application/xml,text/xml,text/plain;q=0.9,*/*;q=0.8');
                 $sitemapStatus = $sitemapResponse->getStatusCode();
                 if ($sitemapStatus !== 200) {
                     continue;
@@ -761,9 +762,7 @@ class SeoAnalyzerService
         $redirectHops = 0;
 
         for ($hop = 0; $hop < 5; $hop++) {
-            $response = $this->requestFactory->request($currentUrl, 'GET', $this->getDefaultRequestOptions(
-                'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-            ));
+            $response = $this->requestUrl($currentUrl, 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
 
             $statusCode = $response->getStatusCode();
             if ($initialStatusCode === 0) {
@@ -810,11 +809,106 @@ class SeoAnalyzerService
                 'User-Agent' => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
                 'Accept' => $acceptHeader,
             ],
-            'timeout' => 15,
+            'connect_timeout' => 10,
+            'timeout' => 30,
+            'version' => 1.1,
             'allow_redirects' => false,
             'verify' => true,
             'http_errors' => false,
         ];
+    }
+
+    private function requestUrl(string $url, string $acceptHeader): \Psr\Http\Message\ResponseInterface
+    {
+        $options = $this->getDefaultRequestOptions($acceptHeader);
+
+        try {
+            return $this->requestFactory->request($url, 'GET', $options);
+        } catch (\Throwable $exception) {
+            if (!$this->shouldRetryWithIpv4($exception)) {
+                throw $exception;
+            }
+
+            $retryOptions = $options;
+            $retryOptions['force_ip_resolve'] = 'v4';
+
+            try {
+                return $this->requestFactory->request($url, 'GET', $retryOptions);
+            } catch (\Throwable $retryException) {
+                if (!$this->shouldRetryWithIpv4($retryException)) {
+                    throw $retryException;
+                }
+
+                return $this->requestWithNativeCurl($url, $acceptHeader);
+            }
+        }
+    }
+
+    private function requestWithNativeCurl(string $url, string $acceptHeader): \Psr\Http\Message\ResponseInterface
+    {
+        if (!function_exists('curl_init')) {
+            throw new \RuntimeException('Native cURL fallback is not available.');
+        }
+
+        $headers = [];
+        $ch = curl_init($url);
+        if ($ch === false) {
+            throw new \RuntimeException('Could not initialize cURL.');
+        }
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER => false,
+            CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            CURLOPT_USERAGENT => 'AIstea SEO Spider/1.0 (+https://aistea.me)',
+            CURLOPT_HTTPHEADER => [
+                'Accept: ' . $acceptHeader,
+            ],
+            CURLOPT_HEADERFUNCTION => static function ($curlHandle, string $headerLine) use (&$headers): int {
+                $trimmed = trim($headerLine);
+                $length = strlen($headerLine);
+
+                if ($trimmed === '' || !str_contains($trimmed, ':')) {
+                    return $length;
+                }
+
+                [$name, $value] = explode(':', $trimmed, 2);
+                $headers[trim($name)][] = trim($value);
+                return $length;
+            },
+        ]);
+
+        $body = curl_exec($ch);
+        $errno = curl_errno($ch);
+        $error = curl_error($ch);
+        $statusCode = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+
+        if ($body === false || $errno !== 0) {
+            throw new \RuntimeException(sprintf('Native cURL fallback failed: [%d] %s', $errno, $error !== '' ? $error : 'unknown error'));
+        }
+
+        $normalizedHeaders = [];
+        foreach ($headers as $name => $values) {
+            $normalizedHeaders[$name] = $values;
+        }
+
+        return new Response($statusCode > 0 ? $statusCode : 0, $normalizedHeaders, $body);
+    }
+
+    private function shouldRetryWithIpv4(\Throwable $exception): bool
+    {
+        $message = strtolower($exception->getMessage());
+
+        return str_contains($message, 'curl error 28')
+            || str_contains($message, 'ssl connection timeout')
+            || str_contains($message, 'operation timed out');
     }
 
     private function normalizeUrl(string $url, string $baseUrl): ?string

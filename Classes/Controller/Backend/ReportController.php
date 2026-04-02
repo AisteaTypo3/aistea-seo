@@ -10,7 +10,6 @@ use Aistea\AisteaSeo\Service\SeoAnalyzerService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -423,22 +422,38 @@ class ReportController extends ActionController
 
         try {
             $report->setBaseUrl($this->analyzerService->assertAllowedBaseUrl($report->getBaseUrl()));
-            $this->spawnBackgroundQueueWorker($report->getUid());
+            $this->pageRepository->deleteByReportUid($report->getUid());
+            $this->persistenceManager->persistAll();
+            $this->analyzerService->analyzeWebsite($report);
         } catch (\Throwable $exception) {
             $this->addFlashMessage(
                 htmlspecialchars($exception->getMessage()),
-                'Could not start background analysis',
+                'Could not start analysis',
                 ContextualFeedbackSeverity::ERROR
             );
             return $this->redirect('show', null, null, ['report' => $report->getUid()]);
         }
 
-        $this->addFlashMessage(
-            'Analysis started in the background. You have been redirected to the overview to monitor the current status. Reload the page to see updates.',
-            'Analysis started'
-        );
+        if ($report->getStatus() === SeoReport::STATUS_COMPLETED) {
+            $this->addFlashMessage(
+                'Analysis completed successfully.',
+                'Analysis completed'
+            );
+        } elseif ($report->getStatus() === SeoReport::STATUS_FAILED) {
+            $this->addFlashMessage(
+                $report->getErrorMessage() !== '' ? htmlspecialchars($report->getErrorMessage()) : 'The analysis failed.',
+                'Analysis failed',
+                ContextualFeedbackSeverity::ERROR
+            );
+        } else {
+            $this->addFlashMessage(
+                'Analysis finished with an unexpected status.',
+                'Analysis finished',
+                ContextualFeedbackSeverity::WARNING
+            );
+        }
 
-        return $this->redirect('index');
+        return $this->redirect('show', null, null, ['report' => $report->getUid()]);
     }
 
     public function deleteAction(SeoReport $report): ResponseInterface
@@ -509,31 +524,6 @@ class ReportController extends ActionController
         $report->setErrorMessage('');
         $this->reportRepository->update($report);
         $this->persistenceManager->persistAll();
-    }
-
-    private function spawnBackgroundQueueWorker(int $reportUid): void
-    {
-        $projectPath = Environment::getProjectPath();
-        $typo3Binary = $projectPath . '/vendor/bin/typo3';
-        $command = sprintf(
-            'cd %s && php %s aistea-seo:process-queue --report=%d > /dev/null 2>&1 &',
-            escapeshellarg($projectPath),
-            escapeshellarg($typo3Binary),
-            $reportUid
-        );
-
-        $descriptors = [
-            0 => ['file', '/dev/null', 'r'],
-            1 => ['file', '/dev/null', 'w'],
-            2 => ['file', '/dev/null', 'w'],
-        ];
-
-        $process = @proc_open(['/bin/sh', '-c', $command], $descriptors, $pipes, $projectPath);
-        if (!is_resource($process)) {
-            throw new \RuntimeException('Could not spawn the background worker process.');
-        }
-
-        proc_close($process);
     }
 
     /**
