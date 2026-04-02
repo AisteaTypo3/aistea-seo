@@ -10,9 +10,11 @@ use Aistea\AisteaSeo\Service\SeoAnalyzerService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -30,6 +32,7 @@ class ReportController extends ActionController
 
     public function indexAction(): ResponseInterface
     {
+        $this->registerBackendAssets();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setTitle('SEO Reports');
 
@@ -53,6 +56,7 @@ class ReportController extends ActionController
 
     public function newAction(): ResponseInterface
     {
+        $this->registerBackendAssets();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setTitle('New SEO Report');
 
@@ -104,6 +108,7 @@ class ReportController extends ActionController
 
     public function showAction(SeoReport $report): ResponseInterface
     {
+        $this->registerBackendAssets();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setTitle($report->getTitle());
 
@@ -327,7 +332,7 @@ class ReportController extends ActionController
             ->withBody($this->streamFactory->createStream($json ?: '{}'));
     }
 
-    public function analyzeAction(SeoReport $report): ResponseInterface
+    public function analyzeAction(SeoReport $report, string $runMode = 'queue'): ResponseInterface
     {
         if (!$this->isPostRequest()) {
             $this->addFlashMessage(
@@ -349,6 +354,19 @@ class ReportController extends ActionController
             return $this->redirect('show', null, null, ['report' => $report->getUid()]);
         }
 
+        if ($runMode === 'now') {
+            return $this->startNowAction($report);
+        }
+
+        if ($this->isStaleRunningReport($report)) {
+            $this->resetReportToQueuedState($report);
+            $this->addFlashMessage(
+                'A stale running state was detected and reset. The analysis has been queued again.',
+                'Stale run recovered',
+                ContextualFeedbackSeverity::WARNING
+            );
+        }
+
         if ($report->getStatus() === SeoReport::STATUS_RUNNING || $report->getStatus() === SeoReport::STATUS_QUEUED) {
             $this->addFlashMessage(
                 'This report is already queued or running.',
@@ -364,6 +382,63 @@ class ReportController extends ActionController
         );
 
         return $this->redirect('show', null, null, ['report' => $report->getUid()]);
+    }
+
+    public function startNowAction(SeoReport $report): ResponseInterface
+    {
+        if (!$this->isPostRequest()) {
+            $this->addFlashMessage(
+                'Starting an analysis requires a POST request.',
+                'Method not allowed',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('show', null, null, ['report' => $report->getUid()]);
+        }
+
+        if ($this->isStaleRunningReport($report)) {
+            $this->resetReportToQueuedState($report);
+            $this->addFlashMessage(
+                'A stale running state was detected and reset. Starting the report again now.',
+                'Stale run recovered',
+                ContextualFeedbackSeverity::WARNING
+            );
+        }
+
+        if ($report->getStatus() === SeoReport::STATUS_RUNNING) {
+            $this->addFlashMessage(
+                'This report is already running.',
+                'Analysis already running'
+            );
+            return $this->redirect('index');
+        }
+
+        if ($report->getStatus() !== SeoReport::STATUS_QUEUED) {
+            $this->addFlashMessage(
+                'Only queued reports can be started manually. Queue the report first.',
+                'Report is not queued',
+                ContextualFeedbackSeverity::WARNING
+            );
+            return $this->redirect('show', null, null, ['report' => $report->getUid()]);
+        }
+
+        try {
+            $report->setBaseUrl($this->analyzerService->assertAllowedBaseUrl($report->getBaseUrl()));
+            $this->spawnBackgroundQueueWorker($report->getUid());
+        } catch (\Throwable $exception) {
+            $this->addFlashMessage(
+                htmlspecialchars($exception->getMessage()),
+                'Could not start background analysis',
+                ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('show', null, null, ['report' => $report->getUid()]);
+        }
+
+        $this->addFlashMessage(
+            'Analysis started in the background. You have been redirected to the overview to monitor the current status. Reload the page to see updates.',
+            'Analysis started'
+        );
+
+        return $this->redirect('index');
     }
 
     public function deleteAction(SeoReport $report): ResponseInterface
@@ -391,6 +466,74 @@ class ReportController extends ActionController
     private function isPostRequest(): bool
     {
         return strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET')) === 'POST';
+    }
+
+    private function registerBackendAssets(): void
+    {
+        GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class)
+            ->addJsFile('EXT:aistea_seo/Resources/Public/JavaScript/backend-module.js');
+    }
+
+    private function isStaleRunningReport(SeoReport $report): bool
+    {
+        if ($report->getStatus() !== SeoReport::STATUS_RUNNING) {
+            return false;
+        }
+
+        $startedAt = $report->getStartedAt();
+        if ($startedAt <= 0) {
+            return true;
+        }
+
+        if ((time() - $startedAt) < 30) {
+            return false;
+        }
+
+        if ($report->getPagesCrawled() > 0 || $report->getProgressPages() > 0) {
+            return false;
+        }
+
+        return trim($report->getLastCrawledUrl()) === '';
+    }
+
+    private function resetReportToQueuedState(SeoReport $report): void
+    {
+        $report->setStatus(SeoReport::STATUS_QUEUED);
+        $report->setQueuedAt(time());
+        $report->setStartedAt(0);
+        $report->setFinishedAt(0);
+        $report->setProgressPages(0);
+        $report->setPagesCrawled(0);
+        $report->setOverallScore(0);
+        $report->setLastCrawledUrl('');
+        $report->setErrorMessage('');
+        $this->reportRepository->update($report);
+        $this->persistenceManager->persistAll();
+    }
+
+    private function spawnBackgroundQueueWorker(int $reportUid): void
+    {
+        $projectPath = Environment::getProjectPath();
+        $typo3Binary = $projectPath . '/vendor/bin/typo3';
+        $command = sprintf(
+            'cd %s && php %s aistea-seo:process-queue --report=%d > /dev/null 2>&1 &',
+            escapeshellarg($projectPath),
+            escapeshellarg($typo3Binary),
+            $reportUid
+        );
+
+        $descriptors = [
+            0 => ['file', '/dev/null', 'r'],
+            1 => ['file', '/dev/null', 'w'],
+            2 => ['file', '/dev/null', 'w'],
+        ];
+
+        $process = @proc_open(['/bin/sh', '-c', $command], $descriptors, $pipes, $projectPath);
+        if (!is_resource($process)) {
+            throw new \RuntimeException('Could not spawn the background worker process.');
+        }
+
+        proc_close($process);
     }
 
     /**

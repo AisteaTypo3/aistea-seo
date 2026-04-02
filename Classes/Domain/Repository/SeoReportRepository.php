@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Aistea\AisteaSeo\Domain\Repository;
 
+use Aistea\AisteaSeo\Domain\Model\SeoReport;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -25,7 +26,7 @@ class SeoReportRepository extends Repository
     public function findQueuedReports(int $limit = 10): array
     {
         $query = $this->createQuery();
-        $query->matching($query->equals('status', \Aistea\AisteaSeo\Domain\Model\SeoReport::STATUS_QUEUED));
+        $query->matching($query->equals('status', SeoReport::STATUS_QUEUED));
         $query->setOrderings([
             'queuedAt' => QueryInterface::ORDER_ASCENDING,
             'crdate' => QueryInterface::ORDER_ASCENDING,

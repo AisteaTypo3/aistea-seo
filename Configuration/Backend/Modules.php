@@ -17,7 +17,7 @@ return [
         ],
         'extensionName' => 'AisteaSeo',
         'controllerActions' => [
-            ReportController::class => ['index', 'new', 'create', 'show', 'exportCsv', 'exportIssuesCsv', 'exportJson', 'analyze', 'delete'],
+            ReportController::class => ['index', 'new', 'create', 'show', 'exportCsv', 'exportIssuesCsv', 'exportJson', 'analyze', 'startNow', 'delete'],
         ],
     ],
 ];

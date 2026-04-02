@@ -37,12 +37,29 @@ final class ProcessSeoQueueCommand extends Command
             'Maximum number of queued reports to process',
             '5'
         );
+        $this->addOption(
+            'report',
+            'r',
+            InputOption::VALUE_REQUIRED,
+            'Process a specific report UID'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $limit = max(1, (int) $input->getOption('limit'));
-        $reports = $this->reportRepository->findQueuedReports($limit);
+        $reportUid = (int) $input->getOption('report');
+        if ($reportUid > 0) {
+            $report = $this->reportRepository->findByUid($reportUid);
+            if ($report === null) {
+                $output->writeln(sprintf('<error>SEO report #%d was not found.</error>', $reportUid));
+                return Command::FAILURE;
+            }
+
+            $reports = [$report];
+        } else {
+            $limit = max(1, (int) $input->getOption('limit'));
+            $reports = $this->reportRepository->findQueuedReports($limit);
+        }
 
         if ($reports === []) {
             $output->writeln('<info>No queued SEO reports found.</info>');

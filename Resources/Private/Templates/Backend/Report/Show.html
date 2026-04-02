@@ -4,7 +4,10 @@
 
 <f:flashMessages />
 
-<div class="px-3 py-3 px-xl-4">
+<div class="px-3 py-3 px-xl-4"
+     data-seo-module="show"
+     data-report-uid="{report.uid}"
+     data-report-status="{report.status}">
 
 <!-- Report meta + action buttons -->
 <div class="d-flex align-items-start justify-content-between mb-4 gap-3">
@@ -35,6 +38,15 @@
                 <core:icon identifier="actions-refresh" size="small" /> Queue Analysis
             </button>
         </f:form>
+        <f:if condition="{report.status} == 4">
+            <f:form action="startNow" arguments="{report: report}" method="post" class="d-inline">
+                <button type="submit"
+                   class="btn btn-primary btn-sm text-nowrap js-confirm"
+                   data-confirm="Start this queued analysis now in the current backend request? This can take some time for larger websites.">
+                    <core:icon identifier="actions-play" size="small" /> Start Now
+                </button>
+            </f:form>
+        </f:if>
         <f:form action="delete" arguments="{report: report}" method="post" class="d-inline">
             <button type="submit"
                class="btn btn-danger btn-sm js-confirm"
@@ -73,6 +85,9 @@
             <p class="mb-2">
                 This report is waiting for the background worker. Run
                 <code>bin/typo3 aistea-seo:process-queue</code> or schedule that command.
+            </p>
+            <p class="mb-2 small text-muted">
+                If no Scheduler, cron, or CLI worker is available, use <strong>Start Now</strong> above to process this queued report directly in the backend.
             </p>
             <f:if condition="{report.queuedAt} > 0">
                 <p class="mb-0 small text-muted">
@@ -581,182 +596,6 @@
         </div>
     </div>
 </f:if>
-
-<script>
-document.querySelectorAll('.js-confirm').forEach(function (el) {
-    el.addEventListener('click', function (e) {
-        if (!confirm(el.getAttribute('data-confirm'))) {
-            e.preventDefault();
-        }
-    });
-});
-
-(function () {
-    const table = document.getElementById('seo-pages-table');
-    if (!table) {
-        return;
-    }
-
-    const storageKey = 'aistea-seo-report-filters-{report.uid}';
-    const searchInput = document.getElementById('seo-filter-search');
-    const typeSelect = document.getElementById('seo-filter-type');
-    const severitySelect = document.getElementById('seo-filter-severity');
-    const issueTypeInput = document.getElementById('seo-filter-issue-type');
-    const resetButton = document.getElementById('seo-filter-reset');
-    const issueSummaryRows = Array.from(document.querySelectorAll('.seo-issue-summary-row'));
-    const rows = Array.from(table.querySelectorAll('tbody tr.seo-page-row'));
-
-    function matchesSeverity(row, severity) {
-        if (!severity) {
-            return true;
-        }
-        return Number(row.dataset[severity + 'Count'] || '0') > 0;
-    }
-
-    function matchesIssueType(row, issueType) {
-        if (!issueType) {
-            return true;
-        }
-
-        try {
-            const issues = JSON.parse(row.dataset.issuesJson || '[]');
-            return issues.some(function (issue) {
-                return String(issue.type || '').toLowerCase().includes(issueType);
-            });
-        } catch (error) {
-            return false;
-        }
-    }
-
-    function saveFilters() {
-        const payload = {
-            search: searchInput.value || '',
-            type: typeSelect.value || '',
-            severity: severitySelect.value || '',
-            issueType: issueTypeInput.value || '',
-        };
-        localStorage.setItem(storageKey, JSON.stringify(payload));
-    }
-
-    function loadFilters() {
-        try {
-            const payload = JSON.parse(localStorage.getItem(storageKey) || '{}');
-            searchInput.value = payload.search || '';
-            typeSelect.value = payload.type || '';
-            severitySelect.value = payload.severity || '';
-            issueTypeInput.value = payload.issueType || '';
-        } catch (error) {
-            localStorage.removeItem(storageKey);
-        }
-    }
-
-    function applyFilters() {
-        const search = (searchInput.value || '').trim().toLowerCase();
-        const type = typeSelect.value;
-        const severity = severitySelect.value;
-        const issueType = (issueTypeInput.value || '').trim().toLowerCase();
-
-        rows.forEach(function (row) {
-            const text = (row.dataset.search || '').toLowerCase();
-            const visible = (search === '' || text.includes(search))
-                && (type === '' || row.dataset.pageType === type)
-                && matchesSeverity(row, severity)
-                && matchesIssueType(row, issueType);
-
-            row.style.display = visible ? '' : 'none';
-
-            const detailRow = document.getElementById(row.dataset.detailId || '');
-            if (detailRow && !visible) {
-                detailRow.classList.remove('show');
-                detailRow.style.display = 'none';
-            } else if (detailRow) {
-                detailRow.style.display = '';
-            }
-        });
-
-        saveFilters();
-    }
-
-    loadFilters();
-    applyFilters();
-
-    searchInput.addEventListener('input', applyFilters);
-    typeSelect.addEventListener('change', applyFilters);
-    severitySelect.addEventListener('change', applyFilters);
-    issueTypeInput.addEventListener('input', applyFilters);
-    resetButton.addEventListener('click', function () {
-        searchInput.value = '';
-        typeSelect.value = '';
-        severitySelect.value = '';
-        issueTypeInput.value = '';
-        applyFilters();
-    });
-
-    issueSummaryRows.forEach(function (row) {
-        row.addEventListener('click', function () {
-            issueTypeInput.value = row.dataset.issueType || '';
-            applyFilters();
-            table.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-})();
-
-(function () {
-    const table = document.getElementById('seo-pages-table');
-    if (!table) {
-        return;
-    }
-
-    const tbody = table.querySelector('tbody');
-    const sortButtons = Array.from(table.querySelectorAll('.seo-sort'));
-    let currentKey = '';
-    let currentDirection = 'asc';
-
-    sortButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            const key = button.dataset.sortKey || '';
-            if (!key) {
-                return;
-            }
-
-            currentDirection = currentKey === key && currentDirection === 'asc' ? 'desc' : 'asc';
-            currentKey = key;
-
-            const rows = Array.from(tbody.querySelectorAll('tr.seo-page-row'));
-            rows.sort(function (a, b) {
-                const aValue = a.dataset['sort' + key.charAt(0).toUpperCase() + key.slice(1)] || '';
-                const bValue = b.dataset['sort' + key.charAt(0).toUpperCase() + key.slice(1)] || '';
-                const aNumber = Number(aValue);
-                const bNumber = Number(bValue);
-                const bothNumeric = !Number.isNaN(aNumber) && !Number.isNaN(bNumber) && aValue !== '' && bValue !== '';
-
-                let comparison = 0;
-                if (bothNumeric) {
-                    comparison = aNumber - bNumber;
-                } else {
-                    comparison = aValue.localeCompare(bValue, undefined, { sensitivity: 'base' });
-                }
-
-                return currentDirection === 'asc' ? comparison : -comparison;
-            });
-
-            rows.forEach(function (row) {
-                tbody.appendChild(row);
-                const detailId = row.dataset.detailId || '';
-                const detailRow = detailId ? document.getElementById(detailId) : null;
-                if (detailRow) {
-                    tbody.appendChild(detailRow);
-                }
-            });
-
-            sortButtons.forEach(function (item) {
-                item.classList.remove('text-primary');
-            });
-            button.classList.add('text-primary');
-        });
-    });
-})();
-</script>
 
 </div>
 </html>
