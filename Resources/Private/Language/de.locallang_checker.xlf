@@ -456,8 +456,8 @@
                 <target>Keine Duplikate unter %1$s Seiten.</target>
             </trans-unit>
             <trans-unit id="msg.duplicates">
-                <source>%1$s pages share their value with other pages (%2$s groups).</source>
-                <target>%1$s Seiten teilen sich den Wert mit anderen Seiten (%2$s Gruppen).</target>
+                <source>%1$s pages share their value with other pages (number of groups: %2$s).</source>
+                <target>%1$s Seiten teilen sich den Wert mit anderen Seiten (Anzahl Gruppen: %2$s).</target>
             </trans-unit>
             <trans-unit id="check.reachability.title">
                 <source>Start page reachable</source>

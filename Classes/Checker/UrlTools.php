@@ -133,6 +133,17 @@ final class UrlTools
         return $query !== '' ? $path . '?' . $query : $path;
     }
 
+    /**
+     * Short label for reports: path and query without the TYPO3 cHash; the full URL stays the link target.
+     */
+    public static function displayPath(string $url): string
+    {
+        $path = (string) preg_replace('/([?&])cHash=[a-f0-9]+(&|$)/', '$1', self::pathWithQuery($url));
+        $path = rtrim($path, '?&');
+
+        return $path === '/' ? $url : $path;
+    }
+
     public static function isLikelyDocument(string $url): bool
     {
         $extension = strtolower(pathinfo((string) parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));

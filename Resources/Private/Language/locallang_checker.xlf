@@ -343,7 +343,7 @@
                 <source>No duplicates among %1$s pages.</source>
             </trans-unit>
             <trans-unit id="msg.duplicates">
-                <source>%1$s pages share their value with other pages (%2$s groups).</source>
+                <source>%1$s pages share their value with other pages (number of groups: %2$s).</source>
             </trans-unit>
             <trans-unit id="check.reachability.title">
                 <source>Start page reachable</source>

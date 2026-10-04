@@ -786,7 +786,7 @@ final class ReportBuilder
             'urls' => array_map(static fn(array $u): array => [
                 // Only http(s) URLs become links; anything else is rendered as plain text.
                 'url' => preg_match('#^https?://#i', $u['url']) ? $u['url'] : '',
-                'path' => UrlTools::pathWithQuery($u['url']) === '/' ? $u['url'] : UrlTools::pathWithQuery($u['url']),
+                'path' => UrlTools::displayPath($u['url']),
                 'note' => mb_substr((string) ($u['note'] ?? ''), 0, 160),
             ], array_slice($urls, 0, self::MAX_URLS_PER_CHECK)),
             'moreUrls' => max(0, $total - self::MAX_URLS_PER_CHECK),
@@ -841,7 +841,7 @@ final class ReportBuilder
         foreach ($pages as $url => $page) {
             $pageRows[] = [
                 'url' => $url,
-                'path' => UrlTools::pathWithQuery($url),
+                'path' => UrlTools::displayPath($url),
                 'status' => $page['status'] ?? 0,
                 'title' => mb_substr((string) ($page['title'] ?? ''), 0, 90),
                 'words' => $page['wordCount'] ?? null,
