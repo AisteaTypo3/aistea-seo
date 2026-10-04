@@ -47,6 +47,10 @@
                 <source>You have used your %1$s free tests for today. New tests are available tomorrow.</source>
                 <target>Deine %1$s kostenlosen Tests für heute sind aufgebraucht. Morgen stehen neue Tests bereit.</target>
             </trans-unit>
+            <trans-unit id="form.unlimited">
+                <source>You are logged in to the TYPO3 backend: unlimited tests (visitors: %1$s per day).</source>
+                <target>Du bist im TYPO3-Backend eingeloggt: unbegrenzte Tests (Besucher: %1$s pro Tag).</target>
+            </trans-unit>
             <trans-unit id="form.privacy">
                 <source>Only publicly accessible pages are fetched. Reports are available via their link for 30 days.</source>
                 <target>Es werden nur öffentlich erreichbare Seiten abgerufen. Berichte sind 30 Tage über ihren Link abrufbar.</target>

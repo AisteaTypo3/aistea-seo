@@ -58,6 +58,7 @@ final class CheckerController extends ActionController
             'report' => $report,
             'formToken' => $this->visitorGuard->issueFormToken(),
             'remaining' => $this->visitorGuard->remaining($this->request),
+            'unlimited' => $this->visitorGuard->isUnlimited(),
             'dailyLimit' => $this->checkerSettings->dailyLimit,
             'maxPages' => $this->checkerSettings->maxPages,
             'pageSpeedEnabled' => $this->checkerSettings->pageSpeedEnabled,

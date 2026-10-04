@@ -32,8 +32,9 @@
             </div>
             <p class="aseo-form__error" data-aseo-error role="alert" hidden></p>
             <p class="aseo-form__quota">
-                <f:if condition="{remaining} > 0">
-                    <f:then><f:translate key="{ll}form.remaining" arguments="{0: remaining, 1: dailyLimit}" /></f:then>
+                <f:if condition="{unlimited}">
+                    <f:then><f:translate key="{ll}form.unlimited" arguments="{0: dailyLimit}" /></f:then>
+                    <f:else if="{remaining} > 0"><f:translate key="{ll}form.remaining" arguments="{0: remaining, 1: dailyLimit}" /></f:else>
                     <f:else><f:translate key="{ll}form.limitReached" arguments="{0: dailyLimit}" /></f:else>
                 </f:if>
             </p>
