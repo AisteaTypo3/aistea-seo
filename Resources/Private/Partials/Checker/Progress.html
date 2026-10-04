@@ -1,0 +1,26 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<section class="aseo-hero aseo-hero--compact">
+    <div class="aseo-hero__inner">
+        <span class="aseo-badge"><f:translate key="{ll}progress.badge" /></span>
+        <h1 class="aseo-hero__title aseo-hero__title--small">{audit.host}</h1>
+
+        <div class="aseo-progress" data-aseo-progress>
+            <div class="aseo-progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{audit.progress}" aria-label="{f:translate(key: '{ll}progress.label')}">
+                <span data-aseo-bar></span>
+            </div>
+            <div class="aseo-progress__meta">
+                <span data-aseo-phase><f:translate key="{ll}phase.{audit.phase}" /></span>
+                <span data-aseo-percent>{audit.progress} %</span>
+            </div>
+            <ol class="aseo-phases">
+                <f:for each="{0: 'site', 1: 'crawl', 2: 'links', 3: 'performance', 4: 'finalize'}" as="phase">
+                    <li data-phase="{phase}"><span class="aseo-phases__dot" aria-hidden="true"></span><f:translate key="{ll}phase.{phase}" /></li>
+                </f:for>
+            </ol>
+            <p class="aseo-progress__current" data-aseo-current aria-live="polite"></p>
+            <p class="aseo-alert" data-aseo-error role="alert" hidden></p>
+        </div>
+        <p class="aseo-hero__note"><f:translate key="{ll}progress.hint" /></p>
+    </div>
+</section>
+</html>

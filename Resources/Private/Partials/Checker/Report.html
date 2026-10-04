@@ -1,0 +1,161 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<section class="aseo-report-head">
+    <div class="aseo-container">
+        <div class="aseo-card aseo-summary">
+            <div class="aseo-score aseo-score--{report.rating}">
+                <svg class="aseo-ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="aseo-ring__track" cx="60" cy="60" r="54" />
+                    <circle class="aseo-ring__value" cx="60" cy="60" r="54" stroke-dasharray="339.29" stroke-dashoffset="{report.ringOffset}" transform="rotate(-90 60 60)" />
+                </svg>
+                <div class="aseo-score__value">
+                    <strong>{report.score}</strong>
+                    <span>/ 100</span>
+                </div>
+            </div>
+            <div class="aseo-summary__body">
+                <span class="aseo-eyebrow"><f:translate key="{ll}report.eyebrow" /></span>
+                <h1 class="aseo-summary__title">{report.host}</h1>
+                <p class="aseo-summary__rating aseo-text--{report.rating}"><f:translate key="{ll}rating.{report.rating}" /></p>
+                <ul class="aseo-chips">
+                    <li class="aseo-chip aseo-chip--fail"><strong>{report.counts.fail}</strong> <f:translate key="{ll}status.fail.plural" /></li>
+                    <li class="aseo-chip aseo-chip--warn"><strong>{report.counts.warn}</strong> <f:translate key="{ll}status.warn.plural" /></li>
+                    <li class="aseo-chip aseo-chip--pass"><strong>{report.counts.pass}</strong> <f:translate key="{ll}status.pass.plural" /></li>
+                </ul>
+                <p class="aseo-summary__meta">
+                    <a href="{report.finalUrl}" target="_blank" rel="nofollow noopener noreferrer">{report.finalUrl}</a>
+                    · <f:format.date format="d.m.Y, H:i">{report.createdAt}</f:format.date>
+                </p>
+            </div>
+            <div class="aseo-summary__actions">
+                <button type="button" class="aseo-btn aseo-btn--ghost" data-aseo-copy="{shareUrl}">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+                    <span data-aseo-copy-label><f:translate key="{ll}report.copyLink" /></span>
+                </button>
+                <button type="button" class="aseo-btn aseo-btn--ghost" data-aseo-print>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></svg>
+                    <f:translate key="{ll}report.print" />
+                </button>
+                <a class="aseo-btn aseo-btn--primary" href="{pageUrl}"><f:translate key="{ll}report.newTest" /></a>
+            </div>
+        </div>
+
+        <dl class="aseo-stats">
+            <div class="aseo-stat"><dt><f:translate key="{ll}stats.pages" /></dt><dd>{report.stats.htmlPages}<small> / {report.stats.pages}</small></dd></div>
+            <div class="aseo-stat"><dt><f:translate key="{ll}stats.ttfb" /></dt><dd>{report.stats.avgTtfb}<small> ms</small></dd></div>
+            <div class="aseo-stat"><dt><f:translate key="{ll}stats.links" /></dt><dd>{report.stats.linksChecked}</dd></div>
+            <div class="aseo-stat"><dt><f:translate key="{ll}stats.sitemap" /></dt><dd>{report.stats.sitemapUrls}</dd></div>
+            <div class="aseo-stat">
+                <dt><f:translate key="{ll}stats.pagespeed" /></dt>
+                <dd><f:if condition="{report.stats.psiScore}"><f:then>{report.stats.psiScore}<small> / 100</small></f:then><f:else>–</f:else></f:if></dd>
+            </div>
+        </dl>
+
+        <nav class="aseo-categories" aria-label="{f:translate(key: '{ll}report.categoriesNav')}">
+            <f:for each="{report.categories}" as="category">
+                <a class="aseo-cat aseo-score--{category.rating}" href="#aseo-cat-{category.id}">
+                    <span class="aseo-cat__ring">
+                        <svg class="aseo-ring" viewBox="0 0 60 60" aria-hidden="true">
+                            <circle class="aseo-ring__track" cx="30" cy="30" r="26" />
+                            <circle class="aseo-ring__value" cx="30" cy="30" r="26" stroke-dasharray="163.36" stroke-dashoffset="{category.ringOffset}" transform="rotate(-90 30 30)" />
+                        </svg>
+                        <strong>{category.score}</strong>
+                    </span>
+                    <span class="aseo-cat__text">
+                        <span class="aseo-cat__name"><f:translate key="{ll}category.{category.id}" /></span>
+                        <span class="aseo-cat__counts">
+                            <f:translate key="{ll}report.categoryCounts" arguments="{0: category.counts.fail, 1: category.counts.warn}" />
+                        </span>
+                    </span>
+                </a>
+            </f:for>
+        </nav>
+    </div>
+</section>
+
+<section class="aseo-section aseo-section--report">
+    <div class="aseo-container">
+        <f:if condition="{report.priorities}">
+            <div class="aseo-card aseo-priorities">
+                <h2><f:translate key="{ll}report.priorities" /></h2>
+                <p class="aseo-muted"><f:translate key="{ll}report.prioritiesLead" /></p>
+                <ol>
+                    <f:for each="{report.priorities}" as="check">
+                        <li class="aseo-priority">
+                            <span class="aseo-status aseo-status--{check.status}" aria-hidden="true"></span>
+                            <span class="aseo-priority__text">
+                                <a href="#aseo-check-{check.id}"><f:translate key="{ll}check.{check.id}.title" /></a>
+                                <span><f:translate key="{ll}{check.messageKey}" arguments="{check.args}" /></span>
+                            </span>
+                            <span class="aseo-tag"><f:translate key="{ll}category.{check.category}" /></span>
+                            <span class="aseo-sr"><f:translate key="{ll}status.{check.status}" /></span>
+                        </li>
+                    </f:for>
+                </ol>
+            </div>
+        </f:if>
+
+        <f:for each="{report.categories}" as="category">
+            <div class="aseo-card aseo-category" id="aseo-cat-{category.id}">
+                <header class="aseo-category__head">
+                    <span class="aseo-feature__icon"><f:render partial="Checker/Icon" arguments="{name: category.id}" /></span>
+                    <div>
+                        <h2><f:translate key="{ll}category.{category.id}" /></h2>
+                        <p class="aseo-muted"><f:translate key="{ll}category.{category.id}.description" /></p>
+                    </div>
+                    <span class="aseo-pill aseo-score--{category.rating}">{category.score} / 100</span>
+                </header>
+                <div class="aseo-checks">
+                    <f:for each="{category.checks}" as="check">
+                        <f:render partial="Checker/Check" arguments="{check: check, ll: ll}" />
+                    </f:for>
+                </div>
+            </div>
+        </f:for>
+
+        <details class="aseo-card aseo-pages">
+            <summary>
+                <h2><f:translate key="{ll}report.pages" arguments="{0: report.stats.pages}" /></h2>
+                <svg class="aseo-chevron" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="aseo-table-wrap">
+                <table class="aseo-table">
+                    <thead>
+                    <tr>
+                        <th scope="col"><f:translate key="{ll}table.url" /></th>
+                        <th scope="col"><f:translate key="{ll}table.status" /></th>
+                        <th scope="col"><f:translate key="{ll}table.title" /></th>
+                        <th scope="col" class="aseo-num"><f:translate key="{ll}table.words" /></th>
+                        <th scope="col" class="aseo-num"><f:translate key="{ll}table.ttfb" /></th>
+                        <th scope="col" class="aseo-num"><f:translate key="{ll}table.issues" /></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <f:for each="{report.pages}" as="page">
+                        <tr>
+                            <td class="aseo-table__url"><a href="{page.url}" target="_blank" rel="nofollow noopener noreferrer">{page.path}</a></td>
+                            <td><span class="aseo-code aseo-code--{page.state}">{page.status}</span></td>
+                            <td class="aseo-table__title">
+                                <f:if condition="{page.redirectTo}">
+                                    <f:then>→ {page.redirectTo}</f:then>
+                                    <f:else>{page.title}</f:else>
+                                </f:if>
+                            </td>
+                            <td class="aseo-num">{page.words}</td>
+                            <td class="aseo-num"><f:if condition="{page.ttfb}">{page.ttfb} ms</f:if></td>
+                            <td class="aseo-num">{page.issues}</td>
+                        </tr>
+                    </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+
+        <div class="aseo-card aseo-method">
+            <h2><f:translate key="{ll}method.title" /></h2>
+            <p><f:translate key="{ll}method.score" /></p>
+            <p><f:translate key="{ll}method.scope" arguments="{0: report.stats.maxPages}" /></p>
+            <p class="aseo-muted"><f:translate key="{ll}method.limits" /></p>
+        </div>
+    </div>
+</section>
+</html>

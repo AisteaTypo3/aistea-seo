@@ -1,0 +1,32 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<details class="aseo-check aseo-check--{check.status}" id="aseo-check-{check.id}">
+    <summary>
+        <span class="aseo-status aseo-status--{check.status}" aria-hidden="true"></span>
+        <span class="aseo-check__text">
+            <strong><f:translate key="{ll}check.{check.id}.title" /></strong>
+            <span><f:translate key="{ll}{check.messageKey}" arguments="{check.args}" /></span>
+        </span>
+        <span class="aseo-sr"><f:translate key="{ll}status.{check.status}" /></span>
+        <svg class="aseo-chevron" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="aseo-check__body">
+        <p><f:translate key="{ll}check.{check.id}.help" /></p>
+        <f:if condition="{check.urls}">
+            <ul class="aseo-urls">
+                <f:for each="{check.urls}" as="item">
+                    <li>
+                        <f:if condition="{item.url}">
+                            <f:then><a href="{item.url}" target="_blank" rel="nofollow noopener noreferrer">{item.path}</a></f:then>
+                            <f:else><span>{item.path}</span></f:else>
+                        </f:if>
+                        <f:if condition="{item.note}"><span class="aseo-urls__note">{item.note}</span></f:if>
+                    </li>
+                </f:for>
+                <f:if condition="{check.moreUrls}">
+                    <li class="aseo-urls__more"><f:translate key="{ll}report.moreUrls" arguments="{0: check.moreUrls}" /></li>
+                </f:if>
+            </ul>
+        </f:if>
+    </div>
+</details>
+</html>

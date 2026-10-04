@@ -1,0 +1,1376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="locallang_checker.xlf" date="2026-10-04T00:00:00Z" product-name="aistea_seo">
+        <header/>
+        <body>
+            <trans-unit id="plugin.title">
+                <source>SEO Checker (public)</source>
+                <target>SEO-Checker (öffentlich)</target>
+            </trans-unit>
+            <trans-unit id="plugin.description">
+                <source>Visitors audit their own website: crawl, technical SEO, content, performance and security. Limited tests per day.</source>
+                <target>Besucher prüfen ihre Website: Crawling, technisches SEO, Inhalte, Performance und Sicherheit. Begrenzte Tests pro Tag.</target>
+            </trans-unit>
+            <trans-unit id="hero.badge">
+                <source>Free SEO check</source>
+                <target>Kostenloser SEO-Check</target>
+            </trans-unit>
+            <trans-unit id="hero.title">
+                <source>How visible is</source>
+                <target>Wie sichtbar ist</target>
+            </trans-unit>
+            <trans-unit id="hero.titleAccent">
+                <source>your website?</source>
+                <target>deine Website?</target>
+            </trans-unit>
+            <trans-unit id="hero.lead">
+                <source>Enter your URL and get a detailed SEO report within minutes: up to %1$s pages are crawled, more than 60 checks on indexing, content, performance, structured data and security, with clear priorities.</source>
+                <target>URL eingeben und in wenigen Minuten einen ausführlichen SEO-Bericht erhalten: bis zu %1$s Seiten werden gecrawlt, über 60 Prüfungen zu Indexierung, Inhalten, Performance, strukturierten Daten und Sicherheit – mit klaren Prioritäten.</target>
+            </trans-unit>
+            <trans-unit id="form.label">
+                <source>Website address</source>
+                <target>Adresse der Website</target>
+            </trans-unit>
+            <trans-unit id="form.placeholder">
+                <source>your-website.com</source>
+                <target>deine-website.de</target>
+            </trans-unit>
+            <trans-unit id="form.submit">
+                <source>Check now</source>
+                <target>Jetzt prüfen</target>
+            </trans-unit>
+            <trans-unit id="form.remaining">
+                <source>%1$s of %2$s free tests left today.</source>
+                <target>Heute noch %1$s von %2$s kostenlosen Tests verfügbar.</target>
+            </trans-unit>
+            <trans-unit id="form.limitReached">
+                <source>You have used your %1$s free tests for today. New tests are available tomorrow.</source>
+                <target>Deine %1$s kostenlosen Tests für heute sind aufgebraucht. Morgen stehen neue Tests bereit.</target>
+            </trans-unit>
+            <trans-unit id="form.privacy">
+                <source>Only publicly accessible pages are fetched. Reports are available via their link for 30 days.</source>
+                <target>Es werden nur öffentlich erreichbare Seiten abgerufen. Berichte sind 30 Tage über ihren Link abrufbar.</target>
+            </trans-unit>
+            <trans-unit id="form.privacyPageSpeed">
+                <source>For Core Web Vitals the start URL is sent to Google PageSpeed Insights.</source>
+                <target>Für die Core Web Vitals wird die Start-URL an Google PageSpeed Insights übermittelt.</target>
+            </trans-unit>
+            <trans-unit id="features.title">
+                <source>What the SEO check covers</source>
+                <target>Was der SEO-Check prüft</target>
+            </trans-unit>
+            <trans-unit id="features.lead">
+                <source>Not just meta tags: the checker crawls your site like a search engine and evaluates every finding by its impact.</source>
+                <target>Nicht nur Meta-Tags: Der Checker crawlt deine Website wie eine Suchmaschine und bewertet jeden Befund nach seiner Wirkung.</target>
+            </trans-unit>
+            <trans-unit id="steps.one">
+                <source>Enter the address of your website – no registration needed.</source>
+                <target>Adresse deiner Website eingeben – ohne Anmeldung.</target>
+            </trans-unit>
+            <trans-unit id="steps.two">
+                <source>We analyse robots.txt, sitemaps and up to %1$s pages and check their links.</source>
+                <target>Wir analysieren robots.txt, Sitemaps und bis zu %1$s Seiten und prüfen deren Links.</target>
+            </trans-unit>
+            <trans-unit id="steps.three">
+                <source>You get a report with score, priorities and concrete recommendations.</source>
+                <target>Du erhältst einen Bericht mit Score, Prioritäten und konkreten Empfehlungen.</target>
+            </trans-unit>
+            <trans-unit id="category.indexing">
+                <source>Indexing &amp; crawling</source>
+                <target>Indexierung &amp; Crawling</target>
+            </trans-unit>
+            <trans-unit id="category.indexing.description">
+                <source>Can search engines reach, crawl and index your pages?</source>
+                <target>Können Suchmaschinen deine Seiten erreichen, crawlen und indexieren?</target>
+            </trans-unit>
+            <trans-unit id="category.indexing.examples">
+                <source>HTTPS, redirects, robots.txt, XML sitemaps, canonicals, noindex, broken links, soft 404</source>
+                <target>HTTPS, Weiterleitungen, robots.txt, XML-Sitemaps, Canonicals, noindex, defekte Links, Soft-404</target>
+            </trans-unit>
+            <trans-unit id="category.content">
+                <source>Content &amp; on-page</source>
+                <target>Inhalte &amp; On-Page</target>
+            </trans-unit>
+            <trans-unit id="category.content.description">
+                <source>Do titles, descriptions, headings and content describe your pages well?</source>
+                <target>Beschreiben Titel, Beschreibungen, Überschriften und Inhalte deine Seiten gut?</target>
+            </trans-unit>
+            <trans-unit id="category.content.examples">
+                <source>Titles, meta descriptions, headings, duplicates, content length, alt texts, link texts, language</source>
+                <target>Titel, Meta-Descriptions, Überschriften, Duplikate, Textumfang, Alt-Texte, Linktexte, Sprache</target>
+            </trans-unit>
+            <trans-unit id="category.performance">
+                <source>Performance &amp; technology</source>
+                <target>Performance &amp; Technik</target>
+            </trans-unit>
+            <trans-unit id="category.performance.description">
+                <source>How fast and mobile-friendly is the site?</source>
+                <target>Wie schnell und mobilfreundlich ist die Website?</target>
+            </trans-unit>
+            <trans-unit id="category.performance.examples">
+                <source>Core Web Vitals, server response, compression, HTTP/2, caching, render-blocking resources, images, viewport</source>
+                <target>Core Web Vitals, Serverantwort, Komprimierung, HTTP/2, Caching, blockierende Ressourcen, Bilder, Viewport</target>
+            </trans-unit>
+            <trans-unit id="category.structure">
+                <source>Structured data &amp; social</source>
+                <target>Strukturierte Daten &amp; Social</target>
+            </trans-unit>
+            <trans-unit id="category.structure.description">
+                <source>Can search engines and social networks understand and present your content?</source>
+                <target>Verstehen Suchmaschinen und soziale Netzwerke deine Inhalte und können sie ansprechend darstellen?</target>
+            </trans-unit>
+            <trans-unit id="category.structure.examples">
+                <source>Schema.org/JSON-LD, Open Graph, Twitter Cards, favicon, hreflang</source>
+                <target>Schema.org/JSON-LD, Open Graph, Twitter Cards, Favicon, hreflang</target>
+            </trans-unit>
+            <trans-unit id="category.security">
+                <source>Security &amp; trust</source>
+                <target>Sicherheit &amp; Vertrauen</target>
+            </trans-unit>
+            <trans-unit id="category.security.description">
+                <source>Is the site delivered securely?</source>
+                <target>Wird die Website sicher ausgeliefert?</target>
+            </trans-unit>
+            <trans-unit id="category.security.examples">
+                <source>TLS certificate, HSTS, mixed content, security headers</source>
+                <target>TLS-Zertifikat, HSTS, Mixed Content, Security-Header</target>
+            </trans-unit>
+            <trans-unit id="progress.badge">
+                <source>Analysis in progress</source>
+                <target>Analyse läuft</target>
+            </trans-unit>
+            <trans-unit id="progress.label">
+                <source>Progress of the analysis</source>
+                <target>Fortschritt der Analyse</target>
+            </trans-unit>
+            <trans-unit id="progress.hint">
+                <source>Please keep this page open – the analysis usually takes one to three minutes. You can bookmark the link and come back later.</source>
+                <target>Bitte lass diese Seite geöffnet – die Analyse dauert meist ein bis drei Minuten. Du kannst den Link speichern und später zurückkehren.</target>
+            </trans-unit>
+            <trans-unit id="phase.site">
+                <source>Website, robots.txt &amp; sitemaps</source>
+                <target>Website, robots.txt &amp; Sitemaps</target>
+            </trans-unit>
+            <trans-unit id="phase.crawl">
+                <source>Crawling and analysing pages</source>
+                <target>Seiten crawlen und analysieren</target>
+            </trans-unit>
+            <trans-unit id="phase.links">
+                <source>Checking links and resources</source>
+                <target>Links und Ressourcen prüfen</target>
+            </trans-unit>
+            <trans-unit id="phase.performance">
+                <source>Measuring Core Web Vitals</source>
+                <target>Core Web Vitals messen</target>
+            </trans-unit>
+            <trans-unit id="phase.finalize">
+                <source>Creating report</source>
+                <target>Bericht erstellen</target>
+            </trans-unit>
+            <trans-unit id="phase.done">
+                <source>Done</source>
+                <target>Fertig</target>
+            </trans-unit>
+            <trans-unit id="report.eyebrow">
+                <source>SEO report</source>
+                <target>SEO-Bericht</target>
+            </trans-unit>
+            <trans-unit id="report.copyLink">
+                <source>Copy link</source>
+                <target>Link kopieren</target>
+            </trans-unit>
+            <trans-unit id="report.print">
+                <source>Print / PDF</source>
+                <target>Drucken / PDF</target>
+            </trans-unit>
+            <trans-unit id="report.newTest">
+                <source>Check another website</source>
+                <target>Weitere Website prüfen</target>
+            </trans-unit>
+            <trans-unit id="report.categoriesNav">
+                <source>Categories</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="report.categoryCounts">
+                <source>%1$s errors · %2$s warnings</source>
+                <target>%1$s Fehler · %2$s Hinweise</target>
+            </trans-unit>
+            <trans-unit id="report.priorities">
+                <source>Top priorities</source>
+                <target>Top-Prioritäten</target>
+            </trans-unit>
+            <trans-unit id="report.prioritiesLead">
+                <source>The findings with the biggest expected impact – start here.</source>
+                <target>Die Befunde mit der größten zu erwartenden Wirkung – hier lohnt sich der Einstieg.</target>
+            </trans-unit>
+            <trans-unit id="report.pages">
+                <source>Analysed URLs (%1$s)</source>
+                <target>Analysierte URLs (%1$s)</target>
+            </trans-unit>
+            <trans-unit id="report.moreUrls">
+                <source>+ %1$s more</source>
+                <target>+ %1$s weitere</target>
+            </trans-unit>
+            <trans-unit id="stats.pages">
+                <source>Pages analysed</source>
+                <target>Seiten analysiert</target>
+            </trans-unit>
+            <trans-unit id="stats.ttfb">
+                <source>Avg. server response</source>
+                <target>Ø Serverantwort</target>
+            </trans-unit>
+            <trans-unit id="stats.links">
+                <source>Links checked</source>
+                <target>Links geprüft</target>
+            </trans-unit>
+            <trans-unit id="stats.sitemap">
+                <source>URLs in sitemap</source>
+                <target>URLs in der Sitemap</target>
+            </trans-unit>
+            <trans-unit id="stats.pagespeed">
+                <source>PageSpeed (mobile)</source>
+                <target>PageSpeed (mobil)</target>
+            </trans-unit>
+            <trans-unit id="rating.good">
+                <source>Very good – only minor improvements left.</source>
+                <target>Sehr gut – nur noch kleine Verbesserungen möglich.</target>
+            </trans-unit>
+            <trans-unit id="rating.medium">
+                <source>Solid foundation with clear potential for improvement.</source>
+                <target>Solide Basis mit deutlichem Verbesserungspotenzial.</target>
+            </trans-unit>
+            <trans-unit id="rating.poor">
+                <source>Significant issues – they can noticeably limit visibility.</source>
+                <target>Erhebliche Probleme – sie können die Sichtbarkeit spürbar einschränken.</target>
+            </trans-unit>
+            <trans-unit id="status.pass">
+                <source>Passed</source>
+                <target>Bestanden</target>
+            </trans-unit>
+            <trans-unit id="status.pass.plural">
+                <source>passed</source>
+                <target>bestanden</target>
+            </trans-unit>
+            <trans-unit id="status.warn">
+                <source>Warning</source>
+                <target>Hinweis</target>
+            </trans-unit>
+            <trans-unit id="status.warn.plural">
+                <source>warnings</source>
+                <target>Hinweise</target>
+            </trans-unit>
+            <trans-unit id="status.fail">
+                <source>Error</source>
+                <target>Fehler</target>
+            </trans-unit>
+            <trans-unit id="status.fail.plural">
+                <source>errors</source>
+                <target>Fehler</target>
+            </trans-unit>
+            <trans-unit id="status.info">
+                <source>Information</source>
+                <target>Information</target>
+            </trans-unit>
+            <trans-unit id="status.info.plural">
+                <source>notes</source>
+                <target>Infos</target>
+            </trans-unit>
+            <trans-unit id="table.url">
+                <source>URL</source>
+                <target>URL</target>
+            </trans-unit>
+            <trans-unit id="table.status">
+                <source>Status</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="table.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="table.words">
+                <source>Words</source>
+                <target>Wörter</target>
+            </trans-unit>
+            <trans-unit id="table.ttfb">
+                <source>TTFB</source>
+                <target>TTFB</target>
+            </trans-unit>
+            <trans-unit id="table.issues">
+                <source>Findings</source>
+                <target>Befunde</target>
+            </trans-unit>
+            <trans-unit id="method.title">
+                <source>How this report is scored</source>
+                <target>So entsteht die Bewertung</target>
+            </trans-unit>
+            <trans-unit id="method.score">
+                <source>Each check has a weight from 1 to 10. Passed checks count fully, warnings half, errors not at all; notes are not scored. Page-level checks only become errors when a relevant share of pages is affected. The categories are weighted (indexing 30 %, content 25 %, performance 20 %, structured data 15 %, security 10 %). The score shows how well established best practices are met – it is not a prediction of rankings.</source>
+                <target>Jede Prüfung hat ein Gewicht von 1 bis 10. Bestandene Prüfungen zählen voll, Hinweise zur Hälfte, Fehler gar nicht; Infos fließen nicht ein. Seitenbezogene Prüfungen werden erst zum Fehler, wenn ein relevanter Anteil der Seiten betroffen ist. Die Kategorien sind gewichtet (Indexierung 30 %, Inhalte 25 %, Performance 20 %, strukturierte Daten 15 %, Sicherheit 10 %). Der Score zeigt, wie gut bewährte Best Practices erfüllt sind – er ist keine Ranking-Prognose.</target>
+            </trans-unit>
+            <trans-unit id="method.scope">
+                <source>Up to %1$s pages are crawled per test, starting at the home page and complemented by a sample from the XML sitemap. robots.txt rules are respected.</source>
+                <target>Pro Test werden bis zu %1$s Seiten gecrawlt – ausgehend von der Startseite und ergänzt um eine Stichprobe aus der XML-Sitemap. Regeln der robots.txt werden beachtet.</target>
+            </trans-unit>
+            <trans-unit id="method.limits">
+                <source>Limits: pages are analysed as delivered HTML; content that only appears after JavaScript execution is not evaluated. Length recommendations for titles and descriptions are guidelines – Google does not publish fixed limits. Core Web Vitals come from Google PageSpeed Insights (field data where available).</source>
+                <target>Grenzen: Seiten werden als ausgeliefertes HTML analysiert; Inhalte, die erst per JavaScript entstehen, fließen nicht ein. Längenempfehlungen für Titel und Beschreibungen sind Orientierungswerte – Google nennt keine festen Grenzen. Core Web Vitals stammen aus Google PageSpeed Insights (Felddaten, sofern vorhanden).</target>
+            </trans-unit>
+            <trans-unit id="error.generic">
+                <source>Something went wrong. Please try again.</source>
+                <target>Da ist etwas schiefgelaufen. Bitte versuche es erneut.</target>
+            </trans-unit>
+            <trans-unit id="error.internal">
+                <source>The analysis was aborted due to an internal error. Please start a new test.</source>
+                <target>Die Analyse wurde wegen eines internen Fehlers abgebrochen. Bitte starte einen neuen Test.</target>
+            </trans-unit>
+            <trans-unit id="error.formExpired">
+                <source>The form has expired. Please reload the page and try again.</source>
+                <target>Das Formular ist abgelaufen. Bitte lade die Seite neu und versuche es erneut.</target>
+            </trans-unit>
+            <trans-unit id="error.invalidUrl">
+                <source>Please enter a valid web address, e.g. example.com.</source>
+                <target>Bitte gib eine gültige Webadresse ein, z. B. beispiel.de.</target>
+            </trans-unit>
+            <trans-unit id="error.invalidScheme">
+                <source>Only http:// and https:// addresses can be checked.</source>
+                <target>Es können nur http://- und https://-Adressen geprüft werden.</target>
+            </trans-unit>
+            <trans-unit id="error.invalidHost">
+                <source>The host name is not valid.</source>
+                <target>Der Hostname ist ungültig.</target>
+            </trans-unit>
+            <trans-unit id="error.credentials">
+                <source>Addresses with user name or password are not supported.</source>
+                <target>Adressen mit Benutzername oder Passwort werden nicht unterstützt.</target>
+            </trans-unit>
+            <trans-unit id="error.port">
+                <source>Only the standard ports 80, 443, 8080 and 8443 are supported.</source>
+                <target>Nur die Standard-Ports 80, 443, 8080 und 8443 werden unterstützt.</target>
+            </trans-unit>
+            <trans-unit id="error.privateTarget">
+                <source>Local or private network addresses cannot be checked.</source>
+                <target>Lokale oder private Netzwerkadressen können nicht geprüft werden.</target>
+            </trans-unit>
+            <trans-unit id="error.dns">
+                <source>This domain could not be found. Please check the spelling.</source>
+                <target>Diese Domain wurde nicht gefunden. Bitte prüfe die Schreibweise.</target>
+            </trans-unit>
+            <trans-unit id="error.timeout">
+                <source>The website did not respond in time.</source>
+                <target>Die Website hat nicht rechtzeitig geantwortet.</target>
+            </trans-unit>
+            <trans-unit id="error.connect">
+                <source>No connection to the website could be established.</source>
+                <target>Es konnte keine Verbindung zur Website aufgebaut werden.</target>
+            </trans-unit>
+            <trans-unit id="error.ssl">
+                <source>The SSL/TLS certificate of the website is invalid, so the site cannot be loaded securely.</source>
+                <target>Das SSL/TLS-Zertifikat der Website ist ungültig, daher kann sie nicht sicher geladen werden.</target>
+            </trans-unit>
+            <trans-unit id="error.tooManyRedirects">
+                <source>The website redirects too often (redirect loop?).</source>
+                <target>Die Website leitet zu oft weiter (Weiterleitungsschleife?).</target>
+            </trans-unit>
+            <trans-unit id="error.httpStatus">
+                <source>The website responded with HTTP status %1$s. It may block automated requests.</source>
+                <target>Die Website hat mit HTTP-Status %1$s geantwortet. Möglicherweise blockiert sie automatisierte Abrufe.</target>
+            </trans-unit>
+            <trans-unit id="error.notHtml">
+                <source>The address does not return an HTML page.</source>
+                <target>Die Adresse liefert keine HTML-Seite.</target>
+            </trans-unit>
+            <trans-unit id="error.dailyLimit">
+                <source>You have used your %1$s free tests for today. Please come back tomorrow.</source>
+                <target>Deine %1$s kostenlosen Tests für heute sind aufgebraucht. Bitte schau morgen wieder vorbei.</target>
+            </trans-unit>
+            <trans-unit id="error.globalLimit">
+                <source>The SEO checker is very busy today. Please try again tomorrow.</source>
+                <target>Der SEO-Checker ist heute stark ausgelastet. Bitte versuche es morgen erneut.</target>
+            </trans-unit>
+            <trans-unit id="error.hostLimit">
+                <source>This website has already been checked several times today. Please try again tomorrow.</source>
+                <target>Diese Website wurde heute bereits mehrfach geprüft. Bitte versuche es morgen erneut.</target>
+            </trans-unit>
+            <trans-unit id="error.notFound">
+                <source>This report does not exist (anymore).</source>
+                <target>Dieser Bericht existiert nicht (mehr).</target>
+            </trans-unit>
+            <trans-unit id="error.reportNotFound">
+                <source>This report does not exist or has expired. Simply start a new test.</source>
+                <target>Dieser Bericht existiert nicht oder ist abgelaufen. Starte einfach einen neuen Test.</target>
+            </trans-unit>
+            <trans-unit id="error.reportFailed">
+                <source>This analysis could not be completed. Please start a new test.</source>
+                <target>Diese Analyse konnte nicht abgeschlossen werden. Bitte starte einen neuen Test.</target>
+            </trans-unit>
+            <trans-unit id="js.network">
+                <source>Connection problem. Please check your internet connection and try again.</source>
+                <target>Verbindungsproblem. Bitte prüfe deine Internetverbindung und versuche es erneut.</target>
+            </trans-unit>
+            <trans-unit id="js.invalidUrl">
+                <source>Please enter a valid web address, e.g. example.com.</source>
+                <target>Bitte gib eine gültige Webadresse ein, z. B. beispiel.de.</target>
+            </trans-unit>
+            <trans-unit id="js.copied">
+                <source>Link copied</source>
+                <target>Link kopiert</target>
+            </trans-unit>
+            <trans-unit id="js.copyFailed">
+                <source>Copy failed</source>
+                <target>Kopieren fehlgeschlagen</target>
+            </trans-unit>
+            <trans-unit id="js.starting">
+                <source>Loading website …</source>
+                <target>Website wird geladen …</target>
+            </trans-unit>
+            <trans-unit id="js.busy">
+                <source>Waiting for the running step …</source>
+                <target>Warte auf den laufenden Schritt …</target>
+            </trans-unit>
+            <trans-unit id="js.finishing">
+                <source>Report is being opened …</source>
+                <target>Bericht wird geöffnet …</target>
+            </trans-unit>
+            <trans-unit id="js.generic">
+                <source>Something went wrong. Please try again.</source>
+                <target>Da ist etwas schiefgelaufen. Bitte versuche es erneut.</target>
+            </trans-unit>
+            <trans-unit id="msg.allPages">
+                <source>All %1$s analysed pages are fine.</source>
+                <target>Alle %1$s analysierten Seiten sind in Ordnung.</target>
+            </trans-unit>
+            <trans-unit id="msg.affected">
+                <source>%1$s of %2$s pages affected.</source>
+                <target>%1$s von %2$s Seiten betroffen.</target>
+            </trans-unit>
+            <trans-unit id="msg.noindexAffected">
+                <source>%1$s of %2$s pages are excluded from indexing – please check whether this is intended.</source>
+                <target>%1$s von %2$s Seiten sind von der Indexierung ausgeschlossen – bitte prüfen, ob das beabsichtigt ist.</target>
+            </trans-unit>
+            <trans-unit id="msg.noPages">
+                <source>No analysable pages.</source>
+                <target>Keine auswertbaren Seiten.</target>
+            </trans-unit>
+            <trans-unit id="msg.noDuplicates">
+                <source>No duplicates among %1$s pages.</source>
+                <target>Keine Duplikate unter %1$s Seiten.</target>
+            </trans-unit>
+            <trans-unit id="msg.duplicates">
+                <source>%1$s pages share their value with other pages (%2$s groups).</source>
+                <target>%1$s Seiten teilen sich den Wert mit anderen Seiten (%2$s Gruppen).</target>
+            </trans-unit>
+            <trans-unit id="check.reachability.title">
+                <source>Start page reachable</source>
+                <target>Startseite erreichbar</target>
+            </trans-unit>
+            <trans-unit id="check.reachability.help">
+                <source>The start page must answer quickly with status 200 so search engines can crawl the site at all.</source>
+                <target>Die Startseite muss zuverlässig mit Status 200 antworten, damit Suchmaschinen die Website überhaupt crawlen können.</target>
+            </trans-unit>
+            <trans-unit id="check.reachability.pass">
+                <source>The start page responds with HTTP %1$s.</source>
+                <target>Die Startseite antwortet mit HTTP %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.https.title">
+                <source>HTTPS encryption</source>
+                <target>HTTPS-Verschlüsselung</target>
+            </trans-unit>
+            <trans-unit id="check.https.help">
+                <source>HTTPS is a confirmed Google ranking signal and a precondition for trust. Browsers mark HTTP pages as "not secure".</source>
+                <target>HTTPS ist ein bestätigtes Google-Rankingsignal und Voraussetzung für Vertrauen. Browser markieren HTTP-Seiten als „nicht sicher“.</target>
+            </trans-unit>
+            <trans-unit id="check.https.pass">
+                <source>The website is delivered via HTTPS.</source>
+                <target>Die Website wird per HTTPS ausgeliefert.</target>
+            </trans-unit>
+            <trans-unit id="check.https.fail">
+                <source>The website is delivered without HTTPS.</source>
+                <target>Die Website wird ohne HTTPS ausgeliefert.</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.title">
+                <source>HTTP → HTTPS redirect</source>
+                <target>Weiterleitung HTTP → HTTPS</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.help">
+                <source>Requests via http:// should be redirected permanently (301 or 308) to https://, so that only one version is indexed and link signals are consolidated.</source>
+                <target>Aufrufe über http:// sollten dauerhaft (301 oder 308) auf https:// weitergeleitet werden, damit nur eine Version indexiert wird und Linksignale gebündelt werden.</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.pass">
+                <source>http:// is permanently redirected to https:// (%1$s).</source>
+                <target>http:// wird dauerhaft auf https:// weitergeleitet (%1$s).</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.temporary">
+                <source>http:// redirects to https:// only temporarily (%1$s) – use 301 or 308.</source>
+                <target>http:// leitet nur temporär auf https:// weiter (%1$s) – besser 301 oder 308 verwenden.</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.fail">
+                <source>http:// does not redirect to https:// (status %1$s).</source>
+                <target>http:// leitet nicht auf https:// weiter (Status %1$s).</target>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.unreachable">
+                <source>The site is not served on http:// at all – that is fine.</source>
+                <target>Die Website ist über http:// gar nicht erreichbar – das ist in Ordnung.</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.title">
+                <source>www / non-www variant</source>
+                <target>www- / Nicht-www-Variante</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.help">
+                <source>Both host variants should not deliver content. The secondary variant should permanently redirect to the main host, otherwise duplicate content is created.</source>
+                <target>Beide Host-Varianten sollten nicht parallel Inhalte ausliefern. Die Nebenvariante sollte dauerhaft auf den Haupthost weiterleiten, sonst entsteht Duplicate Content.</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.pass">
+                <source>%1$s permanently redirects to %2$s.</source>
+                <target>%1$s leitet dauerhaft auf %2$s weiter.</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.temporary">
+                <source>%1$s redirects to %2$s only temporarily (%3$s).</source>
+                <target>%1$s leitet nur temporär auf %2$s weiter (%3$s).</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.duplicate">
+                <source>%1$s delivers content itself instead of redirecting to %2$s.</source>
+                <target>%1$s liefert selbst Inhalte aus, statt auf %2$s weiterzuleiten.</target>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.notAvailable">
+                <source>The variant %1$s is not in use.</source>
+                <target>Die Variante %1$s wird nicht genutzt.</target>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.title">
+                <source>Redirects of the start URL</source>
+                <target>Weiterleitungen der Start-URL</target>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.help">
+                <source>Every redirect costs loading time and crawl budget. Link directly to the final URL and avoid chains of several hops.</source>
+                <target>Jede Weiterleitung kostet Ladezeit und Crawl-Budget. Verlinke direkt auf die finale URL und vermeide Ketten mit mehreren Sprüngen.</target>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.none">
+                <source>The entered URL loads without redirect.</source>
+                <target>Die eingegebene URL lädt ohne Weiterleitung.</target>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.hops">
+                <source>The entered URL needs %1$s redirect(s) to reach the final page.</source>
+                <target>Die eingegebene URL benötigt %1$s Weiterleitung(en) bis zur finalen Seite.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.title">
+                <source>robots.txt</source>
+                <target>robots.txt</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.help">
+                <source>The robots.txt controls which areas crawlers may access. A server error (5xx) causes Google to pause crawling; "Disallow: /" blocks the whole site.</source>
+                <target>Die robots.txt steuert, welche Bereiche Crawler abrufen dürfen. Ein Serverfehler (5xx) lässt Google das Crawling pausieren; „Disallow: /“ sperrt die ganze Website.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.pass">
+                <source>robots.txt is present and does not block the site.</source>
+                <target>robots.txt ist vorhanden und sperrt die Website nicht.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.missing">
+                <source>No robots.txt found (status %1$s). Crawling is allowed, but a file with a sitemap reference is recommended.</source>
+                <target>Keine robots.txt gefunden (Status %1$s). Crawling ist erlaubt, eine Datei mit Sitemap-Verweis wird aber empfohlen.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.serverError">
+                <source>robots.txt returns a server error (%1$s) – Google may stop crawling.</source>
+                <target>robots.txt liefert einen Serverfehler (%1$s) – Google kann das Crawling einstellen.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.blocksAll">
+                <source>robots.txt blocks the entire website for search engines.</source>
+                <target>Die robots.txt sperrt die gesamte Website für Suchmaschinen.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.title">
+                <source>Sitemap reference in robots.txt</source>
+                <target>Sitemap-Verweis in der robots.txt</target>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.help">
+                <source>A "Sitemap:" line in robots.txt helps all search engines find your XML sitemap.</source>
+                <target>Eine „Sitemap:“-Zeile in der robots.txt hilft allen Suchmaschinen, deine XML-Sitemap zu finden.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.pass">
+                <source>robots.txt references %1$s sitemap(s).</source>
+                <target>Die robots.txt verweist auf %1$s Sitemap(s).</target>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.missing">
+                <source>robots.txt does not reference a sitemap.</source>
+                <target>Die robots.txt verweist auf keine Sitemap.</target>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.unreachable">
+                <source>%1$s sitemap URL(s) referenced in robots.txt cannot be loaded as a valid sitemap – check the address.</source>
+                <target>%1$s in der robots.txt angegebene Sitemap-URL(s) lassen sich nicht als gültige Sitemap laden – Adresse prüfen.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.title">
+                <source>XML sitemap</source>
+                <target>XML-Sitemap</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.help">
+                <source>An XML sitemap lists all indexable URLs and helps search engines find new and changed pages quickly. Sitemap index files are followed.</source>
+                <target>Eine XML-Sitemap listet alle indexierbaren URLs und hilft Suchmaschinen, neue und geänderte Seiten schnell zu finden. Sitemap-Indexdateien werden verfolgt.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.pass">
+                <source>%1$s URLs found in %2$s sitemap file(s).</source>
+                <target>%1$s URLs in %2$s Sitemap-Datei(en) gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.invalid">
+                <source>The sitemap could not be read as valid XML.</source>
+                <target>Die Sitemap konnte nicht als gültiges XML gelesen werden.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.empty">
+                <source>The sitemap contains no URLs.</source>
+                <target>Die Sitemap enthält keine URLs.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap.missing">
+                <source>No XML sitemap found (robots.txt, /sitemap.xml, /sitemap_index.xml).</source>
+                <target>Keine XML-Sitemap gefunden (robots.txt, /sitemap.xml, /sitemap_index.xml).</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.title">
+                <source>Quality of sitemap URLs</source>
+                <target>Qualität der Sitemap-URLs</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.help">
+                <source>A sitemap should only contain indexable URLs with status 200: no redirects, errors, noindex pages or URLs whose canonical points elsewhere.</source>
+                <target>Eine Sitemap sollte nur indexierbare URLs mit Status 200 enthalten: keine Weiterleitungen, Fehler, noindex-Seiten oder URLs, deren Canonical woanders hin zeigt.</target>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.notChecked">
+                <source>No sitemap URLs were part of the crawl sample.</source>
+                <target>Keine Sitemap-URLs waren Teil der Crawl-Stichprobe.</target>
+            </trans-unit>
+            <trans-unit id="check.noindex.title">
+                <source>Indexability (noindex)</source>
+                <target>Indexierbarkeit (noindex)</target>
+            </trans-unit>
+            <trans-unit id="check.noindex.help">
+                <source>Pages with "noindex" (meta robots or X-Robots-Tag header) do not appear in search results. This is correct for e.g. legal notices or internal search, but often happens by mistake after a relaunch.</source>
+                <target>Seiten mit „noindex“ (Meta-Robots oder X-Robots-Tag-Header) erscheinen nicht in den Suchergebnissen. Für z. B. interne Suche ist das richtig, passiert aber nach einem Relaunch oft versehentlich.</target>
+            </trans-unit>
+            <trans-unit id="check.noindex.home">
+                <source>The start page is set to noindex and will not appear in search results.</source>
+                <target>Die Startseite steht auf noindex und erscheint nicht in den Suchergebnissen.</target>
+            </trans-unit>
+            <trans-unit id="check.http_errors.title">
+                <source>HTTP errors on crawled pages</source>
+                <target>HTTP-Fehler auf gecrawlten Seiten</target>
+            </trans-unit>
+            <trans-unit id="check.http_errors.help">
+                <source>Pages with 4xx or 5xx status are not indexed and frustrate visitors. Server errors (5xx) can also slow down crawling of the whole site.</source>
+                <target>Seiten mit 4xx- oder 5xx-Status werden nicht indexiert und frustrieren Besucher. Serverfehler (5xx) können zusätzlich das Crawling der gesamten Website bremsen.</target>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.title">
+                <source>Broken internal links</source>
+                <target>Defekte interne Links</target>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.help">
+                <source>Internal links to missing pages waste crawl budget, lose link signals and lead visitors into dead ends. The list shows the target and where it is linked.</source>
+                <target>Interne Links auf nicht vorhandene Seiten verschwenden Crawl-Budget, verlieren Linksignale und führen Besucher in Sackgassen. Die Liste zeigt Ziel und Fundstelle.</target>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.pass">
+                <source>No broken internal links found (%2$s checked).</source>
+                <target>Keine defekten internen Links gefunden (%2$s geprüft).</target>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.found">
+                <source>%1$s broken internal link targets found (%2$s checked).</source>
+                <target>%1$s defekte interne Linkziele gefunden (%2$s geprüft).</target>
+            </trans-unit>
+            <trans-unit id="check.broken_external.title">
+                <source>Broken external links</source>
+                <target>Defekte externe Links</target>
+            </trans-unit>
+            <trans-unit id="check.broken_external.help">
+                <source>Links to pages that no longer exist harm user experience and look neglected. Sites that block bots (401, 403, 429) are not counted as broken.</source>
+                <target>Links auf nicht mehr existierende Seiten schaden der Nutzererfahrung und wirken ungepflegt. Websites, die Bots blockieren (401, 403, 429), werden nicht als defekt gewertet.</target>
+            </trans-unit>
+            <trans-unit id="check.broken_external.pass">
+                <source>No broken external links found (%2$s checked).</source>
+                <target>Keine defekten externen Links gefunden (%2$s geprüft).</target>
+            </trans-unit>
+            <trans-unit id="check.broken_external.found">
+                <source>%1$s broken external links found (%2$s checked).</source>
+                <target>%1$s defekte externe Links gefunden (%2$s geprüft).</target>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.title">
+                <source>Internal links to redirects</source>
+                <target>Interne Links auf Weiterleitungen</target>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.help">
+                <source>Internal links should point directly to the final URL. Links via redirects cost loading time and crawl budget – typical causes are missing trailing slashes or old URLs.</source>
+                <target>Interne Links sollten direkt auf die finale URL zeigen. Links über Weiterleitungen kosten Ladezeit und Crawl-Budget – typisch sind fehlende Schrägstriche am Ende oder alte URLs.</target>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.pass">
+                <source>Internal links point directly to their targets.</source>
+                <target>Interne Links zeigen direkt auf ihre Ziele.</target>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.found">
+                <source>%1$s internally linked URLs redirect.</source>
+                <target>%1$s intern verlinkte URLs leiten weiter.</target>
+            </trans-unit>
+            <trans-unit id="check.canonical_present.title">
+                <source>Canonical tag present</source>
+                <target>Canonical-Tag vorhanden</target>
+            </trans-unit>
+            <trans-unit id="check.canonical_present.help">
+                <source>A self-referencing canonical tag tells search engines the preferred URL and protects against duplicates caused by parameters or variants.</source>
+                <target>Ein selbstreferenzierendes Canonical-Tag nennt Suchmaschinen die bevorzugte URL und schützt vor Duplikaten durch Parameter oder Varianten.</target>
+            </trans-unit>
+            <trans-unit id="check.canonical_valid.title">
+                <source>Canonical tags valid</source>
+                <target>Canonical-Tags korrekt</target>
+            </trans-unit>
+            <trans-unit id="check.canonical_valid.help">
+                <source>Canonicals should be absolute, unique and point to an indexable page with status 200 on the same host. Contradictory canonicals are ignored by Google.</source>
+                <target>Canonicals sollten absolut, eindeutig und auf eine indexierbare Seite mit Status 200 auf demselben Host zeigen. Widersprüchliche Canonicals ignoriert Google.</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.title">
+                <source>Error page for missing URLs</source>
+                <target>Fehlerseite für fehlende URLs</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.help">
+                <source>A non-existent URL must return status 404 or 410. If it returns 200 ("soft 404"), search engines may index error pages; redirecting everything to the home page is also treated as soft 404.</source>
+                <target>Eine nicht existierende URL muss Status 404 oder 410 liefern. Liefert sie 200 („Soft-404“), können Fehlerseiten indexiert werden; pauschale Weiterleitungen auf die Startseite wertet Google ebenfalls als Soft-404.</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.pass">
+                <source>Missing pages correctly return status %1$s.</source>
+                <target>Fehlende Seiten liefern korrekt Status %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.fail">
+                <source>A non-existent URL returns status %1$s instead of 404.</source>
+                <target>Eine nicht existierende URL liefert Status %1$s statt 404.</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.redirectHome">
+                <source>Missing pages are redirected to the start page.</source>
+                <target>Fehlende Seiten werden auf die Startseite umgeleitet.</target>
+            </trans-unit>
+            <trans-unit id="check.soft_404.other">
+                <source>A non-existent URL returns: %1$s.</source>
+                <target>Eine nicht existierende URL liefert: %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.url_structure.title">
+                <source>URL structure</source>
+                <target>URL-Struktur</target>
+            </trans-unit>
+            <trans-unit id="check.url_structure.help">
+                <source>Short, lower-case URLs with hyphens are easier to read and share. Upper case, underscores, very long URLs and many parameters favour duplicates.</source>
+                <target>Kurze, kleingeschriebene URLs mit Bindestrichen sind leichter lesbar und teilbar. Großbuchstaben, Unterstriche, sehr lange URLs und viele Parameter begünstigen Duplikate.</target>
+            </trans-unit>
+            <trans-unit id="check.meta_refresh.title">
+                <source>Meta refresh</source>
+                <target>Meta-Refresh</target>
+            </trans-unit>
+            <trans-unit id="check.meta_refresh.help">
+                <source>Meta refresh redirects are slow and not accessible. Use server-side 301 redirects instead.</source>
+                <target>Meta-Refresh-Weiterleitungen sind langsam und nicht barrierefrei. Nutze stattdessen serverseitige 301-Weiterleitungen.</target>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.title">
+                <source>Content without JavaScript</source>
+                <target>Inhalte ohne JavaScript</target>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.help">
+                <source>Google can render JavaScript, but with delay and not always completely; other search engines and AI crawlers often cannot. Important content should be in the delivered HTML (server-side rendering).</source>
+                <target>Google kann JavaScript rendern, aber verzögert und nicht immer vollständig; andere Suchmaschinen und KI-Crawler oft gar nicht. Wichtige Inhalte sollten im ausgelieferten HTML stehen (Server-Side Rendering).</target>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.warn">
+                <source>The start page delivers only %1$s words of text without JavaScript – content is probably rendered client-side.</source>
+                <target>Die Startseite liefert ohne JavaScript nur %1$s Wörter Text – Inhalte werden vermutlich clientseitig gerendert.</target>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.info">
+                <source>The main content is contained in the delivered HTML.</source>
+                <target>Der Hauptinhalt ist im ausgelieferten HTML enthalten.</target>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.title">
+                <source>AI crawlers (GPTBot, ClaudeBot &amp; co.)</source>
+                <target>KI-Crawler (GPTBot, ClaudeBot &amp; Co.)</target>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.help">
+                <source>Whether AI assistants may use your content is a business decision. Blocking them can reduce visibility in AI answers; allowing them makes your content available for training and answers.</source>
+                <target>Ob KI-Assistenten deine Inhalte nutzen dürfen, ist eine geschäftliche Entscheidung. Eine Sperre kann die Sichtbarkeit in KI-Antworten verringern; eine Freigabe stellt Inhalte für Training und Antworten bereit.</target>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.open">
+                <source>No AI crawler is blocked completely.</source>
+                <target>Kein KI-Crawler ist vollständig gesperrt.</target>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.blocked">
+                <source>Blocked in robots.txt: %1$s.</source>
+                <target>In der robots.txt gesperrt: %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.title">
+                <source>llms.txt</source>
+                <target>llms.txt</target>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.help">
+                <source>llms.txt is an optional, not yet standardised proposal to give AI systems a structured overview of a website. It has no influence on Google rankings.</source>
+                <target>llms.txt ist ein optionaler, noch nicht standardisierter Vorschlag, KI-Systemen eine strukturierte Übersicht einer Website zu geben. Auf Google-Rankings hat sie keinen Einfluss.</target>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.present">
+                <source>An llms.txt is present.</source>
+                <target>Eine llms.txt ist vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.missing">
+                <source>No llms.txt present (optional).</source>
+                <target>Keine llms.txt vorhanden (optional).</target>
+            </trans-unit>
+            <trans-unit id="check.title_present.title">
+                <source>Page title present</source>
+                <target>Seitentitel vorhanden</target>
+            </trans-unit>
+            <trans-unit id="check.title_present.help">
+                <source>The title is one of the most important on-page signals and usually appears as the headline in search results. Every page needs exactly one unique &lt;title&gt;.</source>
+                <target>Der Titel ist eines der wichtigsten On-Page-Signale und erscheint meist als Überschrift im Suchergebnis. Jede Seite braucht genau einen eindeutigen &lt;title&gt;.</target>
+            </trans-unit>
+            <trans-unit id="check.title_length.title">
+                <source>Title length</source>
+                <target>Länge der Seitentitel</target>
+            </trans-unit>
+            <trans-unit id="check.title_length.help">
+                <source>Titles of roughly 25–65 characters are usually displayed in full. Google does not publish a fixed limit – it truncates by pixel width. Put the most important terms at the beginning.</source>
+                <target>Titel mit etwa 25–65 Zeichen werden meist vollständig angezeigt. Google nennt keine feste Grenze – gekürzt wird nach Pixelbreite. Die wichtigsten Begriffe gehören an den Anfang.</target>
+            </trans-unit>
+            <trans-unit id="check.title_duplicate.title">
+                <source>Duplicate titles</source>
+                <target>Doppelte Seitentitel</target>
+            </trans-unit>
+            <trans-unit id="check.title_duplicate.help">
+                <source>Identical titles make it hard for search engines to tell pages apart and lead to competing pages. Each page should have its own descriptive title.</source>
+                <target>Identische Titel erschweren Suchmaschinen die Unterscheidung und führen dazu, dass Seiten miteinander konkurrieren. Jede Seite sollte einen eigenen, beschreibenden Titel haben.</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_present.title">
+                <source>Meta description present</source>
+                <target>Meta-Description vorhanden</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_present.help">
+                <source>The meta description is not a ranking factor, but Google often uses it as the snippet. A good description increases the click-through rate.</source>
+                <target>Die Meta-Description ist kein Rankingfaktor, wird von Google aber häufig als Snippet genutzt. Eine gute Beschreibung erhöht die Klickrate.</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_length.title">
+                <source>Meta description length</source>
+                <target>Länge der Meta-Descriptions</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_length.help">
+                <source>Around 70–170 characters is a good guideline. Google has no fixed maximum and may rewrite the snippet anyway – what matters is a precise, appealing summary.</source>
+                <target>Etwa 70–170 Zeichen sind ein guter Orientierungswert. Google hat keine feste Maximallänge und schreibt Snippets teils selbst – entscheidend ist eine präzise, ansprechende Zusammenfassung.</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_duplicate.title">
+                <source>Duplicate meta descriptions</source>
+                <target>Doppelte Meta-Descriptions</target>
+            </trans-unit>
+            <trans-unit id="check.meta_description_duplicate.help">
+                <source>Identical descriptions on many pages are usually ignored by Google. Write individual descriptions at least for important pages.</source>
+                <target>Identische Beschreibungen auf vielen Seiten ignoriert Google meist. Formuliere zumindest für wichtige Seiten individuelle Beschreibungen.</target>
+            </trans-unit>
+            <trans-unit id="check.h1_present.title">
+                <source>H1 heading present</source>
+                <target>H1-Überschrift vorhanden</target>
+            </trans-unit>
+            <trans-unit id="check.h1_present.help">
+                <source>The H1 names the topic of the page for visitors and search engines. Each page should have a meaningful main heading.</source>
+                <target>Die H1 benennt das Thema der Seite für Besucher und Suchmaschinen. Jede Seite sollte eine aussagekräftige Hauptüberschrift haben.</target>
+            </trans-unit>
+            <trans-unit id="check.h1_multiple.title">
+                <source>Multiple H1 headings</source>
+                <target>Mehrere H1-Überschriften</target>
+            </trans-unit>
+            <trans-unit id="check.h1_multiple.help">
+                <source>Several H1s are technically allowed, but one clear main heading makes the structure easier to understand – also for screen readers.</source>
+                <target>Mehrere H1 sind technisch erlaubt, eine klare Hauptüberschrift macht die Struktur aber verständlicher – auch für Screenreader.</target>
+            </trans-unit>
+            <trans-unit id="check.heading_structure.title">
+                <source>Heading hierarchy</source>
+                <target>Überschriften-Hierarchie</target>
+            </trans-unit>
+            <trans-unit id="check.heading_structure.help">
+                <source>Headings should be nested without skipping levels (H1 → H2 → H3). A clean outline helps search engines and assistive technologies.</source>
+                <target>Überschriften sollten ohne Sprünge verschachtelt sein (H1 → H2 → H3). Eine saubere Gliederung hilft Suchmaschinen und assistiven Technologien.</target>
+            </trans-unit>
+            <trans-unit id="check.h1_duplicate.title">
+                <source>Duplicate H1 headings</source>
+                <target>Doppelte H1-Überschriften</target>
+            </trans-unit>
+            <trans-unit id="check.h1_duplicate.help">
+                <source>The same H1 on several pages indicates template headings or near-duplicate pages.</source>
+                <target>Dieselbe H1 auf mehreren Seiten deutet auf Template-Überschriften oder sehr ähnliche Seiten hin.</target>
+            </trans-unit>
+            <trans-unit id="check.content_length.title">
+                <source>Amount of text</source>
+                <target>Textumfang</target>
+            </trans-unit>
+            <trans-unit id="check.content_length.help">
+                <source>There is no minimum word count for rankings. Very short pages (under 150 words of main content), however, often do not answer the search intent sufficiently. Navigation and footer are not counted.</source>
+                <target>Es gibt keine Mindestwortzahl für Rankings. Sehr kurze Seiten (unter 150 Wörter Hauptinhalt) beantworten die Suchintention aber oft nicht ausreichend. Navigation und Footer werden nicht mitgezählt.</target>
+            </trans-unit>
+            <trans-unit id="check.duplicate_content.title">
+                <source>Duplicate content</source>
+                <target>Doppelte Inhalte</target>
+            </trans-unit>
+            <trans-unit id="check.duplicate_content.help">
+                <source>Pages with identical main content compete with each other. Merge them, differentiate the content or set a canonical to the preferred version.</source>
+                <target>Seiten mit identischem Hauptinhalt konkurrieren miteinander. Führe sie zusammen, differenziere die Inhalte oder setze ein Canonical auf die bevorzugte Version.</target>
+            </trans-unit>
+            <trans-unit id="check.image_alt.title">
+                <source>Image alt attributes</source>
+                <target>Alt-Attribute von Bildern</target>
+            </trans-unit>
+            <trans-unit id="check.image_alt.help">
+                <source>Alt texts describe images for screen readers and image search. Images without an alt attribute are counted; alt="" for purely decorative images is correct and not penalised.</source>
+                <target>Alt-Texte beschreiben Bilder für Screenreader und die Bildersuche. Gezählt werden Bilder ganz ohne alt-Attribut; alt="" für rein dekorative Bilder ist korrekt und wird nicht bemängelt.</target>
+            </trans-unit>
+            <trans-unit id="check.image_alt.pass">
+                <source>All %2$s images have an alt attribute.</source>
+                <target>Alle %2$s Bilder haben ein alt-Attribut.</target>
+            </trans-unit>
+            <trans-unit id="check.image_alt.missing">
+                <source>%1$s of %2$s images have no alt attribute.</source>
+                <target>%1$s von %2$s Bildern haben kein alt-Attribut.</target>
+            </trans-unit>
+            <trans-unit id="check.image_alt.noImages">
+                <source>No images found.</source>
+                <target>Keine Bilder gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.linked_image_alt.title">
+                <source>Linked images without text</source>
+                <target>Verlinkte Bilder ohne Text</target>
+            </trans-unit>
+            <trans-unit id="check.linked_image_alt.help">
+                <source>If an image is the only content of a link, its alt text is the link text. An empty alt makes the link unnamed for screen readers and search engines.</source>
+                <target>Ist ein Bild der einzige Inhalt eines Links, ist sein Alt-Text der Linktext. Ein leeres alt macht den Link für Screenreader und Suchmaschinen namenlos.</target>
+            </trans-unit>
+            <trans-unit id="check.anchor_text.title">
+                <source>Link texts</source>
+                <target>Linktexte</target>
+            </trans-unit>
+            <trans-unit id="check.anchor_text.help">
+                <source>Descriptive link texts help users and search engines understand the target. Avoid empty links and phrases like "click here" or "read more".</source>
+                <target>Beschreibende Linktexte helfen Nutzern und Suchmaschinen, das Ziel zu verstehen. Vermeide leere Links und Formulierungen wie „hier klicken“ oder „mehr“.</target>
+            </trans-unit>
+            <trans-unit id="check.lang.title">
+                <source>Language declaration</source>
+                <target>Sprachangabe</target>
+            </trans-unit>
+            <trans-unit id="check.lang.help">
+                <source>The lang attribute on &lt;html&gt; (e.g. "de" or "en-GB") helps browsers, screen readers and search engines identify the language.</source>
+                <target>Das lang-Attribut am &lt;html&gt;-Element (z. B. „de“ oder „en-GB“) hilft Browsern, Screenreadern und Suchmaschinen, die Sprache zu erkennen.</target>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.title">
+                <source>Topic focus of the start page</source>
+                <target>Themenfokus der Startseite</target>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.help">
+                <source>Compares the most frequent terms in the main content with title and H1. This is only an indication: title and content should clearly address the same topic.</source>
+                <target>Vergleicht die häufigsten Begriffe im Hauptinhalt mit Titel und H1. Das ist nur ein Indiz: Titel und Inhalt sollten klar dasselbe Thema adressieren.</target>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.aligned">
+                <source>Frequent terms: %1$s. In title/H1: %2$s.</source>
+                <target>Häufige Begriffe: %1$s. In Titel/H1: %2$s.</target>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.notAligned">
+                <source>Frequent terms: %1$s – none of them appears in title or H1.</source>
+                <target>Häufige Begriffe: %1$s – keiner davon steht in Titel oder H1.</target>
+            </trans-unit>
+            <trans-unit id="check.psi_score.title">
+                <source>PageSpeed score (mobile)</source>
+                <target>PageSpeed-Score (mobil)</target>
+            </trans-unit>
+            <trans-unit id="check.psi_score.help">
+                <source>Google Lighthouse lab test on a simulated mid-range smartphone. It is a diagnostic value; for rankings the Core Web Vitals of real users count.</source>
+                <target>Lighthouse-Labortest von Google auf einem simulierten Mittelklasse-Smartphone. Ein Diagnosewert; für Rankings zählen die Core Web Vitals echter Nutzer.</target>
+            </trans-unit>
+            <trans-unit id="check.psi_score.score">
+                <source>Performance score: %1$s / 100.</source>
+                <target>Performance-Score: %1$s / 100.</target>
+            </trans-unit>
+            <trans-unit id="check.psi_score.unavailable">
+                <source>PageSpeed data could not be retrieved this time.</source>
+                <target>PageSpeed-Daten konnten diesmal nicht abgerufen werden.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.title">
+                <source>Largest Contentful Paint (LCP)</source>
+                <target>Largest Contentful Paint (LCP)</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.help">
+                <source>How quickly the largest visible element loads. Good: up to 2.5 s. Optimise server response, hero image (size, format, preload) and render-blocking resources.</source>
+                <target>Wie schnell das größte sichtbare Element lädt. Gut: bis 2,5 s. Optimiere Serverantwort, Hero-Bild (Größe, Format, Preload) und blockierende Ressourcen.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+                <target>%1$s (Felddaten echter Nutzer, 75. Perzentil).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+                <target>%1$s (Laborwert – nicht genug Felddaten vorhanden).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.noData">
+                <source>Not enough data available.</source>
+                <target>Nicht genügend Daten vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.title">
+                <source>Interaction to Next Paint (INP)</source>
+                <target>Interaction to Next Paint (INP)</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.help">
+                <source>How quickly the page reacts to clicks and input. Good: up to 200 ms. Reduce long JavaScript tasks and third-party scripts.</source>
+                <target>Wie schnell die Seite auf Klicks und Eingaben reagiert. Gut: bis 200 ms. Reduziere lange JavaScript-Tasks und Drittanbieter-Skripte.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+                <target>%1$s (Felddaten echter Nutzer, 75. Perzentil).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+                <target>%1$s (Laborwert – nicht genug Felddaten vorhanden).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.noData">
+                <source>Not enough data available.</source>
+                <target>Nicht genügend Daten vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.title">
+                <source>Cumulative Layout Shift (CLS)</source>
+                <target>Cumulative Layout Shift (CLS)</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.help">
+                <source>How much the layout shifts while loading. Good: up to 0.1. Reserve space for images, ads and embeds (width/height) and avoid late-loading fonts and banners.</source>
+                <target>Wie stark sich das Layout beim Laden verschiebt. Gut: bis 0,1. Reserviere Platz für Bilder, Werbung und Einbettungen (width/height) und vermeide spät nachladende Schriften und Banner.</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+                <target>%1$s (Felddaten echter Nutzer, 75. Perzentil).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+                <target>%1$s (Laborwert – nicht genug Felddaten vorhanden).</target>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.noData">
+                <source>Not enough data available.</source>
+                <target>Nicht genügend Daten vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="check.tbt.title">
+                <source>Total Blocking Time</source>
+                <target>Total Blocking Time</target>
+            </trans-unit>
+            <trans-unit id="check.tbt.help">
+                <source>Lab metric for how long the main thread is blocked by JavaScript; a good indicator for INP. Good: up to 200 ms.</source>
+                <target>Labormetrik dafür, wie lange JavaScript den Hauptthread blockiert; guter Indikator für INP. Gut: bis 200 ms.</target>
+            </trans-unit>
+            <trans-unit id="check.tbt.value">
+                <source>Total Blocking Time: %1$s.</source>
+                <target>Total Blocking Time: %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.ttfb.title">
+                <source>Server response time (TTFB)</source>
+                <target>Serverantwortzeit (TTFB)</target>
+            </trans-unit>
+            <trans-unit id="check.ttfb.help">
+                <source>Time to first byte measured from our server. Below 600 ms is good. Slow responses delay every other metric – use caching, faster hosting or a CDN.</source>
+                <target>Zeit bis zum ersten Byte, gemessen von unserem Server. Unter 600 ms ist gut. Langsame Antworten verzögern alle weiteren Metriken – hilfreich sind Caching, schnelleres Hosting oder ein CDN.</target>
+            </trans-unit>
+            <trans-unit id="check.ttfb.value">
+                <source>Median %1$s ms (start page: %2$s ms).</source>
+                <target>Median %1$s ms (Startseite: %2$s ms).</target>
+            </trans-unit>
+            <trans-unit id="check.html_size.title">
+                <source>HTML size</source>
+                <target>HTML-Größe</target>
+            </trans-unit>
+            <trans-unit id="check.html_size.help">
+                <source>Very large HTML documents (over 400 KB) load and render slowly, often because of inline data, SVGs or page builders.</source>
+                <target>Sehr große HTML-Dokumente (über 400 KB) laden und rendern langsam, oft wegen Inline-Daten, SVGs oder Page-Buildern.</target>
+            </trans-unit>
+            <trans-unit id="check.compression.title">
+                <source>Compression (gzip/Brotli)</source>
+                <target>Komprimierung (gzip/Brotli)</target>
+            </trans-unit>
+            <trans-unit id="check.compression.help">
+                <source>Text compression typically reduces HTML, CSS and JS by 70–90 %. It is enabled with one server setting.</source>
+                <target>Textkomprimierung verkleinert HTML, CSS und JS typischerweise um 70–90 %. Sie lässt sich mit einer Servereinstellung aktivieren.</target>
+            </trans-unit>
+            <trans-unit id="check.compression.pass">
+                <source>HTML is delivered compressed (%1$s).</source>
+                <target>HTML wird komprimiert ausgeliefert (%1$s).</target>
+            </trans-unit>
+            <trans-unit id="check.compression.fail">
+                <source>HTML is delivered uncompressed.</source>
+                <target>HTML wird unkomprimiert ausgeliefert.</target>
+            </trans-unit>
+            <trans-unit id="check.http2.title">
+                <source>HTTP/2 or HTTP/3</source>
+                <target>HTTP/2 oder HTTP/3</target>
+            </trans-unit>
+            <trans-unit id="check.http2.help">
+                <source>Modern protocols load many resources in parallel over one connection and noticeably reduce loading times.</source>
+                <target>Moderne Protokolle laden viele Ressourcen parallel über eine Verbindung und verkürzen Ladezeiten spürbar.</target>
+            </trans-unit>
+            <trans-unit id="check.http2.pass">
+                <source>The server uses HTTP/%1$s.</source>
+                <target>Der Server nutzt HTTP/%1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.http2.fail">
+                <source>The server only uses HTTP/%1$s.</source>
+                <target>Der Server nutzt nur HTTP/%1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.title">
+                <source>Browser caching of resources</source>
+                <target>Browser-Caching von Ressourcen</target>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.help">
+                <source>CSS, JavaScript and images should be cacheable for a long time (Cache-Control max-age of at least 7 days, ideally a year with versioned file names).</source>
+                <target>CSS, JavaScript und Bilder sollten lange zwischengespeichert werden (Cache-Control max-age von mindestens 7 Tagen, ideal ein Jahr mit versionierten Dateinamen).</target>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.pass">
+                <source>Sampled resources are cached long enough.</source>
+                <target>Die geprüften Ressourcen werden ausreichend lange gecacht.</target>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.short">
+                <source>%1$s of %2$s sampled resources have no or a short cache lifetime.</source>
+                <target>%1$s von %2$s geprüften Ressourcen haben keine oder eine kurze Cache-Dauer.</target>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.notChecked">
+                <source>No resources could be checked.</source>
+                <target>Es konnten keine Ressourcen geprüft werden.</target>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.title">
+                <source>Render-blocking scripts</source>
+                <target>Render-blockierende Skripte</target>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.help">
+                <source>Scripts in &lt;head&gt; without async or defer block rendering of the page. Load them with defer or at the end of the body.</source>
+                <target>Skripte im &lt;head&gt; ohne async oder defer blockieren das Rendern der Seite. Lade sie mit defer oder am Ende des Body.</target>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.pass">
+                <source>No blocking scripts in &lt;head&gt;.</source>
+                <target>Keine blockierenden Skripte im &lt;head&gt;.</target>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.found">
+                <source>%1$s blocking script(s) in &lt;head&gt; of the start page.</source>
+                <target>%1$s blockierende(s) Skript(e) im &lt;head&gt; der Startseite.</target>
+            </trans-unit>
+            <trans-unit id="check.requests.title">
+                <source>Number of scripts and stylesheets</source>
+                <target>Anzahl Skripte und Stylesheets</target>
+            </trans-unit>
+            <trans-unit id="check.requests.help">
+                <source>Every file means additional requests and parsing. Bundle files and remove unused libraries and third-party tools.</source>
+                <target>Jede Datei bedeutet zusätzliche Anfragen und Parsing. Bündle Dateien und entferne ungenutzte Bibliotheken und Drittanbieter-Tools.</target>
+            </trans-unit>
+            <trans-unit id="check.requests.value">
+                <source>%1$s files on the start page (%2$s scripts, %3$s stylesheets).</source>
+                <target>%1$s Dateien auf der Startseite (%2$s Skripte, %3$s Stylesheets).</target>
+            </trans-unit>
+            <trans-unit id="check.image_dimensions.title">
+                <source>Image dimensions</source>
+                <target>Bildabmessungen</target>
+            </trans-unit>
+            <trans-unit id="check.image_dimensions.help">
+                <source>Images without width and height attributes cause layout shifts (CLS) because the browser cannot reserve space in advance.</source>
+                <target>Bilder ohne width- und height-Attribute verursachen Layoutverschiebungen (CLS), weil der Browser keinen Platz reservieren kann.</target>
+            </trans-unit>
+            <trans-unit id="check.lazy_loading.title">
+                <source>Lazy loading</source>
+                <target>Lazy Loading</target>
+            </trans-unit>
+            <trans-unit id="check.lazy_loading.help">
+                <source>Images outside the visible area should be loaded with loading="lazy". Do not lazy-load the main image at the top (LCP).</source>
+                <target>Bilder außerhalb des sichtbaren Bereichs sollten mit loading="lazy" geladen werden. Das Hauptbild oben (LCP) aber nicht lazy laden.</target>
+            </trans-unit>
+            <trans-unit id="check.modern_images.title">
+                <source>Modern image formats</source>
+                <target>Moderne Bildformate</target>
+            </trans-unit>
+            <trans-unit id="check.modern_images.help">
+                <source>WebP and AVIF are usually 25–50 % smaller than JPEG/PNG at the same quality. Deliver them e.g. via &lt;picture&gt; or srcset.</source>
+                <target>WebP und AVIF sind bei gleicher Qualität meist 25–50 % kleiner als JPEG/PNG. Liefere sie z. B. über &lt;picture&gt; oder srcset aus.</target>
+            </trans-unit>
+            <trans-unit id="check.modern_images.share">
+                <source>%1$s %% of the raster images use WebP/AVIF (%2$s of %3$s).</source>
+                <target>%1$s %% der Rasterbilder nutzen WebP/AVIF (%2$s von %3$s).</target>
+            </trans-unit>
+            <trans-unit id="check.modern_images.noImages">
+                <source>Too few images for an assessment.</source>
+                <target>Zu wenige Bilder für eine Bewertung.</target>
+            </trans-unit>
+            <trans-unit id="check.dom_size.title">
+                <source>DOM size</source>
+                <target>DOM-Größe</target>
+            </trans-unit>
+            <trans-unit id="check.dom_size.help">
+                <source>More than about 1,500 elements slow down rendering and interactions, especially on smartphones.</source>
+                <target>Mehr als etwa 1.500 Elemente verlangsamen Rendering und Interaktionen, besonders auf Smartphones.</target>
+            </trans-unit>
+            <trans-unit id="check.viewport.title">
+                <source>Mobile viewport</source>
+                <target>Mobiler Viewport</target>
+            </trans-unit>
+            <trans-unit id="check.viewport.help">
+                <source>Google indexes the mobile version (mobile-first). A viewport meta tag with width=device-width is required; zooming should not be disabled.</source>
+                <target>Google indexiert die mobile Version (Mobile First). Ein Viewport-Meta-Tag mit width=device-width ist Pflicht; Zoomen sollte nicht deaktiviert werden.</target>
+            </trans-unit>
+            <trans-unit id="check.doctype_charset.title">
+                <source>Doctype and character set</source>
+                <target>Doctype und Zeichensatz</target>
+            </trans-unit>
+            <trans-unit id="check.doctype_charset.help">
+                <source>&lt;!DOCTYPE html&gt; prevents quirks mode, a declared charset (UTF-8) prevents broken umlauts and special characters.</source>
+                <target>&lt;!DOCTYPE html&gt; verhindert den Quirks-Modus, ein deklarierter Zeichensatz (UTF-8) verhindert kaputte Umlaute und Sonderzeichen.</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data.title">
+                <source>Structured data</source>
+                <target>Strukturierte Daten</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data.help">
+                <source>Schema.org markup (ideally JSON-LD) helps search engines understand content and enables rich results such as breadcrumbs, FAQs, reviews or events.</source>
+                <target>Schema.org-Auszeichnungen (idealerweise JSON-LD) helfen Suchmaschinen, Inhalte zu verstehen, und ermöglichen Rich Results wie Breadcrumbs, FAQs, Bewertungen oder Events.</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data.pass">
+                <source>Found types: %1$s.</source>
+                <target>Gefundene Typen: %1$s.</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data.missing">
+                <source>No structured data found.</source>
+                <target>Keine strukturierten Daten gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data_valid.title">
+                <source>Structured data valid</source>
+                <target>Strukturierte Daten korrekt</target>
+            </trans-unit>
+            <trans-unit id="check.structured_data_valid.help">
+                <source>Faulty JSON is ignored completely; missing required properties prevent rich results. Validate with Google's Rich Results Test.</source>
+                <target>Fehlerhaftes JSON wird komplett ignoriert; fehlende Pflichtangaben verhindern Rich Results. Prüfe mit dem Rich-Results-Test von Google.</target>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.title">
+                <source>Organization / business markup</source>
+                <target>Organisations- / Unternehmensauszeichnung</target>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.help">
+                <source>Organization, LocalBusiness or Person markup with name, logo and contact details supports the knowledge panel and brand recognition.</source>
+                <target>Organization-, LocalBusiness- oder Person-Markup mit Name, Logo und Kontaktdaten unterstützt Knowledge Panel und Markenerkennung.</target>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.pass">
+                <source>Organization, business or person markup found.</source>
+                <target>Organisations-, Unternehmens- oder Personen-Markup gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.missing">
+                <source>No Organization, LocalBusiness or Person markup found.</source>
+                <target>Kein Organization-, LocalBusiness- oder Person-Markup gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.open_graph.title">
+                <source>Open Graph tags</source>
+                <target>Open-Graph-Tags</target>
+            </trans-unit>
+            <trans-unit id="check.open_graph.help">
+                <source>og:title, og:description and og:image (absolute URL) control how pages look when shared on LinkedIn, Facebook, WhatsApp &amp; co.</source>
+                <target>og:title, og:description und og:image (absolute URL) steuern, wie Seiten beim Teilen auf LinkedIn, Facebook, WhatsApp &amp; Co. aussehen.</target>
+            </trans-unit>
+            <trans-unit id="check.twitter_card.title">
+                <source>Twitter / X card</source>
+                <target>Twitter- / X-Card</target>
+            </trans-unit>
+            <trans-unit id="check.twitter_card.help">
+                <source>A twitter:card tag (e.g. summary_large_image) enables large preview images on X. Without it, X falls back to Open Graph.</source>
+                <target>Ein twitter:card-Tag (z. B. summary_large_image) aktiviert große Vorschaubilder auf X. Ohne ihn greift X auf Open Graph zurück.</target>
+            </trans-unit>
+            <trans-unit id="check.favicon.title">
+                <source>Favicon</source>
+                <target>Favicon</target>
+            </trans-unit>
+            <trans-unit id="check.favicon.help">
+                <source>Google shows the favicon next to the result on mobile. It should be at least 48×48 px and crawlable.</source>
+                <target>Google zeigt das Favicon mobil neben dem Suchergebnis. Es sollte mindestens 48×48 px groß und crawlbar sein.</target>
+            </trans-unit>
+            <trans-unit id="check.favicon.pass">
+                <source>A favicon is present.</source>
+                <target>Ein Favicon ist vorhanden.</target>
+            </trans-unit>
+            <trans-unit id="check.favicon.missing">
+                <source>No favicon found.</source>
+                <target>Kein Favicon gefunden.</target>
+            </trans-unit>
+            <trans-unit id="check.hreflang.title">
+                <source>hreflang (language versions)</source>
+                <target>hreflang (Sprachversionen)</target>
+            </trans-unit>
+            <trans-unit id="check.hreflang.help">
+                <source>For multilingual sites, hreflang links language versions. Each version must reference itself and all others (return links), use valid codes (e.g. de, en-GB) and absolute URLs; x-default is recommended.</source>
+                <target>Bei mehrsprachigen Websites verknüpft hreflang die Sprachversionen. Jede Version muss sich selbst und alle anderen referenzieren (Rückverweise), gültige Codes (z. B. de, en-GB) und absolute URLs nutzen; x-default wird empfohlen.</target>
+            </trans-unit>
+            <trans-unit id="check.hreflang.none">
+                <source>No hreflang – fine for single-language websites.</source>
+                <target>Kein hreflang – für einsprachige Websites in Ordnung.</target>
+            </trans-unit>
+            <trans-unit id="check.hreflang.missingMultilingual">
+                <source>Pages in several languages (%1$s) found, but no hreflang.</source>
+                <target>Seiten in mehreren Sprachen (%1$s) gefunden, aber kein hreflang.</target>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.title">
+                <source>TLS certificate</source>
+                <target>TLS-Zertifikat</target>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.help">
+                <source>An expired certificate makes the site inaccessible for visitors and search engines. Automate renewal (e.g. Let's Encrypt).</source>
+                <target>Ein abgelaufenes Zertifikat macht die Website für Besucher und Suchmaschinen unerreichbar. Automatisiere die Verlängerung (z. B. Let's Encrypt).</target>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.valid">
+                <source>The certificate is valid.</source>
+                <target>Das Zertifikat ist gültig.</target>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.expires">
+                <source>Valid for another %1$s days (until %2$s).</source>
+                <target>Noch %1$s Tage gültig (bis %2$s).</target>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.noHttps">
+                <source>No HTTPS – no certificate.</source>
+                <target>Kein HTTPS – kein Zertifikat.</target>
+            </trans-unit>
+            <trans-unit id="check.hsts.title">
+                <source>HSTS</source>
+                <target>HSTS</target>
+            </trans-unit>
+            <trans-unit id="check.hsts.help">
+                <source>Strict-Transport-Security forces browsers to always use HTTPS and prevents downgrade attacks. Recommended: max-age of at least six months.</source>
+                <target>Strict-Transport-Security zwingt Browser, immer HTTPS zu nutzen, und verhindert Downgrade-Angriffe. Empfohlen: max-age von mindestens sechs Monaten.</target>
+            </trans-unit>
+            <trans-unit id="check.hsts.pass">
+                <source>HSTS is active (%1$s days).</source>
+                <target>HSTS ist aktiv (%1$s Tage).</target>
+            </trans-unit>
+            <trans-unit id="check.hsts.short">
+                <source>HSTS is active, but only for %1$s days.</source>
+                <target>HSTS ist aktiv, aber nur für %1$s Tage.</target>
+            </trans-unit>
+            <trans-unit id="check.hsts.missing">
+                <source>No HSTS header set.</source>
+                <target>Kein HSTS-Header gesetzt.</target>
+            </trans-unit>
+            <trans-unit id="check.mixed_content.title">
+                <source>Mixed content</source>
+                <target>Mixed Content</target>
+            </trans-unit>
+            <trans-unit id="check.mixed_content.help">
+                <source>Resources loaded via http:// on HTTPS pages are blocked by browsers or trigger warnings. Load all resources via https://.</source>
+                <target>Über http:// geladene Ressourcen auf HTTPS-Seiten werden von Browsern blockiert oder lösen Warnungen aus. Lade alle Ressourcen per https://.</target>
+            </trans-unit>
+            <trans-unit id="check.security_headers.title">
+                <source>Security headers</source>
+                <target>Security-Header</target>
+            </trans-unit>
+            <trans-unit id="check.security_headers.help">
+                <source>Security headers protect visitors against clickjacking, MIME sniffing and data leakage. They are not a direct ranking factor, but a sign of a well-maintained website.</source>
+                <target>Security-Header schützen Besucher vor Clickjacking, MIME-Sniffing und Datenabfluss. Sie sind kein direkter Rankingfaktor, aber ein Zeichen für eine gepflegte Website.</target>
+            </trans-unit>
+            <trans-unit id="check.security_headers.pass">
+                <source>%1$s of %2$s recommended headers set.</source>
+                <target>%1$s von %2$s empfohlenen Headern gesetzt.</target>
+            </trans-unit>
+            <trans-unit id="check.security_headers.missing">
+                <source>%1$s of %2$s recommended headers set. Missing: %3$s.</source>
+                <target>%1$s von %2$s empfohlenen Headern gesetzt. Es fehlen: %3$s.</target>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.title">
+                <source>Software versions disclosed</source>
+                <target>Offengelegte Softwareversionen</target>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.help">
+                <source>Version numbers in Server or X-Powered-By headers make targeted attacks easier. Remove them in the server configuration.</source>
+                <target>Versionsnummern in Server- oder X-Powered-By-Headern erleichtern gezielte Angriffe. Entferne sie in der Serverkonfiguration.</target>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.pass">
+                <source>No software versions disclosed.</source>
+                <target>Keine Softwareversionen offengelegt.</target>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.found">
+                <source>Disclosed: %1$s.</source>
+                <target>Offengelegt: %1$s.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

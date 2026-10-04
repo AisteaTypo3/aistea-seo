@@ -820,6 +820,8 @@ class SeoAnalyzerService
 
     private function requestUrl(string $url, string $acceptHeader): \Psr\Http\Message\ResponseInterface
     {
+        // Every request, including redirect targets and sitemap URLs from robots.txt, must pass the SSRF check.
+        $this->assertAllowedBaseUrl($url);
         $options = $this->getDefaultRequestOptions($acceptHeader);
 
         try {

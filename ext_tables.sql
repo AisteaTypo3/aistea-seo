@@ -47,3 +47,39 @@ CREATE TABLE tx_aisteaseo_domain_model_page (
     page_score smallint(6) unsigned NOT NULL DEFAULT 0,
     issues text
 );
+
+CREATE TABLE tx_aisteaseo_checker_audit (
+    uid int(11) unsigned NOT NULL auto_increment,
+    token varchar(32) NOT NULL DEFAULT '',
+    url varchar(2000) NOT NULL DEFAULT '',
+    host varchar(255) NOT NULL DEFAULT '',
+    language varchar(10) NOT NULL DEFAULT '',
+    status varchar(20) NOT NULL DEFAULT '',
+    phase varchar(30) NOT NULL DEFAULT '',
+    progress smallint(6) unsigned NOT NULL DEFAULT 0,
+    score smallint(6) unsigned NOT NULL DEFAULT 0,
+    state longtext,
+    result longtext,
+    error_message varchar(1000) NOT NULL DEFAULT '',
+    locked_until int(11) unsigned NOT NULL DEFAULT 0,
+    created int(11) unsigned NOT NULL DEFAULT 0,
+    updated int(11) unsigned NOT NULL DEFAULT 0,
+    finished int(11) unsigned NOT NULL DEFAULT 0,
+
+    PRIMARY KEY (uid),
+    UNIQUE KEY token (token),
+    KEY created (created),
+    KEY host_created (host, created)
+);
+
+CREATE TABLE tx_aisteaseo_checker_quota (
+    uid int(11) unsigned NOT NULL auto_increment,
+    identity varchar(64) NOT NULL DEFAULT '',
+    day varchar(10) NOT NULL DEFAULT '',
+    slot smallint(6) unsigned NOT NULL DEFAULT 0,
+    created int(11) unsigned NOT NULL DEFAULT 0,
+
+    PRIMARY KEY (uid),
+    UNIQUE KEY identity_slot (identity, day, slot),
+    KEY created (created)
+);

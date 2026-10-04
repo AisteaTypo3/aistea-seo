@@ -6,3 +6,6 @@ services:
 
   Aistea\AisteaSeo\:
     resource: '../Classes/*'
+
+  Aistea\AisteaSeo\Middleware\CheckerEndpoint:
+    public: true

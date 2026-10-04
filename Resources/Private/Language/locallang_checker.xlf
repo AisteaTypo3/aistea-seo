@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="locallang_checker.xlf" date="2026-10-04T00:00:00Z" product-name="aistea_seo">
+        <header/>
+        <body>
+            <trans-unit id="plugin.title">
+                <source>SEO Checker (public)</source>
+            </trans-unit>
+            <trans-unit id="plugin.description">
+                <source>Visitors audit their own website: crawl, technical SEO, content, performance and security. Limited tests per day.</source>
+            </trans-unit>
+            <trans-unit id="hero.badge">
+                <source>Free SEO check</source>
+            </trans-unit>
+            <trans-unit id="hero.title">
+                <source>How visible is</source>
+            </trans-unit>
+            <trans-unit id="hero.titleAccent">
+                <source>your website?</source>
+            </trans-unit>
+            <trans-unit id="hero.lead">
+                <source>Enter your URL and get a detailed SEO report within minutes: up to %1$s pages are crawled, more than 60 checks on indexing, content, performance, structured data and security, with clear priorities.</source>
+            </trans-unit>
+            <trans-unit id="form.label">
+                <source>Website address</source>
+            </trans-unit>
+            <trans-unit id="form.placeholder">
+                <source>your-website.com</source>
+            </trans-unit>
+            <trans-unit id="form.submit">
+                <source>Check now</source>
+            </trans-unit>
+            <trans-unit id="form.remaining">
+                <source>%1$s of %2$s free tests left today.</source>
+            </trans-unit>
+            <trans-unit id="form.limitReached">
+                <source>You have used your %1$s free tests for today. New tests are available tomorrow.</source>
+            </trans-unit>
+            <trans-unit id="form.privacy">
+                <source>Only publicly accessible pages are fetched. Reports are available via their link for 30 days.</source>
+            </trans-unit>
+            <trans-unit id="form.privacyPageSpeed">
+                <source>For Core Web Vitals the start URL is sent to Google PageSpeed Insights.</source>
+            </trans-unit>
+            <trans-unit id="features.title">
+                <source>What the SEO check covers</source>
+            </trans-unit>
+            <trans-unit id="features.lead">
+                <source>Not just meta tags: the checker crawls your site like a search engine and evaluates every finding by its impact.</source>
+            </trans-unit>
+            <trans-unit id="steps.one">
+                <source>Enter the address of your website – no registration needed.</source>
+            </trans-unit>
+            <trans-unit id="steps.two">
+                <source>We analyse robots.txt, sitemaps and up to %1$s pages and check their links.</source>
+            </trans-unit>
+            <trans-unit id="steps.three">
+                <source>You get a report with score, priorities and concrete recommendations.</source>
+            </trans-unit>
+            <trans-unit id="category.indexing">
+                <source>Indexing &amp; crawling</source>
+            </trans-unit>
+            <trans-unit id="category.indexing.description">
+                <source>Can search engines reach, crawl and index your pages?</source>
+            </trans-unit>
+            <trans-unit id="category.indexing.examples">
+                <source>HTTPS, redirects, robots.txt, XML sitemaps, canonicals, noindex, broken links, soft 404</source>
+            </trans-unit>
+            <trans-unit id="category.content">
+                <source>Content &amp; on-page</source>
+            </trans-unit>
+            <trans-unit id="category.content.description">
+                <source>Do titles, descriptions, headings and content describe your pages well?</source>
+            </trans-unit>
+            <trans-unit id="category.content.examples">
+                <source>Titles, meta descriptions, headings, duplicates, content length, alt texts, link texts, language</source>
+            </trans-unit>
+            <trans-unit id="category.performance">
+                <source>Performance &amp; technology</source>
+            </trans-unit>
+            <trans-unit id="category.performance.description">
+                <source>How fast and mobile-friendly is the site?</source>
+            </trans-unit>
+            <trans-unit id="category.performance.examples">
+                <source>Core Web Vitals, server response, compression, HTTP/2, caching, render-blocking resources, images, viewport</source>
+            </trans-unit>
+            <trans-unit id="category.structure">
+                <source>Structured data &amp; social</source>
+            </trans-unit>
+            <trans-unit id="category.structure.description">
+                <source>Can search engines and social networks understand and present your content?</source>
+            </trans-unit>
+            <trans-unit id="category.structure.examples">
+                <source>Schema.org/JSON-LD, Open Graph, Twitter Cards, favicon, hreflang</source>
+            </trans-unit>
+            <trans-unit id="category.security">
+                <source>Security &amp; trust</source>
+            </trans-unit>
+            <trans-unit id="category.security.description">
+                <source>Is the site delivered securely?</source>
+            </trans-unit>
+            <trans-unit id="category.security.examples">
+                <source>TLS certificate, HSTS, mixed content, security headers</source>
+            </trans-unit>
+            <trans-unit id="progress.badge">
+                <source>Analysis in progress</source>
+            </trans-unit>
+            <trans-unit id="progress.label">
+                <source>Progress of the analysis</source>
+            </trans-unit>
+            <trans-unit id="progress.hint">
+                <source>Please keep this page open – the analysis usually takes one to three minutes. You can bookmark the link and come back later.</source>
+            </trans-unit>
+            <trans-unit id="phase.site">
+                <source>Website, robots.txt &amp; sitemaps</source>
+            </trans-unit>
+            <trans-unit id="phase.crawl">
+                <source>Crawling and analysing pages</source>
+            </trans-unit>
+            <trans-unit id="phase.links">
+                <source>Checking links and resources</source>
+            </trans-unit>
+            <trans-unit id="phase.performance">
+                <source>Measuring Core Web Vitals</source>
+            </trans-unit>
+            <trans-unit id="phase.finalize">
+                <source>Creating report</source>
+            </trans-unit>
+            <trans-unit id="phase.done">
+                <source>Done</source>
+            </trans-unit>
+            <trans-unit id="report.eyebrow">
+                <source>SEO report</source>
+            </trans-unit>
+            <trans-unit id="report.copyLink">
+                <source>Copy link</source>
+            </trans-unit>
+            <trans-unit id="report.print">
+                <source>Print / PDF</source>
+            </trans-unit>
+            <trans-unit id="report.newTest">
+                <source>Check another website</source>
+            </trans-unit>
+            <trans-unit id="report.categoriesNav">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="report.categoryCounts">
+                <source>%1$s errors · %2$s warnings</source>
+            </trans-unit>
+            <trans-unit id="report.priorities">
+                <source>Top priorities</source>
+            </trans-unit>
+            <trans-unit id="report.prioritiesLead">
+                <source>The findings with the biggest expected impact – start here.</source>
+            </trans-unit>
+            <trans-unit id="report.pages">
+                <source>Analysed URLs (%1$s)</source>
+            </trans-unit>
+            <trans-unit id="report.moreUrls">
+                <source>+ %1$s more</source>
+            </trans-unit>
+            <trans-unit id="stats.pages">
+                <source>Pages analysed</source>
+            </trans-unit>
+            <trans-unit id="stats.ttfb">
+                <source>Avg. server response</source>
+            </trans-unit>
+            <trans-unit id="stats.links">
+                <source>Links checked</source>
+            </trans-unit>
+            <trans-unit id="stats.sitemap">
+                <source>URLs in sitemap</source>
+            </trans-unit>
+            <trans-unit id="stats.pagespeed">
+                <source>PageSpeed (mobile)</source>
+            </trans-unit>
+            <trans-unit id="rating.good">
+                <source>Very good – only minor improvements left.</source>
+            </trans-unit>
+            <trans-unit id="rating.medium">
+                <source>Solid foundation with clear potential for improvement.</source>
+            </trans-unit>
+            <trans-unit id="rating.poor">
+                <source>Significant issues – they can noticeably limit visibility.</source>
+            </trans-unit>
+            <trans-unit id="status.pass">
+                <source>Passed</source>
+            </trans-unit>
+            <trans-unit id="status.pass.plural">
+                <source>passed</source>
+            </trans-unit>
+            <trans-unit id="status.warn">
+                <source>Warning</source>
+            </trans-unit>
+            <trans-unit id="status.warn.plural">
+                <source>warnings</source>
+            </trans-unit>
+            <trans-unit id="status.fail">
+                <source>Error</source>
+            </trans-unit>
+            <trans-unit id="status.fail.plural">
+                <source>errors</source>
+            </trans-unit>
+            <trans-unit id="status.info">
+                <source>Information</source>
+            </trans-unit>
+            <trans-unit id="status.info.plural">
+                <source>notes</source>
+            </trans-unit>
+            <trans-unit id="table.url">
+                <source>URL</source>
+            </trans-unit>
+            <trans-unit id="table.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="table.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="table.words">
+                <source>Words</source>
+            </trans-unit>
+            <trans-unit id="table.ttfb">
+                <source>TTFB</source>
+            </trans-unit>
+            <trans-unit id="table.issues">
+                <source>Findings</source>
+            </trans-unit>
+            <trans-unit id="method.title">
+                <source>How this report is scored</source>
+            </trans-unit>
+            <trans-unit id="method.score">
+                <source>Each check has a weight from 1 to 10. Passed checks count fully, warnings half, errors not at all; notes are not scored. Page-level checks only become errors when a relevant share of pages is affected. The categories are weighted (indexing 30 %, content 25 %, performance 20 %, structured data 15 %, security 10 %). The score shows how well established best practices are met – it is not a prediction of rankings.</source>
+            </trans-unit>
+            <trans-unit id="method.scope">
+                <source>Up to %1$s pages are crawled per test, starting at the home page and complemented by a sample from the XML sitemap. robots.txt rules are respected.</source>
+            </trans-unit>
+            <trans-unit id="method.limits">
+                <source>Limits: pages are analysed as delivered HTML; content that only appears after JavaScript execution is not evaluated. Length recommendations for titles and descriptions are guidelines – Google does not publish fixed limits. Core Web Vitals come from Google PageSpeed Insights (field data where available).</source>
+            </trans-unit>
+            <trans-unit id="error.generic">
+                <source>Something went wrong. Please try again.</source>
+            </trans-unit>
+            <trans-unit id="error.internal">
+                <source>The analysis was aborted due to an internal error. Please start a new test.</source>
+            </trans-unit>
+            <trans-unit id="error.formExpired">
+                <source>The form has expired. Please reload the page and try again.</source>
+            </trans-unit>
+            <trans-unit id="error.invalidUrl">
+                <source>Please enter a valid web address, e.g. example.com.</source>
+            </trans-unit>
+            <trans-unit id="error.invalidScheme">
+                <source>Only http:// and https:// addresses can be checked.</source>
+            </trans-unit>
+            <trans-unit id="error.invalidHost">
+                <source>The host name is not valid.</source>
+            </trans-unit>
+            <trans-unit id="error.credentials">
+                <source>Addresses with user name or password are not supported.</source>
+            </trans-unit>
+            <trans-unit id="error.port">
+                <source>Only the standard ports 80, 443, 8080 and 8443 are supported.</source>
+            </trans-unit>
+            <trans-unit id="error.privateTarget">
+                <source>Local or private network addresses cannot be checked.</source>
+            </trans-unit>
+            <trans-unit id="error.dns">
+                <source>This domain could not be found. Please check the spelling.</source>
+            </trans-unit>
+            <trans-unit id="error.timeout">
+                <source>The website did not respond in time.</source>
+            </trans-unit>
+            <trans-unit id="error.connect">
+                <source>No connection to the website could be established.</source>
+            </trans-unit>
+            <trans-unit id="error.ssl">
+                <source>The SSL/TLS certificate of the website is invalid, so the site cannot be loaded securely.</source>
+            </trans-unit>
+            <trans-unit id="error.tooManyRedirects">
+                <source>The website redirects too often (redirect loop?).</source>
+            </trans-unit>
+            <trans-unit id="error.httpStatus">
+                <source>The website responded with HTTP status %1$s. It may block automated requests.</source>
+            </trans-unit>
+            <trans-unit id="error.notHtml">
+                <source>The address does not return an HTML page.</source>
+            </trans-unit>
+            <trans-unit id="error.dailyLimit">
+                <source>You have used your %1$s free tests for today. Please come back tomorrow.</source>
+            </trans-unit>
+            <trans-unit id="error.globalLimit">
+                <source>The SEO checker is very busy today. Please try again tomorrow.</source>
+            </trans-unit>
+            <trans-unit id="error.hostLimit">
+                <source>This website has already been checked several times today. Please try again tomorrow.</source>
+            </trans-unit>
+            <trans-unit id="error.notFound">
+                <source>This report does not exist (anymore).</source>
+            </trans-unit>
+            <trans-unit id="error.reportNotFound">
+                <source>This report does not exist or has expired. Simply start a new test.</source>
+            </trans-unit>
+            <trans-unit id="error.reportFailed">
+                <source>This analysis could not be completed. Please start a new test.</source>
+            </trans-unit>
+            <trans-unit id="js.network">
+                <source>Connection problem. Please check your internet connection and try again.</source>
+            </trans-unit>
+            <trans-unit id="js.invalidUrl">
+                <source>Please enter a valid web address, e.g. example.com.</source>
+            </trans-unit>
+            <trans-unit id="js.copied">
+                <source>Link copied</source>
+            </trans-unit>
+            <trans-unit id="js.copyFailed">
+                <source>Copy failed</source>
+            </trans-unit>
+            <trans-unit id="js.starting">
+                <source>Loading website …</source>
+            </trans-unit>
+            <trans-unit id="js.busy">
+                <source>Waiting for the running step …</source>
+            </trans-unit>
+            <trans-unit id="js.finishing">
+                <source>Report is being opened …</source>
+            </trans-unit>
+            <trans-unit id="js.generic">
+                <source>Something went wrong. Please try again.</source>
+            </trans-unit>
+            <trans-unit id="msg.allPages">
+                <source>All %1$s analysed pages are fine.</source>
+            </trans-unit>
+            <trans-unit id="msg.affected">
+                <source>%1$s of %2$s pages affected.</source>
+            </trans-unit>
+            <trans-unit id="msg.noindexAffected">
+                <source>%1$s of %2$s pages are excluded from indexing – please check whether this is intended.</source>
+            </trans-unit>
+            <trans-unit id="msg.noPages">
+                <source>No analysable pages.</source>
+            </trans-unit>
+            <trans-unit id="msg.noDuplicates">
+                <source>No duplicates among %1$s pages.</source>
+            </trans-unit>
+            <trans-unit id="msg.duplicates">
+                <source>%1$s pages share their value with other pages (%2$s groups).</source>
+            </trans-unit>
+            <trans-unit id="check.reachability.title">
+                <source>Start page reachable</source>
+            </trans-unit>
+            <trans-unit id="check.reachability.help">
+                <source>The start page must answer quickly with status 200 so search engines can crawl the site at all.</source>
+            </trans-unit>
+            <trans-unit id="check.reachability.pass">
+                <source>The start page responds with HTTP %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.https.title">
+                <source>HTTPS encryption</source>
+            </trans-unit>
+            <trans-unit id="check.https.help">
+                <source>HTTPS is a confirmed Google ranking signal and a precondition for trust. Browsers mark HTTP pages as "not secure".</source>
+            </trans-unit>
+            <trans-unit id="check.https.pass">
+                <source>The website is delivered via HTTPS.</source>
+            </trans-unit>
+            <trans-unit id="check.https.fail">
+                <source>The website is delivered without HTTPS.</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.title">
+                <source>HTTP → HTTPS redirect</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.help">
+                <source>Requests via http:// should be redirected permanently (301 or 308) to https://, so that only one version is indexed and link signals are consolidated.</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.pass">
+                <source>http:// is permanently redirected to https:// (%1$s).</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.temporary">
+                <source>http:// redirects to https:// only temporarily (%1$s) – use 301 or 308.</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.fail">
+                <source>http:// does not redirect to https:// (status %1$s).</source>
+            </trans-unit>
+            <trans-unit id="check.http_redirect.unreachable">
+                <source>The site is not served on http:// at all – that is fine.</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.title">
+                <source>www / non-www variant</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.help">
+                <source>Both host variants should not deliver content. The secondary variant should permanently redirect to the main host, otherwise duplicate content is created.</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.pass">
+                <source>%1$s permanently redirects to %2$s.</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.temporary">
+                <source>%1$s redirects to %2$s only temporarily (%3$s).</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.duplicate">
+                <source>%1$s delivers content itself instead of redirecting to %2$s.</source>
+            </trans-unit>
+            <trans-unit id="check.host_canonical.notAvailable">
+                <source>The variant %1$s is not in use.</source>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.title">
+                <source>Redirects of the start URL</source>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.help">
+                <source>Every redirect costs loading time and crawl budget. Link directly to the final URL and avoid chains of several hops.</source>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.none">
+                <source>The entered URL loads without redirect.</source>
+            </trans-unit>
+            <trans-unit id="check.redirect_chain.hops">
+                <source>The entered URL needs %1$s redirect(s) to reach the final page.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.title">
+                <source>robots.txt</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.help">
+                <source>The robots.txt controls which areas crawlers may access. A server error (5xx) causes Google to pause crawling; "Disallow: /" blocks the whole site.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.pass">
+                <source>robots.txt is present and does not block the site.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.missing">
+                <source>No robots.txt found (status %1$s). Crawling is allowed, but a file with a sitemap reference is recommended.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.serverError">
+                <source>robots.txt returns a server error (%1$s) – Google may stop crawling.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_txt.blocksAll">
+                <source>robots.txt blocks the entire website for search engines.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.title">
+                <source>Sitemap reference in robots.txt</source>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.help">
+                <source>A "Sitemap:" line in robots.txt helps all search engines find your XML sitemap.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.pass">
+                <source>robots.txt references %1$s sitemap(s).</source>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.missing">
+                <source>robots.txt does not reference a sitemap.</source>
+            </trans-unit>
+            <trans-unit id="check.robots_sitemap.unreachable">
+                <source>%1$s sitemap URL(s) referenced in robots.txt cannot be loaded as a valid sitemap – check the address.</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.title">
+                <source>XML sitemap</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.help">
+                <source>An XML sitemap lists all indexable URLs and helps search engines find new and changed pages quickly. Sitemap index files are followed.</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.pass">
+                <source>%1$s URLs found in %2$s sitemap file(s).</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.invalid">
+                <source>The sitemap could not be read as valid XML.</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.empty">
+                <source>The sitemap contains no URLs.</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap.missing">
+                <source>No XML sitemap found (robots.txt, /sitemap.xml, /sitemap_index.xml).</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.title">
+                <source>Quality of sitemap URLs</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.help">
+                <source>A sitemap should only contain indexable URLs with status 200: no redirects, errors, noindex pages or URLs whose canonical points elsewhere.</source>
+            </trans-unit>
+            <trans-unit id="check.sitemap_quality.notChecked">
+                <source>No sitemap URLs were part of the crawl sample.</source>
+            </trans-unit>
+            <trans-unit id="check.noindex.title">
+                <source>Indexability (noindex)</source>
+            </trans-unit>
+            <trans-unit id="check.noindex.help">
+                <source>Pages with "noindex" (meta robots or X-Robots-Tag header) do not appear in search results. This is correct for e.g. legal notices or internal search, but often happens by mistake after a relaunch.</source>
+            </trans-unit>
+            <trans-unit id="check.noindex.home">
+                <source>The start page is set to noindex and will not appear in search results.</source>
+            </trans-unit>
+            <trans-unit id="check.http_errors.title">
+                <source>HTTP errors on crawled pages</source>
+            </trans-unit>
+            <trans-unit id="check.http_errors.help">
+                <source>Pages with 4xx or 5xx status are not indexed and frustrate visitors. Server errors (5xx) can also slow down crawling of the whole site.</source>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.title">
+                <source>Broken internal links</source>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.help">
+                <source>Internal links to missing pages waste crawl budget, lose link signals and lead visitors into dead ends. The list shows the target and where it is linked.</source>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.pass">
+                <source>No broken internal links found (%2$s checked).</source>
+            </trans-unit>
+            <trans-unit id="check.broken_internal.found">
+                <source>%1$s broken internal link targets found (%2$s checked).</source>
+            </trans-unit>
+            <trans-unit id="check.broken_external.title">
+                <source>Broken external links</source>
+            </trans-unit>
+            <trans-unit id="check.broken_external.help">
+                <source>Links to pages that no longer exist harm user experience and look neglected. Sites that block bots (401, 403, 429) are not counted as broken.</source>
+            </trans-unit>
+            <trans-unit id="check.broken_external.pass">
+                <source>No broken external links found (%2$s checked).</source>
+            </trans-unit>
+            <trans-unit id="check.broken_external.found">
+                <source>%1$s broken external links found (%2$s checked).</source>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.title">
+                <source>Internal links to redirects</source>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.help">
+                <source>Internal links should point directly to the final URL. Links via redirects cost loading time and crawl budget – typical causes are missing trailing slashes or old URLs.</source>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.pass">
+                <source>Internal links point directly to their targets.</source>
+            </trans-unit>
+            <trans-unit id="check.internal_redirects.found">
+                <source>%1$s internally linked URLs redirect.</source>
+            </trans-unit>
+            <trans-unit id="check.canonical_present.title">
+                <source>Canonical tag present</source>
+            </trans-unit>
+            <trans-unit id="check.canonical_present.help">
+                <source>A self-referencing canonical tag tells search engines the preferred URL and protects against duplicates caused by parameters or variants.</source>
+            </trans-unit>
+            <trans-unit id="check.canonical_valid.title">
+                <source>Canonical tags valid</source>
+            </trans-unit>
+            <trans-unit id="check.canonical_valid.help">
+                <source>Canonicals should be absolute, unique and point to an indexable page with status 200 on the same host. Contradictory canonicals are ignored by Google.</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.title">
+                <source>Error page for missing URLs</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.help">
+                <source>A non-existent URL must return status 404 or 410. If it returns 200 ("soft 404"), search engines may index error pages; redirecting everything to the home page is also treated as soft 404.</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.pass">
+                <source>Missing pages correctly return status %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.fail">
+                <source>A non-existent URL returns status %1$s instead of 404.</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.redirectHome">
+                <source>Missing pages are redirected to the start page.</source>
+            </trans-unit>
+            <trans-unit id="check.soft_404.other">
+                <source>A non-existent URL returns: %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.url_structure.title">
+                <source>URL structure</source>
+            </trans-unit>
+            <trans-unit id="check.url_structure.help">
+                <source>Short, lower-case URLs with hyphens are easier to read and share. Upper case, underscores, very long URLs and many parameters favour duplicates.</source>
+            </trans-unit>
+            <trans-unit id="check.meta_refresh.title">
+                <source>Meta refresh</source>
+            </trans-unit>
+            <trans-unit id="check.meta_refresh.help">
+                <source>Meta refresh redirects are slow and not accessible. Use server-side 301 redirects instead.</source>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.title">
+                <source>Content without JavaScript</source>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.help">
+                <source>Google can render JavaScript, but with delay and not always completely; other search engines and AI crawlers often cannot. Important content should be in the delivered HTML (server-side rendering).</source>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.warn">
+                <source>The start page delivers only %1$s words of text without JavaScript – content is probably rendered client-side.</source>
+            </trans-unit>
+            <trans-unit id="check.js_rendering.info">
+                <source>The main content is contained in the delivered HTML.</source>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.title">
+                <source>AI crawlers (GPTBot, ClaudeBot &amp; co.)</source>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.help">
+                <source>Whether AI assistants may use your content is a business decision. Blocking them can reduce visibility in AI answers; allowing them makes your content available for training and answers.</source>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.open">
+                <source>No AI crawler is blocked completely.</source>
+            </trans-unit>
+            <trans-unit id="check.ai_crawlers.blocked">
+                <source>Blocked in robots.txt: %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.title">
+                <source>llms.txt</source>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.help">
+                <source>llms.txt is an optional, not yet standardised proposal to give AI systems a structured overview of a website. It has no influence on Google rankings.</source>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.present">
+                <source>An llms.txt is present.</source>
+            </trans-unit>
+            <trans-unit id="check.llms_txt.missing">
+                <source>No llms.txt present (optional).</source>
+            </trans-unit>
+            <trans-unit id="check.title_present.title">
+                <source>Page title present</source>
+            </trans-unit>
+            <trans-unit id="check.title_present.help">
+                <source>The title is one of the most important on-page signals and usually appears as the headline in search results. Every page needs exactly one unique &lt;title&gt;.</source>
+            </trans-unit>
+            <trans-unit id="check.title_length.title">
+                <source>Title length</source>
+            </trans-unit>
+            <trans-unit id="check.title_length.help">
+                <source>Titles of roughly 25–65 characters are usually displayed in full. Google does not publish a fixed limit – it truncates by pixel width. Put the most important terms at the beginning.</source>
+            </trans-unit>
+            <trans-unit id="check.title_duplicate.title">
+                <source>Duplicate titles</source>
+            </trans-unit>
+            <trans-unit id="check.title_duplicate.help">
+                <source>Identical titles make it hard for search engines to tell pages apart and lead to competing pages. Each page should have its own descriptive title.</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_present.title">
+                <source>Meta description present</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_present.help">
+                <source>The meta description is not a ranking factor, but Google often uses it as the snippet. A good description increases the click-through rate.</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_length.title">
+                <source>Meta description length</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_length.help">
+                <source>Around 70–170 characters is a good guideline. Google has no fixed maximum and may rewrite the snippet anyway – what matters is a precise, appealing summary.</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_duplicate.title">
+                <source>Duplicate meta descriptions</source>
+            </trans-unit>
+            <trans-unit id="check.meta_description_duplicate.help">
+                <source>Identical descriptions on many pages are usually ignored by Google. Write individual descriptions at least for important pages.</source>
+            </trans-unit>
+            <trans-unit id="check.h1_present.title">
+                <source>H1 heading present</source>
+            </trans-unit>
+            <trans-unit id="check.h1_present.help">
+                <source>The H1 names the topic of the page for visitors and search engines. Each page should have a meaningful main heading.</source>
+            </trans-unit>
+            <trans-unit id="check.h1_multiple.title">
+                <source>Multiple H1 headings</source>
+            </trans-unit>
+            <trans-unit id="check.h1_multiple.help">
+                <source>Several H1s are technically allowed, but one clear main heading makes the structure easier to understand – also for screen readers.</source>
+            </trans-unit>
+            <trans-unit id="check.heading_structure.title">
+                <source>Heading hierarchy</source>
+            </trans-unit>
+            <trans-unit id="check.heading_structure.help">
+                <source>Headings should be nested without skipping levels (H1 → H2 → H3). A clean outline helps search engines and assistive technologies.</source>
+            </trans-unit>
+            <trans-unit id="check.h1_duplicate.title">
+                <source>Duplicate H1 headings</source>
+            </trans-unit>
+            <trans-unit id="check.h1_duplicate.help">
+                <source>The same H1 on several pages indicates template headings or near-duplicate pages.</source>
+            </trans-unit>
+            <trans-unit id="check.content_length.title">
+                <source>Amount of text</source>
+            </trans-unit>
+            <trans-unit id="check.content_length.help">
+                <source>There is no minimum word count for rankings. Very short pages (under 150 words of main content), however, often do not answer the search intent sufficiently. Navigation and footer are not counted.</source>
+            </trans-unit>
+            <trans-unit id="check.duplicate_content.title">
+                <source>Duplicate content</source>
+            </trans-unit>
+            <trans-unit id="check.duplicate_content.help">
+                <source>Pages with identical main content compete with each other. Merge them, differentiate the content or set a canonical to the preferred version.</source>
+            </trans-unit>
+            <trans-unit id="check.image_alt.title">
+                <source>Image alt attributes</source>
+            </trans-unit>
+            <trans-unit id="check.image_alt.help">
+                <source>Alt texts describe images for screen readers and image search. Images without an alt attribute are counted; alt="" for purely decorative images is correct and not penalised.</source>
+            </trans-unit>
+            <trans-unit id="check.image_alt.pass">
+                <source>All %2$s images have an alt attribute.</source>
+            </trans-unit>
+            <trans-unit id="check.image_alt.missing">
+                <source>%1$s of %2$s images have no alt attribute.</source>
+            </trans-unit>
+            <trans-unit id="check.image_alt.noImages">
+                <source>No images found.</source>
+            </trans-unit>
+            <trans-unit id="check.linked_image_alt.title">
+                <source>Linked images without text</source>
+            </trans-unit>
+            <trans-unit id="check.linked_image_alt.help">
+                <source>If an image is the only content of a link, its alt text is the link text. An empty alt makes the link unnamed for screen readers and search engines.</source>
+            </trans-unit>
+            <trans-unit id="check.anchor_text.title">
+                <source>Link texts</source>
+            </trans-unit>
+            <trans-unit id="check.anchor_text.help">
+                <source>Descriptive link texts help users and search engines understand the target. Avoid empty links and phrases like "click here" or "read more".</source>
+            </trans-unit>
+            <trans-unit id="check.lang.title">
+                <source>Language declaration</source>
+            </trans-unit>
+            <trans-unit id="check.lang.help">
+                <source>The lang attribute on &lt;html&gt; (e.g. "de" or "en-GB") helps browsers, screen readers and search engines identify the language.</source>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.title">
+                <source>Topic focus of the start page</source>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.help">
+                <source>Compares the most frequent terms in the main content with title and H1. This is only an indication: title and content should clearly address the same topic.</source>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.aligned">
+                <source>Frequent terms: %1$s. In title/H1: %2$s.</source>
+            </trans-unit>
+            <trans-unit id="check.keyword_focus.notAligned">
+                <source>Frequent terms: %1$s – none of them appears in title or H1.</source>
+            </trans-unit>
+            <trans-unit id="check.psi_score.title">
+                <source>PageSpeed score (mobile)</source>
+            </trans-unit>
+            <trans-unit id="check.psi_score.help">
+                <source>Google Lighthouse lab test on a simulated mid-range smartphone. It is a diagnostic value; for rankings the Core Web Vitals of real users count.</source>
+            </trans-unit>
+            <trans-unit id="check.psi_score.score">
+                <source>Performance score: %1$s / 100.</source>
+            </trans-unit>
+            <trans-unit id="check.psi_score.unavailable">
+                <source>PageSpeed data could not be retrieved this time.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.title">
+                <source>Largest Contentful Paint (LCP)</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.help">
+                <source>How quickly the largest visible element loads. Good: up to 2.5 s. Optimise server response, hero image (size, format, preload) and render-blocking resources.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_lcp.noData">
+                <source>Not enough data available.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.title">
+                <source>Interaction to Next Paint (INP)</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.help">
+                <source>How quickly the page reacts to clicks and input. Good: up to 200 ms. Reduce long JavaScript tasks and third-party scripts.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_inp.noData">
+                <source>Not enough data available.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.title">
+                <source>Cumulative Layout Shift (CLS)</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.help">
+                <source>How much the layout shifts while loading. Good: up to 0.1. Reserve space for images, ads and embeds (width/height) and avoid late-loading fonts and banners.</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.field">
+                <source>%1$s (field data of real users, 75th percentile).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.lab">
+                <source>%1$s (lab value – not enough field data available).</source>
+            </trans-unit>
+            <trans-unit id="check.cwv_cls.noData">
+                <source>Not enough data available.</source>
+            </trans-unit>
+            <trans-unit id="check.tbt.title">
+                <source>Total Blocking Time</source>
+            </trans-unit>
+            <trans-unit id="check.tbt.help">
+                <source>Lab metric for how long the main thread is blocked by JavaScript; a good indicator for INP. Good: up to 200 ms.</source>
+            </trans-unit>
+            <trans-unit id="check.tbt.value">
+                <source>Total Blocking Time: %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.ttfb.title">
+                <source>Server response time (TTFB)</source>
+            </trans-unit>
+            <trans-unit id="check.ttfb.help">
+                <source>Time to first byte measured from our server. Below 600 ms is good. Slow responses delay every other metric – use caching, faster hosting or a CDN.</source>
+            </trans-unit>
+            <trans-unit id="check.ttfb.value">
+                <source>Median %1$s ms (start page: %2$s ms).</source>
+            </trans-unit>
+            <trans-unit id="check.html_size.title">
+                <source>HTML size</source>
+            </trans-unit>
+            <trans-unit id="check.html_size.help">
+                <source>Very large HTML documents (over 400 KB) load and render slowly, often because of inline data, SVGs or page builders.</source>
+            </trans-unit>
+            <trans-unit id="check.compression.title">
+                <source>Compression (gzip/Brotli)</source>
+            </trans-unit>
+            <trans-unit id="check.compression.help">
+                <source>Text compression typically reduces HTML, CSS and JS by 70–90 %. It is enabled with one server setting.</source>
+            </trans-unit>
+            <trans-unit id="check.compression.pass">
+                <source>HTML is delivered compressed (%1$s).</source>
+            </trans-unit>
+            <trans-unit id="check.compression.fail">
+                <source>HTML is delivered uncompressed.</source>
+            </trans-unit>
+            <trans-unit id="check.http2.title">
+                <source>HTTP/2 or HTTP/3</source>
+            </trans-unit>
+            <trans-unit id="check.http2.help">
+                <source>Modern protocols load many resources in parallel over one connection and noticeably reduce loading times.</source>
+            </trans-unit>
+            <trans-unit id="check.http2.pass">
+                <source>The server uses HTTP/%1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.http2.fail">
+                <source>The server only uses HTTP/%1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.title">
+                <source>Browser caching of resources</source>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.help">
+                <source>CSS, JavaScript and images should be cacheable for a long time (Cache-Control max-age of at least 7 days, ideally a year with versioned file names).</source>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.pass">
+                <source>Sampled resources are cached long enough.</source>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.short">
+                <source>%1$s of %2$s sampled resources have no or a short cache lifetime.</source>
+            </trans-unit>
+            <trans-unit id="check.asset_caching.notChecked">
+                <source>No resources could be checked.</source>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.title">
+                <source>Render-blocking scripts</source>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.help">
+                <source>Scripts in &lt;head&gt; without async or defer block rendering of the page. Load them with defer or at the end of the body.</source>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.pass">
+                <source>No blocking scripts in &lt;head&gt;.</source>
+            </trans-unit>
+            <trans-unit id="check.render_blocking.found">
+                <source>%1$s blocking script(s) in &lt;head&gt; of the start page.</source>
+            </trans-unit>
+            <trans-unit id="check.requests.title">
+                <source>Number of scripts and stylesheets</source>
+            </trans-unit>
+            <trans-unit id="check.requests.help">
+                <source>Every file means additional requests and parsing. Bundle files and remove unused libraries and third-party tools.</source>
+            </trans-unit>
+            <trans-unit id="check.requests.value">
+                <source>%1$s files on the start page (%2$s scripts, %3$s stylesheets).</source>
+            </trans-unit>
+            <trans-unit id="check.image_dimensions.title">
+                <source>Image dimensions</source>
+            </trans-unit>
+            <trans-unit id="check.image_dimensions.help">
+                <source>Images without width and height attributes cause layout shifts (CLS) because the browser cannot reserve space in advance.</source>
+            </trans-unit>
+            <trans-unit id="check.lazy_loading.title">
+                <source>Lazy loading</source>
+            </trans-unit>
+            <trans-unit id="check.lazy_loading.help">
+                <source>Images outside the visible area should be loaded with loading="lazy". Do not lazy-load the main image at the top (LCP).</source>
+            </trans-unit>
+            <trans-unit id="check.modern_images.title">
+                <source>Modern image formats</source>
+            </trans-unit>
+            <trans-unit id="check.modern_images.help">
+                <source>WebP and AVIF are usually 25–50 % smaller than JPEG/PNG at the same quality. Deliver them e.g. via &lt;picture&gt; or srcset.</source>
+            </trans-unit>
+            <trans-unit id="check.modern_images.share">
+                <source>%1$s %% of the raster images use WebP/AVIF (%2$s of %3$s).</source>
+            </trans-unit>
+            <trans-unit id="check.modern_images.noImages">
+                <source>Too few images for an assessment.</source>
+            </trans-unit>
+            <trans-unit id="check.dom_size.title">
+                <source>DOM size</source>
+            </trans-unit>
+            <trans-unit id="check.dom_size.help">
+                <source>More than about 1,500 elements slow down rendering and interactions, especially on smartphones.</source>
+            </trans-unit>
+            <trans-unit id="check.viewport.title">
+                <source>Mobile viewport</source>
+            </trans-unit>
+            <trans-unit id="check.viewport.help">
+                <source>Google indexes the mobile version (mobile-first). A viewport meta tag with width=device-width is required; zooming should not be disabled.</source>
+            </trans-unit>
+            <trans-unit id="check.doctype_charset.title">
+                <source>Doctype and character set</source>
+            </trans-unit>
+            <trans-unit id="check.doctype_charset.help">
+                <source>&lt;!DOCTYPE html&gt; prevents quirks mode, a declared charset (UTF-8) prevents broken umlauts and special characters.</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data.title">
+                <source>Structured data</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data.help">
+                <source>Schema.org markup (ideally JSON-LD) helps search engines understand content and enables rich results such as breadcrumbs, FAQs, reviews or events.</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data.pass">
+                <source>Found types: %1$s.</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data.missing">
+                <source>No structured data found.</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data_valid.title">
+                <source>Structured data valid</source>
+            </trans-unit>
+            <trans-unit id="check.structured_data_valid.help">
+                <source>Faulty JSON is ignored completely; missing required properties prevent rich results. Validate with Google's Rich Results Test.</source>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.title">
+                <source>Organization / business markup</source>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.help">
+                <source>Organization, LocalBusiness or Person markup with name, logo and contact details supports the knowledge panel and brand recognition.</source>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.pass">
+                <source>Organization, business or person markup found.</source>
+            </trans-unit>
+            <trans-unit id="check.organization_schema.missing">
+                <source>No Organization, LocalBusiness or Person markup found.</source>
+            </trans-unit>
+            <trans-unit id="check.open_graph.title">
+                <source>Open Graph tags</source>
+            </trans-unit>
+            <trans-unit id="check.open_graph.help">
+                <source>og:title, og:description and og:image (absolute URL) control how pages look when shared on LinkedIn, Facebook, WhatsApp &amp; co.</source>
+            </trans-unit>
+            <trans-unit id="check.twitter_card.title">
+                <source>Twitter / X card</source>
+            </trans-unit>
+            <trans-unit id="check.twitter_card.help">
+                <source>A twitter:card tag (e.g. summary_large_image) enables large preview images on X. Without it, X falls back to Open Graph.</source>
+            </trans-unit>
+            <trans-unit id="check.favicon.title">
+                <source>Favicon</source>
+            </trans-unit>
+            <trans-unit id="check.favicon.help">
+                <source>Google shows the favicon next to the result on mobile. It should be at least 48×48 px and crawlable.</source>
+            </trans-unit>
+            <trans-unit id="check.favicon.pass">
+                <source>A favicon is present.</source>
+            </trans-unit>
+            <trans-unit id="check.favicon.missing">
+                <source>No favicon found.</source>
+            </trans-unit>
+            <trans-unit id="check.hreflang.title">
+                <source>hreflang (language versions)</source>
+            </trans-unit>
+            <trans-unit id="check.hreflang.help">
+                <source>For multilingual sites, hreflang links language versions. Each version must reference itself and all others (return links), use valid codes (e.g. de, en-GB) and absolute URLs; x-default is recommended.</source>
+            </trans-unit>
+            <trans-unit id="check.hreflang.none">
+                <source>No hreflang – fine for single-language websites.</source>
+            </trans-unit>
+            <trans-unit id="check.hreflang.missingMultilingual">
+                <source>Pages in several languages (%1$s) found, but no hreflang.</source>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.title">
+                <source>TLS certificate</source>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.help">
+                <source>An expired certificate makes the site inaccessible for visitors and search engines. Automate renewal (e.g. Let's Encrypt).</source>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.valid">
+                <source>The certificate is valid.</source>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.expires">
+                <source>Valid for another %1$s days (until %2$s).</source>
+            </trans-unit>
+            <trans-unit id="check.tls_certificate.noHttps">
+                <source>No HTTPS – no certificate.</source>
+            </trans-unit>
+            <trans-unit id="check.hsts.title">
+                <source>HSTS</source>
+            </trans-unit>
+            <trans-unit id="check.hsts.help">
+                <source>Strict-Transport-Security forces browsers to always use HTTPS and prevents downgrade attacks. Recommended: max-age of at least six months.</source>
+            </trans-unit>
+            <trans-unit id="check.hsts.pass">
+                <source>HSTS is active (%1$s days).</source>
+            </trans-unit>
+            <trans-unit id="check.hsts.short">
+                <source>HSTS is active, but only for %1$s days.</source>
+            </trans-unit>
+            <trans-unit id="check.hsts.missing">
+                <source>No HSTS header set.</source>
+            </trans-unit>
+            <trans-unit id="check.mixed_content.title">
+                <source>Mixed content</source>
+            </trans-unit>
+            <trans-unit id="check.mixed_content.help">
+                <source>Resources loaded via http:// on HTTPS pages are blocked by browsers or trigger warnings. Load all resources via https://.</source>
+            </trans-unit>
+            <trans-unit id="check.security_headers.title">
+                <source>Security headers</source>
+            </trans-unit>
+            <trans-unit id="check.security_headers.help">
+                <source>Security headers protect visitors against clickjacking, MIME sniffing and data leakage. They are not a direct ranking factor, but a sign of a well-maintained website.</source>
+            </trans-unit>
+            <trans-unit id="check.security_headers.pass">
+                <source>%1$s of %2$s recommended headers set.</source>
+            </trans-unit>
+            <trans-unit id="check.security_headers.missing">
+                <source>%1$s of %2$s recommended headers set. Missing: %3$s.</source>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.title">
+                <source>Software versions disclosed</source>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.help">
+                <source>Version numbers in Server or X-Powered-By headers make targeted attacks easier. Remove them in the server configuration.</source>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.pass">
+                <source>No software versions disclosed.</source>
+            </trans-unit>
+            <trans-unit id="check.server_disclosure.found">
+                <source>Disclosed: %1$s.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

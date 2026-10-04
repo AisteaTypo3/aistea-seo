@@ -1,0 +1,18 @@
+# cat=checker/limits/10; type=int+; label=Tests per visitor and day: Daily quota per visitor (identified by a daily rotating hash of the IP address)
+checker.dailyLimit = 2
+# cat=checker/limits/20; type=int+; label=Tests per day (all visitors): Protects the server and avoids misuse as a crawler
+checker.globalDailyLimit = 300
+# cat=checker/limits/30; type=int+; label=Tests per target host and day: Prevents using the checker to flood a single website
+checker.perHostDailyLimit = 6
+# cat=checker/limits/40; type=boolean; label=No limit for logged-in backend users
+checker.unlimitedForBackendUsers = 1
+# cat=checker/crawl/10; type=int+; label=Pages per audit (1-100)
+checker.maxPages = 30
+# cat=checker/crawl/20; type=int+; label=Links to check per audit (0-300)
+checker.linkCheckLimit = 80
+# cat=checker/crawl/30; type=int+; label=Keep reports for days
+checker.retentionDays = 30
+# cat=checker/pagespeed/10; type=boolean; label=Use Google PageSpeed Insights: Adds Core Web Vitals. The tested URL is sent to Google.
+checker.pageSpeedEnabled = 1
+# cat=checker/pagespeed/20; type=string; label=PageSpeed Insights API key: Optional, recommended for production (higher quota)
+checker.pageSpeedApiKey =

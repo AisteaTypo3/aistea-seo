@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-seo-checker" href="EXT:aistea_seo/Resources/Public/Css/seo-checker.css" />
+<f:asset.script identifier="aistea-seo-checker" src="EXT:aistea_seo/Resources/Public/JavaScript/seo-checker.js" defer="1" />
+
+<div class="aseo" data-aseo data-mode="{mode}" data-endpoint="{endpoint}" data-page-url="{pageUrl}" data-token="{audit.token}" data-progress="{audit.progress}" data-phase="{audit.phase}" data-labels="{jsLabels}">
+    <f:switch expression="{mode}">
+        <f:case value="report">
+            <f:render partial="Checker/Report" arguments="{_all}" />
+        </f:case>
+        <f:case value="progress">
+            <f:render partial="Checker/Progress" arguments="{_all}" />
+        </f:case>
+        <f:defaultCase>
+            <f:render partial="Checker/Form" arguments="{_all}" />
+        </f:defaultCase>
+    </f:switch>
+</div>
+</html>

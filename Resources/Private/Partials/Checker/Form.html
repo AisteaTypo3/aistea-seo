@@ -1,0 +1,72 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<section class="aseo-hero">
+    <div class="aseo-hero__inner">
+        <span class="aseo-badge"><f:translate key="{ll}hero.badge" /></span>
+        <h1 class="aseo-hero__title">
+            <f:translate key="{ll}hero.title" />
+            <span class="aseo-accent"><f:translate key="{ll}hero.titleAccent" /></span>
+        </h1>
+        <p class="aseo-hero__lead"><f:translate key="{ll}hero.lead" arguments="{0: maxPages}" /></p>
+
+        <f:if condition="{mode} == 'notFound'">
+            <p class="aseo-alert" role="alert"><f:translate key="{ll}error.reportNotFound" /></p>
+        </f:if>
+        <f:if condition="{mode} == 'failed'">
+            <p class="aseo-alert" role="alert"><f:translate key="{ll}error.reportFailed" /></p>
+        </f:if>
+
+        <form class="aseo-form" data-aseo-form novalidate>
+            <label class="aseo-sr" for="aseo-url"><f:translate key="{ll}form.label" /></label>
+            <div class="aseo-form__field">
+                <svg class="aseo-form__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                <input id="aseo-url" class="aseo-form__input" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="2000" required
+                       placeholder="{f:translate(key: '{ll}form.placeholder')}" {f:if(condition: '{remaining} < 1', then: 'disabled')}>
+                <button type="submit" class="aseo-btn aseo-btn--primary" {f:if(condition: '{remaining} < 1', then: 'disabled')}>
+                    <span data-aseo-submit-label><f:translate key="{ll}form.submit" /></span>
+                    <span class="aseo-spinner" aria-hidden="true"></span>
+                </button>
+            </div>
+            <input type="hidden" name="formToken" value="{formToken}">
+            <div class="aseo-hp" aria-hidden="true">
+                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <p class="aseo-form__error" data-aseo-error role="alert" hidden></p>
+            <p class="aseo-form__quota">
+                <f:if condition="{remaining} > 0">
+                    <f:then><f:translate key="{ll}form.remaining" arguments="{0: remaining, 1: dailyLimit}" /></f:then>
+                    <f:else><f:translate key="{ll}form.limitReached" arguments="{0: dailyLimit}" /></f:else>
+                </f:if>
+            </p>
+        </form>
+        <p class="aseo-hero__note">
+            <f:translate key="{ll}form.privacy" />
+            <f:if condition="{pageSpeedEnabled}"> <f:translate key="{ll}form.privacyPageSpeed" /></f:if>
+        </p>
+    </div>
+</section>
+
+<section class="aseo-section">
+    <div class="aseo-container">
+        <header class="aseo-section__head">
+            <h2><f:translate key="{ll}features.title" /></h2>
+            <p><f:translate key="{ll}features.lead" /></p>
+        </header>
+        <div class="aseo-features">
+            <f:for each="{categoryIds}" as="category">
+                <article class="aseo-feature">
+                    <span class="aseo-feature__icon"><f:render partial="Checker/Icon" arguments="{name: category}" /></span>
+                    <h3><f:translate key="{ll}category.{category}" /></h3>
+                    <p><f:translate key="{ll}category.{category}.description" /></p>
+                    <p class="aseo-feature__list"><f:translate key="{ll}category.{category}.examples" /></p>
+                </article>
+            </f:for>
+        </div>
+
+        <ol class="aseo-steps">
+            <li><strong>1</strong><span><f:translate key="{ll}steps.one" /></span></li>
+            <li><strong>2</strong><span><f:translate key="{ll}steps.two" arguments="{0: maxPages}" /></span></li>
+            <li><strong>3</strong><span><f:translate key="{ll}steps.three" /></span></li>
+        </ol>
+    </div>
+</section>
+</html>
